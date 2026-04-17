@@ -1,0 +1,40 @@
+/* ============================================
+   FONT IMPORT - INTER VARIABLE FONT
+   ============================================
+   Import Inter font from Google Fonts with all weights (100-900)
+   and italic variants for complete typography flexibility.
+   
+   Inter is a highly legible sans-serif font designed for
+   user interfaces and screens.
+   ============================================ */
+
+/* Inter Variable Font - All Weights (100-900) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* 
+   Font weights available:
+   - Thin (100)
+   - Extra Light (200)
+   - Light (300)
+   - Regular (400) - Default
+   - Medium (500)
+   - Semi Bold (600)
+   - Bold (700)
+   - Extra Bold (800)
+   - Black (900)
+   
+   All weights include italic variants.
+   
+   Usage in CSS:
+   font-family: 'Inter', sans-serif;
+   font-weight: var(--font-weight-thin);     // 100
+   font-weight: var(--font-weight-extra-light); // 200
+   font-weight: var(--font-weight-light);    // 300
+   font-weight: var(--font-weight-normal);   // 400
+   font-weight: var(--font-weight-medium);   // 500
+   font-weight: var(--font-weight-semibold); // 600
+   font-weight: var(--font-weight-bold);     // 700
+   font-weight: var(--font-weight-extra-bold); // 800
+   font-weight: var(--font-weight-black);    // 900
+   font-style: italic; // For italic variants
+*/

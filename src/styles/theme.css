@@ -1,0 +1,1064 @@
+:root {
+  /* ============================================
+     DESIGN SYSTEM - SINGLE SOURCE OF TRUTH
+     ============================================
+     This file defines ALL design tokens for the application.
+     Update these CSS variables to change colors, spacing, typography globally.
+     
+     🎨 Colors: Use via Tailwind (e.g., bg-primary, text-foreground)
+     📐 Spacing: Use via CSS variables (e.g., var(--spacing-4))
+     🔤 Typography: Font faces, sizes, weights defined below
+     🔲 Borders & Radius: Consistent corner radius
+     
+     DO NOT hardcode values in components - always reference these variables.
+     ============================================ */
+  
+  /* Base font size for the application */
+  --font-size: 16px;
+  
+  /* ============================================
+     RAW COLOR PALETTE - FOUNDATION
+     ============================================
+     Complete color palette from design system.
+     These are the raw colors that semantic tokens reference.
+     ============================================ */
+  
+  /* Gray Scale */
+  --gray-0: #F9F9F9;
+  --gray-5: #F1F1F1;
+  --gray-10: #D8D8D8;
+  --gray-20: #C7C7C7;
+  --gray-30: #ADADAD;
+  --gray-40: #9E9E9E;
+  --gray-50: #828282;
+  --gray-60: #727272;
+  --gray-70: #5E5E5E;
+  --gray-80: #505050;
+  --gray-90: #323232;
+  --gray-100: #212121;
+  
+  /* Red Scale */
+  --red-0: #FFF6F8;
+  --red-5: #FEEDF2;
+  --red-10: #FECACE;
+  --red-20: #FFB3B6;
+  --red-30: #FF8C8C;
+  --red-40: #FB7474;
+  --red-50: #EB4545;
+  --red-60: #DF2121;
+  --red-70: #BD1214;
+  --red-80: #A21013;
+  --red-90: #650C0F;
+  --red-100: #470909;
+  
+  /* Pink Scale */
+  --pink-0: #FDF6FC;
+  --pink-5: #FBEDF9;
+  --pink-10: #F3CBEE;
+  --pink-20: #F8B0EA;
+  --pink-30: #F985DB;
+  --pink-40: #F170C7;
+  --pink-50: #DF469D;
+  --pink-60: #D22980;
+  --pink-70: #B31D64;
+  --pink-80: #9C134F;
+  --pink-90: #64082D;
+  --pink-100: #470620;
+  
+  /* Purple Scale */
+  --purple-0: #FCF6FF;
+  --purple-5: #F7EEFF;
+  --purple-10: #E3CFFD;
+  --purple-20: #D5BCFC;
+  --purple-30: #C09CFA;
+  --purple-40: #B389F9;
+  --purple-50: #9963F7;
+  --purple-60: #864BF9;
+  --purple-70: #6D36E1;
+  --purple-80: #5A2CC6;
+  --purple-90: #32148C;
+  --purple-100: #1C086E;
+  
+  /* Blue Scale */
+  --blue-0: #F5FAFF;
+  --blue-5: #E6F1FF;
+  --blue-10: #BFDAFE;
+  --blue-20: #A4C9FE;
+  --blue-30: #79AFFD;
+  --blue-40: #5F9FFC;
+  --blue-50: #2A7EFB;
+  --blue-60: #0A65FC;
+  --blue-70: #0954D9;
+  --blue-80: #0746BD;
+  --blue-90: #04287E;
+  --blue-100: #021A5E;
+  
+  /* Cyan Scale */
+  --cyan-0: #F1FBFE;
+  --cyan-5: #E3F4FC;
+  --cyan-10: #AFDEF9;
+  --cyan-20: #8CCFF7;
+  --cyan-30: #55B6F2;
+  --cyan-40: #36A7EC;
+  --cyan-50: #0687D9;
+  --cyan-60: #0075C5;
+  --cyan-70: #0061A8;
+  --cyan-80: #005291;
+  --cyan-90: #003258;
+  --cyan-100: #05233B;
+  
+  /* Teal Scale */
+  --teal-0: #EAFEF9;
+  --teal-5: #D6F8F1;
+  --teal-10: #99E5D9;
+  --teal-20: #73D8CA;
+  --teal-30: #38C0B3;
+  --teal-40: #1DB1A7;
+  --teal-50: #009290;
+  --teal-60: #007F82;
+  --teal-70: #00696F;
+  --teal-80: #005960;
+  --teal-90: #00373E;
+  --teal-100: #03252B;
+  
+  /* Green Scale */
+  --green-0: #F0FDED;
+  --green-5: #E2F5E0;
+  --green-10: #BBE2B8;
+  --green-20: #9FD49D;
+  --green-30: #77BE75;
+  --green-40: #5FB05E;
+  --green-50: #369536;
+  --green-60: #268326;
+  --green-70: #196D1A;
+  --green-80: #135D15;
+  --green-90: #0D390F;
+  --green-100: #0B270E;
+  
+  /* Orange Scale */
+  --orange-0: #FFF8E6;
+  --orange-5: #FFEFD6;
+  --orange-10: #FFCF9D;
+  --orange-20: #FFB879;
+  --orange-30: #FD9245;
+  --orange-40: #FB7927;
+  --orange-50: #E65002;
+  --orange-60: #CE4100;
+  --orange-70: #AF3200;
+  --orange-80: #972801;
+  --orange-90: #611502;
+  --orange-100: #430F00;
+  
+  /* Yellow Scale */
+  --yellow-0: #FFF9D4;
+  --yellow-5: #FDF2B2;
+  --yellow-10: #F7D63A;
+  --yellow-20: #FABE24;
+  --yellow-30: #FD9400;
+  --yellow-40: #E78701;
+  --yellow-50: #BF6F02;
+  --yellow-60: #A76203;
+  --yellow-70: #8B5104;
+  --yellow-80: #754504;
+  --yellow-90: #482B06;
+  --yellow-100: #311D06;
+  
+  /* Tropicana Scale */
+  --tropicana-0: #F7FAEA;
+  --tropicana-5: #EEF5D4;
+  --tropicana-10: #CAE17F;
+  --tropicana-20: #B3D449;
+  --tropicana-30: #8FBC0B;
+  --tropicana-40: #80AD0C;
+  --tropicana-50: #648F0F;
+  --tropicana-60: #547F11;
+  --tropicana-70: #446A0D;
+  --tropicana-80: #38590B;
+  --tropicana-90: #1F3705;
+  --tropicana-100: #122602;
+  
+  /* Indigo Scale */
+  --indigo-0: #F5F9FF;
+  --indigo-5: #EAF1FF;
+  --indigo-10: #CCD6FE;
+  --indigo-20: #BAC4FD;
+  --indigo-30: #9DA8FB;
+  --indigo-40: #8D96FA;
+  --indigo-50: #7074F6;
+  --indigo-60: #5E5EF4;
+  --indigo-70: #4843EB;
+  --indigo-80: #392DDE;
+  --indigo-90: #241792;
+  --indigo-100: #190B6D;
+  
+  /* White & Black */
+  --white: #FFFFFF;
+  --black: #000000;
+  
+  /* ============================================
+     SEMANTIC COLOR TOKENS
+     ============================================
+     These colors reference the raw palette above.
+     Update mappings here to change the design system globally.
+     ============================================ */
+  
+  /* ============================================
+     STATUS/BADGE COLORS
+     ============================================ */
+  
+  /* Success Colors */
+  --success: var(--green-40);
+  --success-foreground: var(--white);
+  --success-light: var(--green-5);
+  --success-light-foreground: var(--green-80);
+  
+  /* Warning Colors */
+  --warning: var(--orange-30);
+  --warning-foreground: var(--white);
+  --warning-light: var(--yellow-5);
+  --warning-light-foreground: var(--orange-80);
+  
+  /* Critical/Error Colors */
+  --critical: var(--red-60);
+  --critical-foreground: var(--white);
+  --critical-light: var(--red-5);
+  --critical-light-foreground: var(--red-80);
+  
+  /* Informational Colors */
+  --info: var(--blue-60);
+  --info-foreground: var(--white);
+  --info-light: var(--blue-5);
+  --info-light-foreground: var(--blue-90);
+  
+  /* ============================================
+     FIGMA DESIGN SYSTEM - SEMANTIC TOKENS
+     ============================================
+     Organized by function: Surface, Text, Action, Border, Icon
+     These tokens match your Figma design system naming convention.
+     ============================================ */
+  
+  /* ----------------------------------------
+     SURFACE (Background & Container Colors)
+     ---------------------------------------- */
+  
+  /* Main page/app background - light gray */
+  --bg-default: var(--gray-0);                   /* #F9F9F9 - main page bg */
+  
+  /* Default page/app background - white */
+  --surface-default: var(--white);
+  
+  /* Subdued surface - light gray */
+  --surface-subdued: var(--gray-5);              /* #F1F1F1 - subdued bg */
+  
+  /* Neutral surfaces for cards, containers, panels */
+  --surface-neutral-default: var(--gray-5);      /* #F1F1F1 - cards/containers bg */
+  --surface-neutral-subdued: var(--gray-10);     /* #D8D8D8 - subtle bg */
+  
+  /* Interactive surface states */
+  --surface-hovered: var(--gray-5);              /* #F1F1F1 - hover bg */
+  --surface-pressed: var(--gray-20);             /* #C7C7C7 - pressed bg */
+  --surface-disabled: var(--gray-5);             /* #F1F1F1 - disabled bg */
+  --surface-selected-default: var(--blue-5);     /* #E6F1FF - selected item bg */
+  
+  /* Status surfaces (light backgrounds for alerts/banners) */
+  --surface-critical-default: var(--red-5);      /* #FEEDF2 - error/critical bg */
+  --surface-success-default: var(--green-5);     /* #E2F5E0 - success bg */
+  --surface-warning-default: var(--orange-5);    /* #FFEFD6 - warning bg */
+  --surface-informational-default: var(--cyan-5); /* #E3F4FC - informational bg */
+  
+  /* Input surface */
+  --surface-input: var(--white);                 /* #FFFFFF - input field bg */
+  
+  /* ----------------------------------------
+     TEXT (Foreground Colors)
+     ---------------------------------------- */
+  
+  /* Default text colors */
+  --text-default: var(--gray-90);                /* #323232 - primary text */
+  --text-subdued: var(--gray-60);                /* #727272 - secondary text */
+  --text-disabled: var(--gray-50);               /* #828282 - disabled text */
+  --text-inverse-subdued: var(--gray-20);        /* #C7C7C7 - subdued text on dark bg */
+  
+  /* Status text colors */
+  --text-critical: var(--red-60);                /* #DF2121 - error text */
+  --text-success: var(--green-60);               /* #268326 - success text */
+  --text-warning: var(--yellow-70);              /* #8B5104 - warning text */
+  --text-informational: var(--blue-50);          /* #2A7EFB - informational text */
+  
+  /* ----------------------------------------
+     ACTION (Interactive Elements)
+     ---------------------------------------- */
+  
+  /* Primary action colors (buttons, links, CTAs) */
+  --action-default: var(--blue-60);              /* #0A65FC - primary button */
+  --action-hovered: var(--blue-80);              /* #0746BD - primary hover state */
+  --action-pressed: var(--blue-90);              /* #04287E - active/pressed state */
+  
+  /* Secondary/Neutral action colors (dark buttons) */
+  --action-neutral-default: var(--gray-90);      /* #323232 - secondary button default */
+  --action-neutral-hovered: var(--gray-100);     /* #212121 - secondary button hover (darker) */
+  
+  /* Action highlights (selected states) */
+  --action-highlight-subtle: var(--blue-5);      /* #E6F1FF - light blue bg for selected */
+  --action-highlight-border: var(--blue-10);     /* #BFDAFE - light blue border */
+  
+  /* Disabled action */
+  --action-disabled: var(--gray-30);             /* #ADADAD - disabled button/action */
+  
+  /* ----------------------------------------
+     BORDER
+     ---------------------------------------- */
+  
+  /* Border colors for inputs, containers, dividers */
+  --border-default: var(--gray-50);              /* #828282 - default border */
+  --border-light: var(--gray-20);                /* #C7C7C7 - subtle border/divider */
+  --border-high: var(--gray-60);                 /* #727272 - high contrast border */
+  --border-hovered: var(--gray-90);              /* #323232 - hover border */
+  --border-disabled: var(--gray-10);             /* #D8D8D8 - disabled border (very subtle) */
+  --border-critical: var(--red-60);              /* #DF2121 - error border */
+  
+  /* ----------------------------------------
+     ICON
+     ---------------------------------------- */
+  
+  /* Icon colors for various states */
+  --icon-default: var(--gray-90);                /* #323232 - default icon */
+  --icon-hovered: var(--gray-90);                /* #323232 - hover icon (same for now) */
+  --icon-subdued: var(--gray-60);                /* #727272 - secondary icon */
+  --icon-disabled: var(--gray-50);               /* #828282 - disabled icon */
+  --icon-inverse: var(--white);                  /* #FFFFFF - icon on dark bg */
+  --icon-critical: var(--red-60);                /* #DF2121 - error icon */
+  --icon-success: var(--green-50);               /* #369536 - success icon */
+  --icon-secondary: var(--gray-80);              /* #505050 - nav/secondary icon */
+  --icon-informational: var(--blue-80);          /* #0746BD - informational icon */
+  
+  /* ============================================
+     BACKWARD COMPATIBILITY ALIASES
+     ============================================
+     Legacy token names for backward compatibility.
+     ⚠️ DEPRECATED: Use Figma naming convention instead.
+     These will be removed in a future version.
+     ============================================ */
+  
+  /* Background & Foreground (DEPRECATED - use surface-* and text-*) */
+  --background: var(--surface-default);          /* ⚠️ Use --surface-default */
+  --foreground: var(--text-default);             /* ⚠️ Use --text-default */
+  
+  /* Card (DEPRECATED - use surface-neutral-default) */
+  --card: var(--surface-neutral-default);        /* ⚠️ Use --surface-neutral-default */
+  --card-foreground: var(--text-default);        /* ⚠️ Use --text-default */
+  --card-background: var(--gray-0);              /* Keep for special nested cards */
+  
+  /* Popover (DEPRECATED - use surface-neutral-default) */
+  --popover: var(--surface-neutral-default);     /* ⚠️ Use --surface-neutral-default */
+  --popover-foreground: var(--text-default);     /* ⚠️ Use --text-default */
+  
+  /* Primary/Action (DEPRECATED - use action-*) */
+  --primary: var(--action-default);              /* ⚠️ Use --action-default */
+  --primary-foreground: var(--white);            /* ⚠️ Use white for button text */
+  --primary-hover: var(--action-hovered);        /* ⚠️ Use --action-hovered */
+  --primary-50: var(--action-highlight-subtle);  /* ⚠️ Use --action-highlight-subtle */
+  --primary-200: var(--action-highlight-border); /* ⚠️ Use --action-highlight-border */
+  
+  /* Secondary (use for secondary buttons) */
+  --secondary: var(--surface-neutral-default);   /* Secondary button bg */
+  --secondary-foreground: var(--text-default);   /* Secondary button text */
+  
+  /* Muted (use for disabled/subtle states) */
+  --muted: var(--surface-neutral-subdued);       /* Muted background */
+  --muted-foreground: var(--text-subdued);       /* Muted text */
+  
+  /* Accent (DEPRECATED - not in Figma, use action-pressed for dark emphasis) */
+  --accent: var(--action-pressed);               /* ⚠️ Use --action-pressed or --action-default */
+  --accent-foreground: var(--white);             /* ⚠️ Use white */
+  
+  /* Destructive (DEPRECATED - use critical) */
+  --destructive: var(--critical);                /* ⚠️ Use --critical */
+  --destructive-foreground: var(--critical-foreground); /* ⚠️ Use --critical-foreground */
+  
+  /* Border & Input (DEPRECATED - use border-default and surface-input) */
+  --border: var(--border-default);               /* ⚠️ Use --border-default */
+  --input: var(--surface-input);                 /* ⚠️ Use --surface-input */
+  --input-background: var(--surface-input);      /* ⚠️ Use --surface-input */
+  
+  /* ============================================
+     UTILITY COLORS
+     ============================================ */
+  
+  /* Focus ring for interactive elements */
+  --ring: var(--blue-40);
+  
+  /* Badge background for informational tags */
+  --badge-info: var(--cyan-20);
+  
+  /* ============================================
+     ELEVATION & SHADOWS
+     ============================================ */
+  
+  /* Shadow for small elevations, such as cards or modals. */
+  --elevation-sm: 0px 1px 1px 0px rgba(0,0,0,0.08), 0px 2px 1px -1px rgba(0,0,0,0.02), 0px 1px 3px 0px rgba(0,0,0,0.1);
+  /* Shadow for medium elevations, such as hover states on cards. */
+  --elevation-md: 0px 4px 6px -1px rgba(0,0,0,0.1), 0px 2px 4px -1px rgba(0,0,0,0.06);
+  
+  /* ============================================
+     CHART COLORS
+     ============================================ */
+  
+  /* The color for chart elements, such as a bar or line in a chart. */
+  --chart-1: var(--blue-60);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-2: var(--teal-40);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-3: var(--red-60);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-4: var(--orange-50);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-5: var(--purple-50);
+  
+  /* ============================================
+     BORDER RADIUS SYSTEM
+     ============================================ */
+  
+  /* The default border radius for elements such as buttons, tooltip, and other containers. */
+  --radius: 4px;
+  /* The border radius specifically for buttons */
+  --radius-button: 4px;
+  /* The border radius specifically for cards */
+  --radius-card: 8px;
+  
+  /* ============================================
+     SIDEBAR/NAVIGATION COLORS
+     ============================================ */
+  
+  /* The background color for sidebars, navigation menus, and other persistent elements. */
+  --sidebar: var(--blue-90);
+  /* The default color for text or elements that appear on top of sidebars, navigation menus, and other persistent elements. */
+  --sidebar-foreground: var(--white);
+  /* The primary color used for buttons, links, and other interactive elements in sidebars and navigation menus. */
+  --sidebar-primary: var(--blue-60);
+  /* The default color for text or elements that appear on top of primary colored elements in sidebars and navigation menus. */
+  --sidebar-primary-foreground: var(--white);
+  /* The accent color used for highlights, links, and other interactive elements in sidebars and navigation menus. */
+  --sidebar-accent: var(--blue-40);
+  /* The default color for text or elements that appear on top of accent colored elements in sidebars and navigation menus. */
+  --sidebar-accent-foreground: var(--white);
+  /* The default border color for elements in sidebars and navigation menus. */
+  --sidebar-border: var(--gray-80);
+  /* The default color for focus rings, outlines, and other focus indicators in sidebars and navigation menus. */
+  --sidebar-ring: var(--blue-40);
+  
+  /* ============================================
+     TYPOGRAPHY SYSTEM
+     ============================================
+     Font Family: Inter (defined in fonts.css)
+     
+     Complete typography scale from Figma design system
+     Usage: Use class names or CSS variables in components
+     ============================================ */
+  
+  /* Font Weights - Complete Inter Variable Font Range */
+  --font-weight-thin: 100;          /* Thin - lightest weight */
+  --font-weight-extra-light: 200;   /* Extra Light */
+  --font-weight-light: 300;         /* Light */
+  --font-weight-normal: 400;        /* Regular - default body text */
+  --font-weight-medium: 500;        /* Medium - subtle emphasis */
+  --font-weight-semibold: 600;      /* Semi Bold - headings, emphasis */
+  --font-weight-bold: 700;          /* Bold - strong emphasis */
+  --font-weight-extra-bold: 800;    /* Extra Bold - very strong emphasis */
+  --font-weight-black: 900;         /* Black - heaviest weight */
+  
+  /* ============================================
+     HEADLINE STYLES (Large Display Text)
+     ============================================ */
+  --headline-large-size: 80px;
+  --headline-large-height: 88px;
+  --headline-large-weight: var(--font-weight-semibold);
+  
+  --headline-medium-size: 64px;
+  --headline-medium-height: 72px;
+  --headline-medium-weight: var(--font-weight-semibold);
+  
+  --headline-small-size: 54px;
+  --headline-small-height: 62px;
+  --headline-small-weight: var(--font-weight-semibold);
+  
+  --headline-xsmall-size: 42px;
+  --headline-xsmall-height: 48px;
+  --headline-xsmall-weight: var(--font-weight-semibold);
+  
+  /* ============================================
+     DISPLAY STYLES (Medium-Large Headings)
+     ============================================ */
+  --display-large-size: 32px;
+  --display-large-height: 36px;
+  --display-large-weight: var(--font-weight-semibold);
+  
+  --display-medium-size: 28px;
+  --display-medium-height: 36px;
+  --display-medium-weight: var(--font-weight-semibold);
+  
+  --display-small-size: 24px;
+  --display-small-height: 28px;
+  --display-small-weight: var(--font-weight-semibold);
+  
+  /* ============================================
+     HEADING STYLES (Section Headings)
+     ============================================ */
+  --heading-large-size: 22px;
+  --heading-large-height: 28px;
+  --heading-large-weight: var(--font-weight-semibold);
+  
+  --heading-medium-size: 19px;
+  --heading-medium-height: 24px;
+  --heading-medium-weight: var(--font-weight-semibold);
+  
+  --heading-small-size: 17px;
+  --heading-small-height: 22px;
+  --heading-small-weight: var(--font-weight-medium);
+  
+  /* ============================================
+     BODY STYLES (Body Text)
+     ============================================ */
+  --body-lg-size: 20px;
+  --body-lg-height: 28px;
+  --body-lg-weight: var(--font-weight-normal);
+  
+  --body-size: 16px;
+  --body-height: 24px;
+  --body-weight: var(--font-weight-normal);
+  
+  --body-small-size: 14px;
+  --body-small-height: 20px;
+  --body-small-weight: var(--font-weight-normal);
+  
+  --body-small-bold-size: 14px;
+  --body-small-bold-height: 20px;
+  --body-small-bold-weight: var(--font-weight-semibold);
+  
+  /* ============================================
+     ACTION & UI STYLES
+     ============================================ */
+  --action-size: 16px;
+  --action-height: 24px;
+  --action-weight: var(--font-weight-semibold);
+  
+  --subheading-size: 14px;
+  --subheading-height: 16px;
+  --subheading-weight: var(--font-weight-semibold);
+  --subheading-spacing: 0.5px;
+  
+  /* ============================================
+     HELPER STYLES (Small Text)
+     ============================================ */
+  --helper-size: 12px;
+  --helper-height: 16px;
+  --helper-weight: var(--font-weight-normal);
+  
+  --helper-bold-size: 12px;
+  --helper-bold-height: 16px;
+  --helper-bold-weight: var(--font-weight-semibold);
+  
+  /* ============================================
+     LEGACY/SIMPLIFIED VARIABLES (For backwards compatibility)
+     ============================================ */
+  --text-xs: var(--helper-size);           /* 12px */
+  --text-sm: var(--body-small-size);       /* 14px */
+  --text-base: var(--body-size);           /* 16px */
+  --text-lg: var(--heading-medium-size);   /* 19px */
+  --text-xl: var(--display-small-size);    /* 24px */
+  --text-2xl: var(--headline-xsmall-size); /* 42px */
+  
+  /* ============================================
+     SPACING SYSTEM
+     ============================================
+     Consistent spacing scale for padding, margin, gaps
+     
+     Usage: var(--spacing-1) through var(--spacing-8)
+     ============================================ */
+  
+  --spacing-1: 4px;    /* Tiny gaps */
+  --spacing-2: 8px;    /* Small gaps, button padding */
+  --spacing-3: 12px;   /* Medium gaps */
+  --spacing-4: 16px;   /* Default gaps, card padding */
+  --spacing-5: 20px;   /* Large gaps */
+  --spacing-6: 24px;   /* Section spacing */
+  --spacing-8: 32px;   /* Large section spacing */
+  
+  /* ============================================
+     INPUT & TEXT FIELD SYSTEM
+     ============================================
+     Standard specifications for text fields, inputs, and form controls
+     ============================================ */
+  
+  /* Text Field Label */
+  --input-label-size: var(--text-base);           /* 16px - Label text size */
+  --input-label-weight: var(--font-weight-normal); /* 400 - Label font weight */
+  --input-label-color: var(--foreground);          /* Label text color */
+  
+  /* Text Field Input/Value */
+  --input-text-size: var(--text-base);            /* 16px - Input text size */
+  --input-text-weight: var(--font-weight-normal); /* 400 - Input font weight */
+  --input-text-color: var(--foreground);          /* Input text color */
+  
+  /* Text Field Placeholder */
+  --input-placeholder-size: var(--text-base);     /* 16px - Placeholder text size */
+  --input-placeholder-weight: var(--font-weight-normal); /* 400 - Placeholder font weight */
+  --input-placeholder-color: var(--text-disabled); /* Placeholder text color - uses semantic text-disabled token */
+  
+  /* Text Field Sizing */
+  --input-height: 44px;                           /* Standard input height */
+  --input-padding-x: var(--spacing-4);            /* 16px - Horizontal padding */
+  --input-padding-y: var(--spacing-3);            /* 12px - Vertical padding */
+  --input-border-width: 1px;                      /* Border thickness */
+  --input-border-color: var(--border);            /* Border color */
+  --input-border-radius: var(--radius);           /* Border radius (4px) */
+  
+  /* Text Field States */
+  --input-focus-border-color: var(--ring);        /* Focus state border color */
+  --input-focus-ring-width: 2px;                  /* Focus ring width */
+  --input-disabled-bg: var(--muted);              /* Disabled background */
+  --input-disabled-text: var(--muted-foreground); /* Disabled text color */
+  
+  /* ============================================
+     LINE HEIGHT SYSTEM (Legacy - use specific typography vars above)
+     ============================================ */
+  
+  --line-height-tight: 1.25;      /* Headings, compact text */
+  --line-height-normal: 1.5;      /* Body text, default */
+  --line-height-relaxed: 1.625;   /* Comfortable reading */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-disabled: var(--border-disabled);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+  --color-card-background: var(--card-background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius-card);
+  --radius-xl: calc(var(--radius-card) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Typography styles */
+h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--headline-small-size);
+  font-weight: var(--headline-small-weight);
+  line-height: var(--headline-small-height);
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--headline-xsmall-size);
+  font-weight: var(--headline-xsmall-weight);
+  line-height: var(--headline-xsmall-height);
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--display-small-size);
+  font-weight: var(--display-small-weight);
+  line-height: var(--display-small-height);
+}
+
+h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--heading-medium-size);
+  font-weight: var(--heading-medium-weight);
+  line-height: var(--heading-medium-height);
+}
+
+p {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--body-size);
+  font-weight: var(--body-weight);
+  line-height: var(--body-height);
+}
+
+span {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--helper-size);
+  font-weight: var(--helper-weight);
+  line-height: var(--helper-height);
+}
+
+label {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+}
+
+button {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5;
+  border-radius: var(--radius-button);
+}
+
+input {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+}
+
+/* Input placeholder styles - Design System Compliant */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  font-size: var(--input-placeholder-size);
+  font-weight: var(--input-placeholder-weight);
+  color: var(--input-placeholder-color);
+  opacity: 1; /* Firefox fix */
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  font-size: var(--input-placeholder-size);
+  font-weight: var(--input-placeholder-weight);
+  color: var(--input-placeholder-color);
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  font-size: var(--input-placeholder-size);
+  font-weight: var(--input-placeholder-weight);
+  color: var(--input-placeholder-color);
+  opacity: 1;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  font-size: var(--input-placeholder-size);
+  font-weight: var(--input-placeholder-weight);
+  color: var(--input-placeholder-color);
+}
+
+html {
+  font-size: var(--font-size);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Card styles */
+.card {
+  border-radius: var(--radius-card);
+  box-shadow: var(--elevation-sm);
+}
+
+/* ============================================
+   RESPONSIVE TYPOGRAPHY UTILITIES
+   ============================================
+   Fluid/responsive typography classes for adaptive text sizing
+   ============================================ */
+
+/* Responsive body text - small to large */
+.text-responsive-body-lg {
+  font-size: clamp(var(--body-small-size), 3vw, var(--body-lg-size));
+  line-height: clamp(var(--body-small-height), 3vw, var(--body-lg-height));
+}
+
+/* Responsive body text - small to medium with custom max */
+.text-responsive-body {
+  font-size: clamp(var(--body-small-size), 3vw, 18px);
+  line-height: clamp(22px, 3vw, var(--body-height));
+}
+
+/* Responsive body text - small to base */
+.text-responsive-base {
+  font-size: clamp(var(--body-small-size), 3vw, var(--body-size));
+  line-height: clamp(22px, 3vw, var(--body-height));
+}
+
+/* Responsive body text - base to large */
+.text-responsive-lg {
+  font-size: clamp(var(--body-size), 3vw, var(--body-lg-size));
+  line-height: clamp(var(--body-height), 3vw, var(--body-lg-height));
+}
+
+/* Body small utility - explicit body-small typography */
+.text-body-small {
+  font-size: var(--body-small-size);
+  line-height: var(--body-small-height);
+  font-weight: var(--body-small-weight);
+}
+
+/* Action text utility - for links and action items */
+.text-action {
+  font-size: var(--action-size);
+  line-height: var(--action-height);
+  font-weight: var(--action-weight);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================
+   Custom keyframe animations for components
+   ============================================ */
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes caret-blink {
+  0%, 70%, 100% {
+    opacity: 1;
+  }
+  20%, 50% {
+    opacity: 0;
+  }
+}
+
+/* Tailwind animation utility classes */
+.animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
+}
+
+.animate-caret-blink {
+  animation: caret-blink 1.25s ease-out infinite;
+}
+
+/* ============================================
+   UTILITY CLASSES - DESIGN SYSTEM
+   ============================================
+   Reusable utility classes that reference design system tokens.
+   These ensure all components use CSS variables consistently.
+   ============================================ */
+
+@layer components {
+  /* Background utilities */
+  .bg-surface-default {
+    background-color: var(--surface-default);
+  }
+  
+  .bg-surface-subdued {
+    background-color: var(--surface-subdued);
+  }
+  
+  .bg-surface-neutral-default {
+    background-color: var(--surface-neutral-default);
+  }
+  
+  .bg-surface-neutral-subdued {
+    background-color: var(--surface-neutral-subdued);
+  }
+  
+  .bg-accent {
+    background-color: var(--accent);
+  }
+  
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  
+  .bg-default {
+    background-color: var(--bg-default);
+  }
+  
+  .bg-surface-informational-default {
+    background-color: var(--surface-informational-default);
+  }
+  
+  .bg-surface-selected-default {
+    background-color: var(--surface-selected-default);
+  }
+  
+  /* Text/foreground colors */
+  .text-default {
+    color: var(--text-default);
+  }
+  
+  .text-subdued {
+    color: var(--text-subdued);
+  }
+  
+  .text-informational {
+    color: var(--text-informational);
+  }
+  
+  .text-primary-foreground {
+    color: var(--primary-foreground);
+  }
+  
+  .text-accent-foreground {
+    color: var(--accent-foreground);
+  }
+  
+  /* Icon colors */
+  .text-icon-informational {
+    color: var(--icon-informational);
+  }
+  
+  /* Border utilities */
+  .border-border-light {
+    border-color: var(--border-light);
+  }
+  
+  .border-border-disabled {
+    border-color: var(--border-disabled);
+  }
+  
+  .bg-border-disabled {
+    background-color: var(--border-disabled);
+  }
+  
+  /* Spacing utilities */
+  .gap-spacing-2 {
+    gap: var(--spacing-2);
+  }
+  
+  .gap-spacing-3 {
+    gap: var(--spacing-3);
+  }
+  
+  .gap-spacing-4 {
+    gap: var(--spacing-4);
+  }
+  
+  .gap-spacing-5 {
+    gap: var(--spacing-5);
+  }
+  
+  .gap-spacing-6 {
+    gap: var(--spacing-6);
+  }
+  
+  .p-spacing-4 {
+    padding: var(--spacing-4);
+  }
+  
+  .p-spacing-5 {
+    padding: var(--spacing-5);
+  }
+  
+  .p-spacing-6 {
+    padding: var(--spacing-6);
+  }
+  
+  .px-spacing-4 {
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
+  }
+  
+  .py-spacing-2 {
+    padding-top: var(--spacing-2);
+    padding-bottom: var(--spacing-2);
+  }
+  
+  .mb-spacing-4 {
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .mt-spacing-2 {
+    margin-top: var(--spacing-2);
+  }
+  
+  /* Border radius */
+  .rounded-card {
+    border-radius: var(--radius-card);
+  }
+  
+  .rounded-button {
+    border-radius: var(--radius-button);
+  }
+  
+  /* Elevation */
+  .shadow-elevation-sm {
+    box-shadow: var(--elevation-sm);
+  }
+  
+  /* Typography utilities */
+  .text-heading-medium {
+    font-size: var(--heading-medium-size);
+    font-weight: var(--heading-medium-weight);
+    line-height: var(--heading-medium-height);
+  }
+  
+  .text-body {
+    font-size: var(--body-size);
+    font-weight: var(--body-weight);
+    line-height: var(--body-height);
+  }
+  
+  .text-body-small {
+    font-size: var(--body-small-size);
+    font-weight: var(--body-small-weight);
+    line-height: var(--body-small-height);
+  }
+  
+  .text-helper {
+    font-size: var(--helper-size);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--helper-height);
+  }
+  
+  .text-display-small {
+    font-size: var(--display-small-size);
+    font-weight: var(--display-small-weight);
+    line-height: var(--display-small-height);
+  }
+}
