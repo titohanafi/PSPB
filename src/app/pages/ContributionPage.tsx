@@ -4,12 +4,12 @@ import { ContributionFormWizard } from "../components/ContributionFormWizard";
 import { ProgramIllustration } from "../components/ProgramIllustration";
 import { SchoolMapModal } from "../components/SchoolMapModal";
 import { ProgramSelectionModal } from "../components/ProgramSelectionModal";
-import imgInfrastrukturDigital from "figma:asset/8ebac0a7fa8e63a44d8c8d44962071fb0f7fe18d.png";
-import imgSumberBelajar from "figma:asset/f4e8af0a8cfab1d74e3f1bd8330668a2c699c0f4.png";
-import imgRevitalisasiSekolah from "figma:asset/5cae35327a5ba99e835f3e3eeda22326d3e4eb70.png";
-import imgPengembanganPlatform from "figma:asset/3e89bb73e1be3976bb46b8cf8ea93f3ae40697c1.png";
-import imgPendampinganGTK from "figma:asset/bb1b92ae63ca87bbc98c50e30e0b5dcc3a45502f.png";
-import imgKebutuhanLainnya from "figma:asset/a93b84ab1f8c8c9bb1e2eeece87c20e59f62f34a.png";
+import imgInfrastrukturDigital from "../../assets/imgInfrastrukturDigital.png";
+import imgSumberBelajar from "../../assets/imgSumberBelajar.png";
+import imgRevitalisasiSekolah from "../../assets/imgRevitalisasiSekolah.png";
+import imgPengembanganPlatform from "../../assets/imgPengembanganPlatform.png";
+import imgPendampinganGTK from "../../assets/imgPendampinganGTK.png";
+import imgKebutuhanLainnya from "../../assets/imgKebutuhanLainnya.png";
 
 const cardDetails = [
   {

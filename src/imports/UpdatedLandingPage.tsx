@@ -3541,81 +3541,128 @@ function ProgramReachSection() {
 
 function WhyContributeAndImpact() {
   return (
-    <div className="bg-white relative shrink-0 w-full">
-      <div 
-        className="flex flex-col items-center justify-center relative w-full px-4 sm:px-6 md:px-8 lg:px-12"
+    <div className="relative shrink-0 w-full overflow-hidden">
+
+      {/* Mengapa berkontribusi — di atas, gradient putih → abu tipis di penghujung */}
+      <div
+        className="content-stretch flex flex-col gap-10 h-auto items-center relative w-full px-4 sm:px-6 md:px-8 lg:px-12"
         style={{
-          paddingTop: 'calc(var(--spacing-8) * 2)',
-          paddingBottom: 'calc(var(--spacing-8) * 2)'
+          paddingTop: 'calc(var(--spacing-8) * 3)',
+          paddingBottom: '24px',
+          background: 'linear-gradient(to bottom, #ffffff 60%, #f1f2f4 100%)'
+        }}
+      >
+        <div className="max-w-[1140px] mx-auto w-full flex flex-col gap-10 items-center">
+          <Frame2 />
+          <Frame10 />
+        </div>
+      </div>
+
+      {/* Dampak PSPB — di bawah */}
+      <div
+        className="content-stretch flex flex-col items-center relative w-full px-4 sm:px-6 md:px-8 lg:px-12"
+        style={{
+          paddingTop: '8px',
+          paddingBottom: 'calc(var(--spacing-8) * 3)',
+          backgroundColor: '#f1f2f4'
         }}
       >
         <div className="max-w-[1140px] w-full mx-auto">
-          <div className="flex flex-col gap-6 items-center">
-            <h2 className="not-italic relative shrink-0 text-center text-gray-900 w-full whitespace-pre-wrap" style={{ fontFamily: 'Inter', fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: 600 }}>
-              Mengapa Berontribusi & Dampaknya
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mb-4">
-              <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-blue-50 text-center">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-1">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-                </div>
-                <h3 className="font-semibold text-gray-900" style={{ fontSize: '16px' }}>Bantuan Tepat Sasar</h3>
-                <p className="text-gray-600" style={{ fontSize: '13px', lineHeight: '1.4' }}>Kontribusi sesuai data kebutuhan terverifikasi dari Dapodik</p>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-purple-50 text-center">
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-1">
-                  <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                </div>
-                <h3 className="font-semibold text-gray-900" style={{ fontSize: '16px' }}>Proses Lebih Mudah</h3>
-                <p className="text-gray-600" style={{ fontSize: '13px', lineHeight: '1.4' }}>Cukup daftar dan pilih bantuan, kami bantu sisanya</p>
-              </div>
-              <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-green-50 text-center">
-                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-1">
-                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                </div>
-                <h3 className="font-semibold text-gray-900" style={{ fontSize: '16px' }}>Progres Transparan</h3>
-                <p className="text-gray-600" style={{ fontSize: '13px', lineHeight: '1.4' }}>Pantau perkembangan sekolah secara real-time</p>
-              </div>
+          <div className="flex flex-col gap-10 items-center">
+            <div className="flex flex-col gap-3 items-center">
+              <h3 className="not-italic relative shrink-0 text-center text-gray-900 w-full whitespace-pre-wrap" style={{ fontFamily: 'Inter' }}>Dampak Program PSPB</h3>
+              <p className="not-italic relative shrink-0 text-center text-gray-600 max-w-[800px] whitespace-pre-wrap text-responsive-body-lg" style={{ fontFamily: 'Inter' }}>Menghimpun kolaborasi untuk meningkatkan mutu pendidikan Indonesia</p>
             </div>
-
-            <div className="w-full h-px bg-gray-200 my-2" />
-
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-3 w-full">
-              <div className="flex flex-col items-center gap-1 p-3 rounded-lg bg-gray-50 text-center">
-                <Users className="w-5 h-5 text-blue-600 mb-1" />
-                <span className="text-gray-900 font-bold" style={{ fontSize: '18px' }}>411.233</span>
-                <p className="text-gray-600" style={{ fontSize: '11px' }}>Siswa</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+              <div className="group relative bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 hover:scale-105 transition-all duration-300 cursor-pointer shadow-sm">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gray-100 rounded-full blur-3xl group-hover:bg-gray-200 transition-all" />
+                <div className="relative flex flex-col items-center gap-6 text-center">
+                  <div className="mb-1"><Users className="w-7 h-7 text-blue-600" /></div>
+                  <span className="text-gray-900 tracking-tight" style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 700, fontFamily: 'Inter' }}>411.233</span>
+                  <p className="text-gray-600 leading-relaxed" style={{ fontFamily: 'Inter' }}><span className="text-gray-900" style={{ fontSize: '16px', fontWeight: 700 }}>Siswa</span> telah merasakan manfaat program pendidikan</p>
+                  <div className="w-full border-t border-gray-200 pt-4">
+                    <div className="flex items-center gap-2 w-full">
+                      <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                      <span className="text-gray-500 text-left" style={{ fontFamily: 'Inter', fontSize: '14px' }}><span style={{ fontWeight: 700 }}>+891.231</span> lainnya dalam perencanaan</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col items-center gap-1 p-3 rounded-lg bg-gray-50 text-center">
-                <Boxes className="w-5 h-5 text-blue-600 mb-1" />
-                <span className="text-gray-900 font-bold" style={{ fontSize: '18px' }}>16.092</span>
-                <p className="text-gray-600" style={{ fontSize: '11px' }}>Sekolah</p>
+              <div className="group relative bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 hover:scale-105 transition-all duration-300 cursor-pointer shadow-sm">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gray-100 rounded-full blur-3xl group-hover:bg-gray-200 transition-all" />
+                <div className="relative flex flex-col items-center gap-6 text-center">
+                  <div className="mb-1"><BookOpen className="w-7 h-7 text-blue-600" /></div>
+                  <span className="text-gray-900 tracking-tight" style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 700, fontFamily: 'Inter' }}>21.981</span>
+                  <p className="text-gray-600 leading-relaxed" style={{ fontFamily: 'Inter' }}><span className="text-gray-900" style={{ fontSize: '16px', fontWeight: 700 }}>Guru</span> telah mengikuti pengembangan kompetensi</p>
+                  <div className="w-full border-t border-gray-200 pt-4">
+                    <div className="flex items-center gap-2 w-full">
+                      <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                      <span className="text-gray-500 text-left" style={{ fontFamily: 'Inter', fontSize: '14px' }}><span style={{ fontWeight: 700 }}>+24.009</span> lainnya dalam perencanaan</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col items-center gap-1 p-3 rounded-lg bg-gray-50 text-center">
-                <GraduationCap className="w-5 h-5 text-blue-600 mb-1" />
-                <span className="text-gray-900 font-bold" style={{ fontSize: '18px' }}>4.092</span>
-                <p className="text-gray-600" style={{ fontSize: '11px' }}>Guru & Fasilitator</p>
+              <div className="group relative bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 hover:scale-105 transition-all duration-300 cursor-pointer shadow-sm">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gray-100 rounded-full blur-3xl group-hover:bg-gray-200 transition-all" />
+                <div className="relative flex flex-col items-center gap-6 text-center">
+                  <div className="mb-1"><Building2 className="w-7 h-7 text-blue-600" /></div>
+                  <span className="text-gray-900 tracking-tight" style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 700, fontFamily: 'Inter' }}>113</span>
+                  <p className="text-gray-600 leading-relaxed" style={{ fontFamily: 'Inter' }}><span className="text-gray-900" style={{ fontSize: '16px', fontWeight: 700 }}>Satuan pendidikan</span> telah terbantu program kami</p>
+                  <div className="w-full border-t border-gray-200 pt-4">
+                    <div className="flex items-center gap-2 w-full">
+                      <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                      <span className="text-gray-500 text-left" style={{ fontFamily: 'Inter', fontSize: '14px' }}><span style={{ fontWeight: 700 }}>+542</span> lainnya dalam perencanaan</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col items-center gap-1 p-3 rounded-lg bg-gray-50 text-center">
-                <BookOpen className="w-5 h-5 text-blue-600 mb-1" />
-                <span className="text-gray-900 font-bold" style={{ fontSize: '18px' }}>21.981</span>
-                <p className="text-gray-600" style={{ fontSize: '11px' }}>Guru</p>
+              <div className="group relative bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 hover:scale-105 transition-all duration-300 cursor-pointer shadow-sm">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gray-100 rounded-full blur-3xl group-hover:bg-gray-200 transition-all" />
+                <div className="relative flex flex-col items-center gap-6 text-center">
+                  <div className="mb-1"><MapPin className="w-7 h-7 text-blue-600" /></div>
+                  <span className="text-gray-900 tracking-tight" style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 700, fontFamily: 'Inter' }}>120+</span>
+                  <p className="text-gray-600 leading-relaxed" style={{ fontFamily: 'Inter' }}><span className="text-gray-900" style={{ fontSize: '16px', fontWeight: 700 }}>Daerah</span> di Indonesia telah terjangkau program kami</p>
+                  <div className="w-full border-t border-gray-200 pt-4">
+                    <div className="flex items-center gap-2 w-full">
+                      <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                      <span className="text-gray-500 text-left" style={{ fontFamily: 'Inter', fontSize: '14px' }}><span style={{ fontWeight: 700 }}>+240</span> lainnya dalam perencanaan</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col items-center gap-1 p-3 rounded-lg bg-gray-50 text-center">
-                <Building2 className="w-5 h-5 text-blue-600 mb-1" />
-                <span className="text-gray-900 font-bold" style={{ fontSize: '18px' }}>113</span>
-                <p className="text-gray-600" style={{ fontSize: '11px' }}>Satuan Pendidikan</p>
+              <div className="group relative bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 hover:scale-105 transition-all duration-300 cursor-pointer shadow-sm">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gray-100 rounded-full blur-3xl group-hover:bg-gray-200 transition-all" />
+                <div className="relative flex flex-col items-center gap-6 text-center">
+                  <div className="mb-1"><Handshake className="w-7 h-7 text-blue-600" /></div>
+                  <span className="text-gray-900 tracking-tight" style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 700, fontFamily: 'Inter' }}>92</span>
+                  <p className="text-gray-600 leading-relaxed" style={{ fontFamily: 'Inter' }}><span className="text-gray-900" style={{ fontSize: '16px', fontWeight: 700 }}>Mitra</span> telah berpartisipasi dalam program</p>
+                  <div className="w-full border-t border-gray-200 pt-4">
+                    <div className="flex items-center gap-2 w-full">
+                      <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                      <span className="text-gray-500 text-left" style={{ fontFamily: 'Inter', fontSize: '14px' }}><span style={{ fontWeight: 700 }}>28 Mitra</span> lainnya dalam pengajuan</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col items-center gap-1 p-3 rounded-lg bg-gray-50 text-center">
-                <MapPin className="w-5 h-5 text-blue-600 mb-1" />
-                <span className="text-gray-900 font-bold" style={{ fontSize: '18px' }}>120+</span>
-                <p className="text-gray-600" style={{ fontSize: '11px' }}>Daerah</p>
+              <div className="group relative bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 hover:scale-105 transition-all duration-300 cursor-pointer shadow-sm">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gray-100 rounded-full blur-3xl group-hover:bg-gray-200 transition-all" />
+                <div className="relative flex flex-col items-center gap-6 text-center">
+                  <div className="mb-1"><Lightbulb className="w-7 h-7 text-blue-600" /></div>
+                  <span className="text-gray-900 tracking-tight" style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 700, fontFamily: 'Inter' }}>29</span>
+                  <p className="text-gray-600 leading-relaxed" style={{ fontFamily: 'Inter' }}><span className="text-gray-900" style={{ fontSize: '16px', fontWeight: 700 }}>Program kolaborasi</span> telah berjalan dengan sukses</p>
+                  <div className="w-full border-t border-gray-200 pt-4">
+                    <div className="flex items-center gap-2 w-full">
+                      <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
+                      <span className="text-gray-500 text-left" style={{ fontFamily: 'Inter', fontSize: '14px' }}><span style={{ fontWeight: 700 }}>+56</span> lainnya dalam perencanaan</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   );
 }
