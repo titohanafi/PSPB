@@ -76,8 +76,7 @@ export function ContributionFormWizard({
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
   const [showThankYou, setShowThankYou] = useState(false);
-  const [expandedPrasyarat, setExpandedPrasyarat] = useState<{guru: boolean; murid: boolean; [key: string]: boolean}>({guru: true, murid: true, 'sso-belajar-id': true, 'integrasi-rumah-pendidikan': true});
-  const [expandedPrasyaratSection, setExpandedPrasyaratSection] = useState<Record<string, {substansi: boolean; teknis: boolean}>>({});
+  const [expandedPrasyarat, setExpandedPrasyarat] = useState<Record<string, boolean>>({guru: true, murid: true, 'sso-belajar-id': true, 'integrasi-rumah-pendidikan': true});
 
   // Debug: Log formData changes
   useEffect(() => {
@@ -391,8 +390,12 @@ export function ContributionFormWizard({
                     return (
                       <div 
                         key={index}
-                        className={`overflow-hidden relative group cursor-pointer rounded-card border border-border-light flex flex-col gap-spacing-3 p-spacing-5 transition-colors ${
-                          isHovered ? 'bg-surface-subdued' : 'bg-surface-default'
+                        className={`overflow-hidden relative group cursor-pointer rounded-card flex flex-col gap-spacing-3 p-spacing-5 transition-colors border ${
+                          isSelected
+                            ? 'border-primary bg-[var(--primary-50)]'
+                            : isHovered
+                            ? 'border-border-light bg-surface-subdued'
+                            : 'border-border-light bg-surface-default'
                         }`}
                         onMouseEnter={() => setHoveredCardIndex(index)}
                         onMouseLeave={() => setHoveredCardIndex(null)}
@@ -465,126 +468,120 @@ export function ContributionFormWizard({
               
               <div className="flex flex-col gap-spacing-6 p-spacing-6 bg-surface-default">
                 {/* Segmen 1: Informasi Perusahaan */}
-                <div className="flex flex-col gap-4">
-                  <h5 className="font-semibold text-foreground" style={{ fontSize: '16px' }}>
-                    Informasi Perusahaan
-                  </h5>
-                  
-                  {/* Row 1: Nama Perusahaan | Bentuk Badan Hukum */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <FormInput
-                      label="Nama Perusahaan"
-                      value={formData.organization}
-                      onChange={(value) => setFormData({ ...formData, organization: value })}
-                      placeholder="Ketik nama perusahaan"
-                    />
-                    
-                    <Select
-                      label="Bentuk Badan Hukum"
-                      placeholder="Pilih bentuk badan hukum"
-                      value={formData.badanHukum || ''}
-                      onChange={(value) => setFormData({ ...formData, badanHukum: value })}
-                      options={[
-                        { label: 'PT', value: 'pt' },
-                        { label: 'PT Perorangan', value: 'pt-perorangan' },
-                        { label: 'Yayasan', value: 'yayasan' },
-                        { label: 'Koperasi', value: 'koperasi' },
-                        { label: 'Perkumpulan', value: 'perkumpulan' },
-                        { label: 'BUMN/BUMD', value: 'bumn-bumd' }
-                      ]}
-                    />
+                <div className="border border-border-light rounded-lg overflow-hidden">
+                  <div className="bg-surface-subdued px-5 py-4 border-b border-border-light">
+                    <h5 className="font-semibold text-foreground" style={{ fontSize: 'var(--text-base)' }}>Informasi Perusahaan</h5>
                   </div>
-                  
-                  {/* Row 2: Status Mitra */}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-foreground" style={{ fontSize: 'var(--input-label-size)', fontWeight: 'var(--input-label-weight)', color: 'var(--input-label-color)' }}>
-                      Status Mitra
-                    </label>
-                    <div className="flex gap-4">
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="statusMitra"
-                          checked={formData.statusMitra === 'baru'}
-                          onChange={() => setFormData({ ...formData, statusMitra: 'baru' })}
-                          className="w-4 h-4 text-primary"
-                        />
-                        <span className="text-foreground text-sm">Baru</span>
+                  <div className="p-5 flex flex-col gap-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <FormInput
+                        label="Nama Perusahaan"
+                        value={formData.organization}
+                        onChange={(value) => setFormData({ ...formData, organization: value })}
+                        placeholder="Ketik nama perusahaan"
+                      />
+                      <Select
+                        label="Bentuk Badan Hukum"
+                        placeholder="Pilih bentuk badan hukum"
+                        value={formData.badanHukum || ''}
+                        onChange={(value) => setFormData({ ...formData, badanHukum: value })}
+                        options={[
+                          { label: 'PT', value: 'pt' },
+                          { label: 'PT Perorangan', value: 'pt-perorangan' },
+                          { label: 'Yayasan', value: 'yayasan' },
+                          { label: 'Koperasi', value: 'koperasi' },
+                          { label: 'Perkumpulan', value: 'perkumpulan' },
+                          { label: 'BUMN/BUMD', value: 'bumn-bumd' }
+                        ]}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-foreground" style={{ fontSize: 'var(--input-label-size)', fontWeight: 'var(--input-label-weight)', color: 'var(--input-label-color)' }}>
+                        Status Mitra
                       </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="statusMitra"
-                          checked={formData.statusMitra === 'lama'}
-                          onChange={() => setFormData({ ...formData, statusMitra: 'lama' })}
-                          className="w-4 h-4 text-primary"
-                        />
-                        <span className="text-foreground text-sm">Lama</span>
-                      </label>
+                      <div className="flex gap-4">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="statusMitra"
+                            checked={formData.statusMitra === 'baru'}
+                            onChange={() => setFormData({ ...formData, statusMitra: 'baru' })}
+                            className="w-4 h-4 text-primary"
+                          />
+                          <span className="text-foreground" style={{ fontSize: 'var(--text-base)' }}>Baru</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="statusMitra"
+                            checked={formData.statusMitra === 'lama'}
+                            onChange={() => setFormData({ ...formData, statusMitra: 'lama' })}
+                            className="w-4 h-4 text-primary"
+                          />
+                          <span className="text-foreground" style={{ fontSize: 'var(--text-base)' }}>Lama</span>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Segmen 2: Data Narahubung */}
-                <div className="flex flex-col gap-4">
-                  <h5 className="font-semibold text-foreground" style={{ fontSize: '16px' }}>
-                    Data Narahubung
-                  </h5>
-                  
-                  {/* Row 1: Nama | Jabatan dan Posisi */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <FormInput
-                      label="Nama"
-                      value={formData.fullName}
-                      onChange={(value) => setFormData({ ...formData, fullName: value })}
-                      placeholder="Ketik nama lengkap"
-                    />
-                    
-                    <FormInput
-                      label="Jabatan dan Posisi"
-                      value={formData.position}
-                      onChange={(value) => setFormData({ ...formData, position: value })}
-                      placeholder="Ketik jabatan dan posisi"
-                    />
+                <div className="border border-border-light rounded-lg overflow-hidden">
+                  <div className="bg-surface-subdued px-5 py-4 border-b border-border-light">
+                    <h5 className="font-semibold text-foreground" style={{ fontSize: 'var(--text-base)' }}>Data Narahubung</h5>
                   </div>
-                  
-                  {/* Row 2: Email Kantor | Nomor Telepon */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <FormInput
-                      label="Email Kantor"
-                      value={formData.email}
-                      onChange={(value) => setFormData({ ...formData, email: value })}
-                      placeholder="Ketik email kantor"
-                      type="email"
-                    />
-                    
-                    <FormInput
-                      label="Nomor Telepon"
-                      value={formData.phone}
-                      onChange={(value) => {
-                        const numericValue = value.replace(/[^0-9]/g, '');
-                        setFormData({ ...formData, phone: numericValue });
-                      }}
-                      placeholder="Ketik nomor telepon"
-                      type="tel"
-                    />
+                  <div className="p-5 flex flex-col gap-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <FormInput
+                        label="Nama"
+                        value={formData.fullName}
+                        onChange={(value) => setFormData({ ...formData, fullName: value })}
+                        placeholder="Ketik nama lengkap"
+                      />
+                      <FormInput
+                        label="Jabatan dan Posisi"
+                        value={formData.position}
+                        onChange={(value) => setFormData({ ...formData, position: value })}
+                        placeholder="Ketik jabatan dan posisi"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <FormInput
+                        label="Email Kantor"
+                        value={formData.email}
+                        onChange={(value) => setFormData({ ...formData, email: value })}
+                        placeholder="Ketik email kantor"
+                        type="email"
+                      />
+                      <FormInput
+                        label="Nomor Telepon"
+                        value={formData.phone}
+                        onChange={(value) => {
+                          const numericValue = value.replace(/[^0-9]/g, '');
+                          setFormData({ ...formData, phone: numericValue });
+                        }}
+                        placeholder="Ketik nomor telepon"
+                        type="tel"
+                      />
+                    </div>
                   </div>
                 </div>
 
                 {/* Segmen 3: Dokumen Pendukung */}
-                <div className="flex flex-col gap-4">
-                  <h5 className="font-semibold text-foreground" style={{ fontSize: '16px' }}>
-                    Dokumen Pendukung
-                  </h5>
-                  
-                  <FileUpload
-                    label="Company Profile"
-                    value={formData.companyProfile}
-                    onChange={(file) => setFormData({ ...formData, companyProfile: file })}
-                    placeholder="Pilih berkas company profile"
-                    accept=".pdf,.doc,.docx"
-                    helperText="Format berkas yang didukung: PDF, DOC, DOCX. Maksimum ukuran berkas 10 MB"
-                  />
+                <div className="border border-border-light rounded-lg overflow-hidden">
+                  <div className="bg-surface-subdued px-5 py-4 border-b border-border-light">
+                    <h5 className="font-semibold text-foreground" style={{ fontSize: 'var(--text-base)' }}>Dokumen Pendukung</h5>
+                  </div>
+                  <div className="p-5">
+                    <FileUpload
+                      label="Company Profile"
+                      value={formData.companyProfile}
+                      onChange={(file) => setFormData({ ...formData, companyProfile: file })}
+                      placeholder="Pilih berkas company profile"
+                      accept=".pdf,.doc,.docx"
+                      helperText="Format berkas yang didukung: PDF, DOC, DOCX. Maksimum ukuran berkas 10 MB"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -626,7 +623,7 @@ export function ContributionFormWizard({
                   });
 
                   return (
-                    <div key={idx} className="border border-border rounded-lg overflow-hidden">
+                    <div key={idx} className="border border-border-light rounded-lg overflow-hidden">
                       <div className="bg-default flex items-start gap-4 p-4 w-full hover:bg-surface-subdued transition-colors">
                         <div className="w-11 h-11 rounded-lg shrink-0">
                           <ProgramIllustration title={program.title} />
@@ -641,15 +638,15 @@ export function ContributionFormWizard({
                           }}
                           className="flex-1 text-left"
                         >
-                          <p 
+                          <p
                             className="text-subdued mb-0.5"
-                            style={{ fontSize: '16px' }}
+                            style={{ fontSize: 'var(--text-sm)' }}
                           >
                             Program {idx + 1}
                           </p>
-                          <h4 
+                          <h4
                             className="font-semibold text-default"
-                            style={{ fontSize: '19px' }}
+                            style={{ fontSize: 'var(--text-lg)' }}
                           >
                             {program.title}
                           </h4>
@@ -703,7 +700,7 @@ export function ContributionFormWizard({
 
                       {/* Form Detail - Collapsible */}
                       {isExpanded && (
-                        <div className="p-6 bg-background border-t border-border">
+                        <div className="p-6 bg-background border-t border-border-light">
                           <div className="flex flex-col gap-5">
                             {/* Multi-School Programs: Revitalisasi Sekolah & Infrastruktur Digital */}
                             {isMultiSchoolProgram ? (
@@ -726,7 +723,7 @@ export function ContributionFormWizard({
                                   <div className="flex flex-col gap-4">
                                     {formData.contributions[idx].schools.map((schoolItem: any, schoolIdx: number) => {
                                       return (
-                                      <div key={`${idx}-${schoolItem.school.npsn}-${schoolIdx}`} className="border border-border rounded-lg overflow-hidden">
+                                      <div key={`${idx}-${schoolItem.school.npsn}-${schoolIdx}`} className="border border-border-light rounded-lg overflow-hidden">
                                         {/* School Info Header */}
                                         <div className="p-4 bg-default">
                                           <div className="w-full flex items-center justify-between gap-3">
@@ -811,7 +808,7 @@ export function ContributionFormWizard({
 
                                         {/* Package/Building Selection for this school - Collapsible */}
                                         {expandedSchools[`${idx}-${schoolIdx}`] && (
-                                        <div className="p-4 bg-background border-t border-border">
+                                        <div className="p-4 bg-background border-t border-border-light">
                                           <div className="flex flex-col gap-3">
                                             {/* Revitalisasi Sekolah - Building Selection */}
                                             {isRevitalisasiSekolah && (
@@ -942,7 +939,7 @@ export function ContributionFormWizard({
                                                   });
                                                 }}
                                                 placeholder="Tambahkan informasi lain yang relevan untuk satuan pendidikan ini"
-                                                className="w-full px-4 py-3 border border-border rounded bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                                                className="w-full px-4 py-3 border border-border-light rounded bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
                                                 rows={3}
                                               />
                                             </div>
@@ -1028,11 +1025,11 @@ export function ContributionFormWizard({
                                 return (
                                   <div className="flex flex-col gap-3">
                                     {/* Target Audience Label */}
-                                    <p 
+                                    <p
                                       className="text-foreground"
                                       style={{
-                                        fontSize: '14px',
-                                        fontWeight: 500,
+                                        fontSize: 'var(--input-label-size)',
+                                        fontWeight: 'var(--input-label-weight)',
                                         color: 'var(--input-label-color)',
                                         lineHeight: '22px'
                                       }}
@@ -1046,13 +1043,13 @@ export function ContributionFormWizard({
                                       const isGuru = targetOption.value === 'guru';
                                       
                                       return (
-                                        <div key={targetOption.value} className="border border-border rounded-lg overflow-hidden">
+                                        <div key={targetOption.value} className={`rounded-lg overflow-hidden border transition-colors ${isTargetChecked ? 'border-primary' : 'border-border-light'}`}>
                                           {/* Target Audience Checkbox */}
                                           <label
                                             className={`flex items-center gap-3 p-4 cursor-pointer transition-colors ${
-                                              isTargetChecked 
-                                                ? 'bg-[var(--primary-50)]' 
-                                                : 'bg-background hover:bg-muted'
+                                              isTargetChecked
+                                                ? 'bg-[var(--primary-50)]'
+                                                : 'bg-background hover:bg-surface-subdued'
                                             }`}
                                           >
                                             <div className="relative shrink-0">
@@ -1069,8 +1066,8 @@ export function ContributionFormWizard({
                                                     ...formData,
                                                     contributions: {
                                                       ...formData.contributions,
-                                                      [idx]: { 
-                                                        ...contribution, 
+                                                      [idx]: {
+                                                        ...contribution,
                                                         targetAudience: newValues,
                                                         jenjangGuru: newValues.includes('guru') ? contribution.jenjangGuru : [],
                                                         jenjangMurid: newValues.includes('murid') ? contribution.jenjangMurid : []
@@ -1079,10 +1076,10 @@ export function ContributionFormWizard({
                                                   });
                                                 }}
                                               />
-                                              <div 
+                                              <div
                                                 className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
-                                                  isTargetChecked 
-                                                    ? 'bg-primary border-primary' 
+                                                  isTargetChecked
+                                                    ? 'bg-primary border-primary'
                                                     : 'bg-input-background border-border peer-hover:border-primary'
                                                 }`}
                                               >
@@ -1093,37 +1090,37 @@ export function ContributionFormWizard({
                                                 )}
                                               </div>
                                             </div>
-                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{targetOption.label}</span>
+                                            <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>{targetOption.label}</span>
                                           </label>
 
                                           {/* Nested: Jenjang + Prasyarat (only show when checked) */}
                                           {isTargetChecked && (
-                                            <div className="p-4 bg-background border-t border-border flex flex-col gap-3">
+                                            <div className="p-4 border-t border-border-light flex flex-col gap-3">
                                               {/* Jenjang - 4 columns grid */}
                                               <div>
-                                                <p 
+                                                <p
                                                   className="text-foreground mb-2"
                                                   style={{
-                                                    fontSize: '14px',
-                                                    fontWeight: 500,
+                                                    fontSize: 'var(--input-label-size)',
+                                                    fontWeight: 'var(--input-label-weight)',
                                                     color: 'var(--input-label-color)'
                                                   }}
                                                 >
                                                   Jenjang Pendidikan
                                                 </p>
-                                                
+
                                                 <div className="grid grid-cols-4 gap-2">
                                                   {programContent.jenjangOptions.map((jenjangOption: any) => {
                                                     const selectedJenjang = isGuru ? (contribution.jenjangGuru || []) : (contribution.jenjangMurid || []);
                                                     const isChecked = selectedJenjang.includes(jenjangOption.value);
-                                                    
+
                                                     return (
                                                       <label
                                                         key={`${targetOption.value}-${jenjangOption.value}`}
-                                                        className={`flex items-center gap-2 p-2 rounded cursor-pointer transition-colors text-center ${
-                                                          isChecked 
-                                                            ? 'bg-[var(--primary-50)]' 
-                                                            : 'bg-muted hover:bg-muted/80'
+                                                        className={`flex items-center gap-2 p-2 rounded cursor-pointer transition-colors ${
+                                                          isChecked
+                                                            ? 'bg-primary/10 text-primary'
+                                                            : 'text-foreground hover:bg-surface-subdued'
                                                         }`}
                                                       >
                                                         <div className="relative shrink-0">
@@ -1140,18 +1137,18 @@ export function ContributionFormWizard({
                                                                 ...formData,
                                                                 contributions: {
                                                                   ...formData.contributions,
-                                                                  [idx]: { 
-                                                                    ...contribution, 
-                                                                    [isGuru ? 'jenjangGuru' : 'jenjangMurid']: newValues 
+                                                                  [idx]: {
+                                                                    ...contribution,
+                                                                    [isGuru ? 'jenjangGuru' : 'jenjangMurid']: newValues
                                                                   }
                                                                 }
                                                               });
                                                             }}
                                                           />
-                                                          <div 
+                                                          <div
                                                             className={`w-4 h-4 border-2 rounded flex items-center justify-center transition-colors ${
-                                                              isChecked 
-                                                                ? 'bg-primary border-primary' 
+                                                              isChecked
+                                                                ? 'bg-primary border-primary'
                                                                 : 'bg-input-background border-border peer-hover:border-primary'
                                                             }`}
                                                           >
@@ -1162,7 +1159,7 @@ export function ContributionFormWizard({
                                                             )}
                                                           </div>
                                                         </div>
-                                                        <span className="text-foreground text-sm">{jenjangOption.label}</span>
+                                                        <span className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{jenjangOption.label}</span>
                                                       </label>
                                                     );
                                                   })}
@@ -1171,41 +1168,25 @@ export function ContributionFormWizard({
 
                                               {/* Prasyarat - Show when jenjang is selected */}
                                               {((isGuru && (contribution.jenjangGuru || []).length > 0) || (!isGuru && (contribution.jenjangMurid || []).length > 0)) && (
-                                                <div className="border border-border rounded-lg overflow-hidden">
+                                                <div className="border-t border-border-light pt-3">
                                                   <button
                                                     type="button"
-                                                    onClick={() => setExpandedPrasyarat(prev => ({...prev, [targetOption.value]: !prev[targetOption.value as 'guru' | 'murid']}))}
-                                                    className="w-full flex items-center justify-between p-3 bg-muted hover:bg-muted/80 transition-colors"
+                                                    onClick={() => setExpandedPrasyarat(prev => ({...prev, [targetOption.value]: !prev[targetOption.value]}))}
+                                                    className="w-full flex items-center justify-between py-1 hover:opacity-80 transition-opacity"
                                                   >
-                                                    <span className="text-foreground font-medium text-sm">
+                                                    <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-base)' }}>
                                                       Prasyarat untuk {targetOption.label}
                                                     </span>
-                                                    <svg 
-                                                      className={`w-4 h-4 text-foreground transition-transform ${expandedPrasyarat[targetOption.value as 'guru' | 'murid'] ? 'rotate-180' : ''}`}
+                                                    <svg
+                                                      className={`w-4 h-4 text-foreground transition-transform ${expandedPrasyarat[targetOption.value] ? 'rotate-180' : ''}`}
                                                       fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                                     >
                                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                                     </svg>
                                                   </button>
-                                                  {expandedPrasyarat[targetOption.value as 'guru' | 'murid'] && (
-                                                    <div className="p-3 bg-background">
+                                                  {expandedPrasyarat[targetOption.value] && (
+                                                    <div className="mt-2">
                                                       <ContributionPrerequisites
-                                                        isOpenSubstansi={expandedPrasyaratSection[`${idx}-${targetOption.value}`]?.substansi ?? true}
-                                                        isOpenTeknis={expandedPrasyaratSection[`${idx}-${targetOption.value}`]?.teknis ?? false}
-                                                        onToggleSubstansi={() => setExpandedPrasyaratSection(prev => ({
-                                                          ...prev,
-                                                          [`${idx}-${targetOption.value}`]: {
-                                                            ...prev[`${idx}-${targetOption.value}`],
-                                                            substansi: !prev[`${idx}-${targetOption.value}`]?.substansi
-                                                          }
-                                                        }))}
-                                                        onToggleTeknis={() => setExpandedPrasyaratSection(prev => ({
-                                                          ...prev,
-                                                          [`${idx}-${targetOption.value}`]: {
-                                                            ...prev[`${idx}-${targetOption.value}`],
-                                                            teknis: !prev[`${idx}-${targetOption.value}`]?.teknis
-                                                          }
-                                                        }))}
                                                         prasyaratSubstansi={isGuru ? programContent.prasyaratGuru.prasyaratSubstansi : programContent.prasyaratMurid.prasyaratSubstansi}
                                                         prasyaratTeknis={isGuru ? programContent.prasyaratGuru.prasyaratTeknis : programContent.prasyaratMurid.prasyaratTeknis}
                                                       />
@@ -1226,26 +1207,26 @@ export function ContributionFormWizard({
                               if (program.title === "Pengembangan Platform Digital") {
                                 return (
                                   <div className="flex flex-col gap-3">
-                                    <p 
+                                    <p
                                       className="text-foreground"
                                       style={{
-                                        fontSize: '14px',
-                                        fontWeight: 500,
+                                        fontSize: 'var(--input-label-size)',
+                                        fontWeight: 'var(--input-label-weight)',
                                         color: 'var(--input-label-color)'
                                       }}
                                     >
                                       {programContent.fieldLabel}
                                     </p>
-                                   
+
                                     {programContent.options.map((option: any) => {
                                       const isChecked = (contribution.selectedTopics || []).includes(option.value);
                                       return (
-                                        <div key={option.value} className="border border-border rounded-lg overflow-hidden">
+                                        <div key={option.value} className={`rounded-lg overflow-hidden border transition-colors ${isChecked ? 'border-primary' : 'border-border-light'}`}>
                                           <label
                                             className={`flex items-center gap-3 p-4 cursor-pointer transition-colors ${
-                                              isChecked 
-                                                ? 'bg-[var(--primary-50)]' 
-                                                : 'bg-background hover:bg-muted'
+                                              isChecked
+                                                ? 'bg-[var(--primary-50)]'
+                                                : 'bg-background hover:bg-surface-subdued'
                                             }`}
                                           >
                                             <div className="relative shrink-0">
@@ -1267,10 +1248,10 @@ export function ContributionFormWizard({
                                                   });
                                                 }}
                                               />
-                                              <div 
+                                              <div
                                                 className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
-                                                  isChecked 
-                                                    ? 'bg-primary border-primary' 
+                                                  isChecked
+                                                    ? 'bg-primary border-primary'
                                                     : 'bg-input-background border-border peer-hover:border-primary'
                                                 }`}
                                               >
@@ -1281,53 +1262,19 @@ export function ContributionFormWizard({
                                                 )}
                                               </div>
                                             </div>
-                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{option.label}</span>
+                                            <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>{option.label}</span>
                                           </label>
 
                                           {/* Show prasyarat when checked */}
-                                          {isChecked && (
-                                            <div className="p-4 bg-background border-t border-border">
-                                              <div className="border border-border rounded-lg overflow-hidden">
-                                                <button
-                                                  type="button"
-                                                  onClick={() => setExpandedPrasyarat(prev => ({...prev, [option.value]: !prev[option.value as 'guru' | 'murid']}))}
-                                                  className="w-full flex items-center justify-between p-3 bg-muted hover:bg-muted/80 transition-colors"
-                                                >
-                                                  <span className="text-foreground font-medium text-sm">
-                                                    Prasyarat
-                                                  </span>
-                                                  <svg 
-                                                    className={`w-4 h-4 text-foreground transition-transform ${expandedPrasyarat[option.value as 'guru' | 'murid'] ? 'rotate-180' : ''}`}
-                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                  >
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                                  </svg>
-                                                </button>
-                                                {expandedPrasyarat[option.value as 'guru' | 'murid'] && (
-                                                  <div className="p-3 bg-background">
-                                                    <ContributionPrerequisites
-                                                      isOpenSubstansi={expandedPrasyaratSection[`${idx}-${option.value}`]?.substansi ?? true}
-                                                      isOpenTeknis={expandedPrasyaratSection[`${idx}-${option.value}`]?.teknis ?? false}
-                                                      onToggleSubstansi={() => setExpandedPrasyaratSection(prev => ({
-                                                        ...prev,
-                                                        [`${idx}-${option.value}`]: {
-                                                          ...prev[`${idx}-${option.value}`],
-                                                          substansi: !prev[`${idx}-${option.value}`]?.substansi
-                                                        }
-                                                      }))}
-                                                      onToggleTeknis={() => setExpandedPrasyaratSection(prev => ({
-                                                        ...prev,
-                                                        [`${idx}-${option.value}`]: {
-                                                          ...prev[`${idx}-${option.value}`],
-                                                          teknis: !prev[`${idx}-${option.value}`]?.teknis
-                                                        }
-                                                      }))}
-                                                      prasyaratSubstansi={option.prasyaratSubstansi}
-                                                      prasyaratTeknis={option.prasyaratTeknis}
-                                                    />
-                                                  </div>
-                                                )}
-                                              </div>
+                                          {isChecked && (option.prasyaratSubstansi || option.prasyaratTeknis) && (
+                                            <div className="px-4 pb-4 pt-3 border-t border-border-light-light">
+                                              <p className="font-medium text-foreground mb-2" style={{ fontSize: 'var(--text-base)' }}>
+                                                Prasyarat
+                                              </p>
+                                              <ContributionPrerequisites
+                                                prasyaratSubstansi={option.prasyaratSubstansi}
+                                                prasyaratTeknis={option.prasyaratTeknis}
+                                              />
                                             </div>
                                           )}
                                         </div>
@@ -1358,9 +1305,11 @@ export function ContributionFormWizard({
                                     {programContent.options.filter((opt: any) => opt.value !== 'lainnya').map((option: any) => {
                                       const isChecked = (contribution.selectedTopics || []).includes(option.value);
                                       return (
-                                        <div key={option.value} className={`border border-border rounded-lg overflow-hidden ${isChecked ? 'bg-[var(--primary-50)]' : ''}`}>
+                                        <div key={option.value} className={`rounded-lg overflow-hidden border transition-colors ${isChecked ? 'border-primary' : 'border-border-light'}`}>
                                           <label
-                                            className={`flex items-center gap-3 p-3 cursor-pointer transition-colors ${isChecked ? '' : 'bg-background hover:bg-muted'}`}
+                                            className={`flex items-center gap-3 p-3 cursor-pointer transition-colors ${
+                                              isChecked ? 'bg-[var(--primary-50)]' : 'bg-background hover:bg-surface-subdued'
+                                            }`}
                                           >
                                             <div className="relative shrink-0">
                                               <input
@@ -1381,10 +1330,10 @@ export function ContributionFormWizard({
                                                   });
                                                 }}
                                               />
-                                              <div 
+                                              <div
                                                 className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
-                                                  isChecked 
-                                                    ? 'bg-primary border-primary' 
+                                                  isChecked
+                                                    ? 'bg-primary border-primary'
                                                     : 'bg-input-background border-border peer-hover:border-primary'
                                                 }`}
                                               >
@@ -1395,11 +1344,11 @@ export function ContributionFormWizard({
                                                 )}
                                               </div>
                                             </div>
-                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{option.label}</span>
+                                            <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>{option.label}</span>
                                           </label>
                                           {isChecked && option.deskripsi && (
-                                            <div className="px-3 pb-3 bg-background border-t border-border">
-                                              <p className="text-sm text-muted-foreground mt-2">{option.deskripsi}</p>
+                                            <div className="px-3 pb-3 bg-background border-t border-border-light">
+                                              <p className="text-muted-foreground mt-2" style={{ fontSize: 'var(--text-sm)' }}>{option.deskripsi}</p>
                                             </div>
                                           )}
                                         </div>
@@ -1407,82 +1356,88 @@ export function ContributionFormWizard({
                                     })}
                                     
                                     {/* Lainnya Option - with free text input */}
-                                    <label
-                                      className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
-                                        (contribution.selectedTopics || []).includes('lainnya') || contribution.otherTopic
-                                          ? 'bg-[var(--primary-50)]' 
-                                          : 'bg-background hover:bg-muted'
-                                      }`}
-                                    >
-                                      <div className="relative shrink-0">
-                                        <input
-                                          type="checkbox"
-                                          className="sr-only peer"
-                                          checked={(contribution.selectedTopics || []).includes('lainnya') || !!contribution.otherTopic}
-                                          onChange={(e) => {
-                                            const currentTopics = contribution.selectedTopics || [];
-                                            if (e.target.checked) {
-                                              setFormData({
-                                                ...formData,
-                                                contributions: {
-                                                  ...formData.contributions,
-                                                  [idx]: { 
-                                                    ...contribution, 
-                                                    selectedTopics: [...currentTopics, 'lainnya'],
-                                                    otherTopic: ' '
+                                    {(() => {
+                                      const isLainnyaChecked = (contribution.selectedTopics || []).includes('lainnya') || !!contribution.otherTopic;
+                                      return (
+                                        <div className={`rounded-lg overflow-hidden border transition-colors ${isLainnyaChecked ? 'border-primary' : 'border-border-light'}`}>
+                                          <label
+                                            className={`flex items-center gap-3 p-3 cursor-pointer transition-colors ${
+                                              isLainnyaChecked ? 'bg-[var(--primary-50)]' : 'bg-background hover:bg-surface-subdued'
+                                            }`}
+                                          >
+                                            <div className="relative shrink-0">
+                                              <input
+                                                type="checkbox"
+                                                className="sr-only peer"
+                                                checked={isLainnyaChecked}
+                                                onChange={(e) => {
+                                                  const currentTopics = contribution.selectedTopics || [];
+                                                  if (e.target.checked) {
+                                                    setFormData({
+                                                      ...formData,
+                                                      contributions: {
+                                                        ...formData.contributions,
+                                                        [idx]: {
+                                                          ...contribution,
+                                                          selectedTopics: [...currentTopics, 'lainnya'],
+                                                          otherTopic: ' '
+                                                        }
+                                                      }
+                                                    });
+                                                  } else {
+                                                    setFormData({
+                                                      ...formData,
+                                                      contributions: {
+                                                        ...formData.contributions,
+                                                        [idx]: {
+                                                          ...contribution,
+                                                          selectedTopics: currentTopics.filter((t: string) => t !== 'lainnya'),
+                                                          otherTopic: ''
+                                                        }
+                                                      }
+                                                    });
                                                   }
-                                                }
-                                              });
-                                            } else {
-                                              setFormData({
-                                                ...formData,
-                                                contributions: {
-                                                  ...formData.contributions,
-                                                  [idx]: { 
-                                                    ...contribution, 
-                                                    selectedTopics: currentTopics.filter((t: string) => t !== 'lainnya'),
-                                                    otherTopic: ''
-                                                  }
-                                                }
-                                              });
-                                            }
-                                          }}
-                                        />
-                                        <div 
-                                          className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
-                                            (contribution.selectedTopics || []).includes('lainnya') || contribution.otherTopic
-                                              ? 'bg-primary border-primary' 
-                                              : 'bg-input-background border-border peer-hover:border-primary'
-                                          }`}
-                                        >
-                                          {((contribution.selectedTopics || []).includes('lainnya') || contribution.otherTopic) && (
-                                            <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                            </svg>
+                                                }}
+                                              />
+                                              <div
+                                                className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
+                                                  isLainnyaChecked
+                                                    ? 'bg-primary border-primary'
+                                                    : 'bg-input-background border-border peer-hover:border-primary'
+                                                }`}
+                                              >
+                                                {isLainnyaChecked && (
+                                                  <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                  </svg>
+                                                )}
+                                              </div>
+                                            </div>
+                                            <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>Lainnya</span>
+                                          </label>
+                                          {isLainnyaChecked && (
+                                            <div className="px-3 pb-3 bg-background border-t border-border-light">
+                                              <input
+                                                type="text"
+                                                className="w-full mt-2 px-3 py-2 border border-border-light rounded bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                                                style={{ fontSize: 'var(--text-sm)' }}
+                                                placeholder="Tulis dukungan lainnya..."
+                                                value={contribution.otherTopic === ' ' ? '' : contribution.otherTopic || ''}
+                                                onChange={(e) => {
+                                                  setFormData({
+                                                    ...formData,
+                                                    contributions: {
+                                                      ...formData.contributions,
+                                                      [idx]: { ...contribution, otherTopic: e.target.value }
+                                                    }
+                                                  });
+                                                }}
+                                              />
+                                            </div>
                                           )}
                                         </div>
-                                      </div>
-                                      <div className="flex-1">
-                                        <span className="text-foreground" style={{ fontSize: '16px' }}>Lainnya</span>
-                                        {((contribution.selectedTopics || []).includes('lainnya') || contribution.otherTopic) && (
-                                          <input
-                                            type="text"
-                                            className="w-full mt-2 px-3 py-2 border border-border rounded bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                                            placeholder="Tulis dukungan lainnya..."
-                                            value={contribution.otherTopic === ' ' ? '' : contribution.otherTopic || ''}
-                                            onChange={(e) => {
-                                              setFormData({
-                                                ...formData,
-                                                contributions: {
-                                                  ...formData.contributions,
-                                                  [idx]: { ...contribution, otherTopic: e.target.value }
-                                                }
-                                              });
-                                            }}
-                                          />
-                                        )}
-                                      </div>
-                                    </label>
+                                      );
+                                    })()}
                                   </div>
 
                                   {/* Prerequisites - Show when at least one topic is selected (excluding Lainnya) */}
@@ -1531,7 +1486,7 @@ export function ContributionFormWizard({
                                       }
                                     }}
                                     placeholder={programContent ? "Sampaikan detail dukungan yang ingin Anda ajukan" : "Tambahkan informasi lain yang relevan"}
-                                    className="w-full px-4 py-3 border border-border rounded bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                                    className="w-full px-4 py-3 border border-border-light rounded bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
                                     rows={4}
                                     maxLength={maxLength}
                                   />
@@ -1583,76 +1538,75 @@ export function ContributionFormWizard({
 
               <div className="flex flex-col gap-spacing-6 p-spacing-6 bg-surface-default">
                 {/* Contributor Info Section */}
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <h4 className="font-semibold text-foreground">Informasi Kontributor</h4>
+                <div className="border border-border-light rounded-lg overflow-hidden">
+                  <div className="bg-surface-subdued px-5 py-4 border-b border-border-light">
+                    <h4 className="font-semibold text-foreground" style={{ fontSize: 'var(--text-base)' }}>Informasi Kontributor</h4>
                   </div>
-                  <div className="p-5 bg-default rounded-lg">
-                    <div className="grid grid-cols-1 gap-4">
-                      {/* Segmen 1: Informasi Perusahaan */}
-                      <div>
-                        <p className="text-xs text-muted-foreground mb-1">Bentuk Badan Hukum</p>
-                        <p className="text-sm font-medium text-foreground">
-                          {formData.badanHukum === 'pt' ? 'PT' : 
-                           formData.badanHukum === 'pt-perorangan' ? 'PT Perorangan' :
-                           formData.badanHukum === 'yayasan' ? 'Yayasan' :
-                           formData.badanHukum === 'koperasi' ? 'Koperasi' :
-                           formData.badanHukum === 'perkumpulan' ? 'Perkumpulan' :
-                           formData.badanHukum === 'bumn-bumd' ? 'BUMN/BUMD' : '-'}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground mb-1">Status Mitra</p>
-                        <p className="text-sm font-medium text-foreground">
-                          {formData.statusMitra === 'baru' ? 'Baru' : 
-                           formData.statusMitra === 'lama' ? 'Lama' : '-'}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground mb-1">Nama Perusahaan</p>
-                        <p className="text-sm font-medium text-foreground">{formData.organization || '-'}</p>
-                      </div>
-                      
-                      {/* Segmen 2: Data Narahubung */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-xs text-muted-foreground mb-1">Nama</p>
-                          <p className="text-sm font-medium text-foreground">{formData.fullName || '-'}</p>
-                        </div>
-                        <div>
-                          <p className="text-xs text-muted-foreground mb-1">Jabatan dan Posisi</p>
-                          <p className="text-sm font-medium text-foreground">{formData.position || '-'}</p>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-xs text-muted-foreground mb-1">Email Kantor</p>
-                          <p className="text-sm font-medium text-foreground">{formData.email || '-'}</p>
-                        </div>
-                        <div>
-                          <p className="text-xs text-muted-foreground mb-1">Nomor Telepon</p>
-                          <p className="text-sm font-medium text-foreground">{formData.phone || '-'}</p>
-                        </div>
-                      </div>
-                      
-                      {/* Segmen 3: Dokumen Pendukung */}
-                      {formData.companyProfile && (
-                        <div>
-                          <p className="text-xs text-muted-foreground mb-1">Company Profile</p>
-                          <p className="text-sm font-medium text-foreground">{formData.companyProfile.name}</p>
-                        </div>
-                      )}
+                  <div className="p-5 flex flex-col gap-4">
+
+                  {/* Perusahaan */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Nama Perusahaan</p>
+                      <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{formData.organization || '-'}</p>
                     </div>
+                    <div>
+                      <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Bentuk Badan Hukum</p>
+                      <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>
+                        {formData.badanHukum === 'pt' ? 'PT' :
+                         formData.badanHukum === 'pt-perorangan' ? 'PT Perorangan' :
+                         formData.badanHukum === 'yayasan' ? 'Yayasan' :
+                         formData.badanHukum === 'koperasi' ? 'Koperasi' :
+                         formData.badanHukum === 'perkumpulan' ? 'Perkumpulan' :
+                         formData.badanHukum === 'bumn-bumd' ? 'BUMN/BUMD' : '-'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Status Mitra</p>
+                      <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>
+                        {formData.statusMitra === 'baru' ? 'Baru' :
+                         formData.statusMitra === 'lama' ? 'Lama' : '-'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Narahubung */}
+                  <div className="border-t border-border-light pt-4 grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Nama</p>
+                      <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{formData.fullName || '-'}</p>
+                    </div>
+                    <div>
+                      <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Jabatan dan Posisi</p>
+                      <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{formData.position || '-'}</p>
+                    </div>
+                    <div>
+                      <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Email Kantor</p>
+                      <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{formData.email || '-'}</p>
+                    </div>
+                    <div>
+                      <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Nomor Telepon</p>
+                      <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{formData.phone || '-'}</p>
+                    </div>
+                  </div>
+
+                  {/* Dokumen */}
+                  {formData.companyProfile && (
+                    <div className="border-t border-border-light pt-4">
+                      <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Company Profile</p>
+                      <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{formData.companyProfile.name}</p>
+                    </div>
+                  )}
+
                   </div>
                 </div>
 
                 {/* Contributions List */}
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <h4 className="font-semibold text-foreground">Detail Program Kontribusi</h4>
+                <div className="border border-border-light rounded-lg overflow-hidden">
+                  <div className="bg-surface-subdued px-5 py-4 border-b border-border-light">
+                    <h4 className="font-semibold text-foreground" style={{ fontSize: 'var(--text-base)' }}>Detail Program Kontribusi</h4>
                   </div>
-                  
-                  <div className="flex flex-col gap-4">
+                  <div className="p-5 flex flex-col gap-4">
                     {selectedProgram.map((programIndex, idx) => {
                       const program = cardDetails[programIndex];
                       const contribution = formData.contributions[idx] || {};
@@ -1661,39 +1615,30 @@ export function ContributionFormWizard({
                       const isMultiSchoolProgram = isRevitalisasiSekolah || isInfrastrukturDigital;
                       
                       return (
-                        <div key={idx} className="p-5 bg-default rounded-lg">
-                          <div className="flex items-start gap-4 mb-4">
-                            <div className="w-12 h-12 rounded-lg shrink-0">
-                              <ProgramIllustration title={program.title} />
-                            </div>
-                            <div className="flex-1">
-                              <p className="text-xs text-muted-foreground mb-1">Program {idx + 1}</p>
-                              <h5 className="font-semibold text-foreground mb-1">{program.title}</h5>
-                            </div>
+                        <div key={idx} className="border border-border-light rounded-lg overflow-hidden">
+                          <div className="px-4 py-3 border-b border-border-light">
+                            <h5 className="font-semibold text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{idx + 1}. {program.title}</h5>
                           </div>
 
-                          <div className="border-t border-border pt-4 grid grid-cols-1 gap-3">
+                          <div className="px-4 py-4 grid grid-cols-2 gap-3">
                             {/* Multi-school display for Revitalisasi & Infrastruktur Digital */}
                             {isMultiSchoolProgram && formData.contributions[idx]?.schools && formData.contributions[idx].schools.length > 0 ? (
-                              <div>
-                                <p className="text-xs text-muted-foreground mb-2">
-                                  {isRevitalisasiSekolah ? 'Satuan Pendidikan & Bangunan' : 'Satuan Pendidikan & Paket'}
-                                </p>
+                              <div className="col-span-2">
                                 <div className="flex flex-col gap-3">
                                   {formData.contributions[idx].schools.map((schoolItem: any, schoolIdx: number) => (
-                                    <div key={`${idx}-${schoolItem.school.npsn}-${schoolIdx}`} className="p-3 bg-surface-subdued rounded-lg">
-                                      <p className="text-sm font-medium text-foreground mb-1">{schoolItem.school.name}</p>
-                                      <p className="text-xs text-muted-foreground mb-2">NPSN: {schoolItem.school.npsn}</p>
-                                      
+                                    <div key={`${idx}-${schoolItem.school.npsn}-${schoolIdx}`} className="p-3 border border-border-light rounded-lg">
+                                      <p className="text-foreground font-semibold mb-0.5" style={{ fontSize: 'var(--text-sm)' }}>{schoolIdx + 1}. {schoolItem.school.name}</p>
+                                      <p className="text-subdued mb-2" style={{ fontSize: 'var(--text-xs)' }}>NPSN: {schoolItem.school.npsn}</p>
+
                                       {/* Buildings for Revitalisasi Sekolah */}
                                       {isRevitalisasiSekolah && schoolItem.selectedBuildings && schoolItem.selectedBuildings.length > 0 && (
-                                        <div className="mt-2 pl-3 border-l-2 border-border">
-                                          <p className="text-xs text-muted-foreground mb-1">Bangunan yang Direvitalisasi:</p>
+                                        <div className="mt-2 pl-3 border-l border-border-light">
+                                          <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Bangunan yang Direvitalisasi:</p>
                                           <div className="flex flex-col gap-1">
                                             {revitalizationBuildings
                                               .filter((building) => schoolItem.selectedBuildings.includes(building.id))
                                               .map((building) => (
-                                                <div key={building.id} className="text-xs text-foreground">
+                                                <div key={building.id} style={{ fontSize: 'var(--text-xs)' }} className="text-foreground">
                                                   <span className="font-medium">{building.buildingName}</span>
                                                   <span className="text-subdued"> • {building.revitalizationType === 'rehabilitasi' ? 'Rehabilitasi' : 'Pembangunan Gedung Baru'}</span>
                                                   {building.classification && (
@@ -1712,13 +1657,14 @@ export function ContributionFormWizard({
 
                                       {/* Packages for Infrastruktur Digital */}
                                       {isInfrastrukturDigital && schoolItem.packages && schoolItem.packages.length > 0 && (
-                                        <div className="mt-2 pl-3 border-l-2 border-border">
-                                          <p className="text-xs text-muted-foreground mb-1">Paket yang Dipilih:</p>
+                                        <div className="mt-2 pl-3 border-l border-border-light">
+                                          <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Paket yang Dipilih:</p>
                                           <div className="flex flex-wrap gap-2">
                                             {schoolItem.packages.map((pkg: string, pkgIdx: number) => (
-                                              <span 
+                                              <span
                                                 key={pkgIdx}
-                                                className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full"
+                                                className="px-3 py-1 bg-primary/10 text-primary font-medium rounded-full"
+                                                style={{ fontSize: 'var(--text-xs)' }}
                                               >
                                                 {pkg === 'internet' && 'Jaringan Internet'}
                                                 {pkg === 'electricity' && 'Instalasi Listrik'}
@@ -1730,9 +1676,9 @@ export function ContributionFormWizard({
 
                                       {/* Notes for this school */}
                                       {schoolItem.notes && (
-                                        <div className="mt-2 pl-3 border-l-2 border-border">
-                                          <p className="text-xs text-muted-foreground mb-1">Catatan:</p>
-                                          <p className="text-xs text-foreground">{schoolItem.notes}</p>
+                                        <div className="mt-2 pl-3 border-l border-border-light">
+                                          <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Catatan:</p>
+                                          <p className="text-foreground" style={{ fontSize: 'var(--text-xs)' }}>{schoolItem.notes}</p>
                                         </div>
                                       )}
                                     </div>
@@ -1764,11 +1710,11 @@ export function ContributionFormWizard({
                               ];
                               
                               return allItems.length > 0 ? (
-                                <div>
-                                  <p className="text-xs text-muted-foreground mb-1">{programContent?.fieldLabel}</p>
+                                <div className="col-span-2">
+                                  <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>{programContent?.fieldLabel}</p>
                                   <div className="flex flex-col gap-1">
                                     {allItems.map((item: {label: string; isLainnya: boolean}, idx: number) => (
-                                      <p key={idx} className="text-sm font-medium text-foreground">
+                                      <p key={idx} className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>
                                         • {item.isLainnya && lainnyaInput ? `Lainnya: ${lainnyaInput}` : item.label}
                                       </p>
                                     ))}
@@ -1789,16 +1735,16 @@ export function ContributionFormWizard({
                               const muridLabels = (contribution.jenjangMurid || []).map((v: string) => jenjangMap[v] || v);
                               
                               return (
-                                <div>
-                                  <p className="text-xs text-muted-foreground mb-1">{programContent?.targetAudienceLabel}</p>
+                                <div className="col-span-2">
+                                  <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>{programContent?.targetAudienceLabel}</p>
                                   <div className="flex flex-col gap-1">
                                     {(contribution.targetAudience || []).includes('guru') && (
                                       <>
-                                        <p className="text-sm font-medium text-foreground">• Guru</p>
+                                        <p className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>• Guru</p>
                                         {guruLabels.length > 0 && (
                                           <div className="ml-4 flex flex-col gap-1">
                                             {guruLabels.map((label: string, idx: number) => (
-                                              <p key={`guru-${idx}`} className="text-sm text-foreground">- {label}</p>
+                                              <p key={`guru-${idx}`} className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>- {label}</p>
                                             ))}
                                           </div>
                                         )}
@@ -1806,11 +1752,11 @@ export function ContributionFormWizard({
                                     )}
                                     {(contribution.targetAudience || []).includes('murid') && (
                                       <>
-                                        <p className="text-sm font-medium text-foreground">• Murid</p>
+                                        <p className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>• Murid</p>
                                         {muridLabels.length > 0 && (
                                           <div className="ml-4 flex flex-col gap-1">
                                             {muridLabels.map((label: string, idx: number) => (
-                                              <p key={`murid-${idx}`} className="text-sm text-foreground">- {label}</p>
+                                              <p key={`murid-${idx}`} className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>- {label}</p>
                                             ))}
                                           </div>
                                         )}
@@ -1823,23 +1769,23 @@ export function ContributionFormWizard({
                             
                             {contribution.type && (
                               <div>
-                                <p className="text-xs text-muted-foreground mb-1">Jenis Kontribusi</p>
-                                <p className="text-sm font-medium text-foreground">{contribution.type}</p>
+                                <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Jenis Kontribusi</p>
+                                <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{contribution.type}</p>
                               </div>
                             )}
-                            
+
                             {contribution.amount && (
                               <div>
-                                <p className="text-xs text-muted-foreground mb-1">Jumlah/Nominal</p>
-                                <p className="text-sm font-medium text-foreground">{contribution.amount}</p>
+                                <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Jumlah/Nominal</p>
+                                <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{contribution.amount}</p>
                               </div>
                             )}
-                            
+
                             {/* Informasi Tambahan - hide for multi-school programs */}
                             {contribution.notes && !isMultiSchoolProgram && (
-                              <div>
-                                <p className="text-xs text-muted-foreground mb-1">Informasi Tambahan</p>
-                                <p className="text-sm text-foreground whitespace-pre-wrap">{contribution.notes}</p>
+                              <div className="col-span-2">
+                                <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Informasi Tambahan</p>
+                                <p className="text-foreground whitespace-pre-wrap" style={{ fontSize: 'var(--text-sm)' }}>{contribution.notes}</p>
                               </div>
                             )}
                           </div>
@@ -1849,20 +1795,27 @@ export function ContributionFormWizard({
                   </div>
                 </div>
 
-                {/* Confirmation Checkbox */}
-                <div className="flex items-start gap-3 p-4 bg-surface-default border border-border rounded-lg">
-                  <Checkbox
-                    id="confirmation"
-                    checked={isConfirmed}
-                    onCheckedChange={setIsConfirmed}
-                    className="mt-0.5"
-                  />
-                  <label htmlFor="confirmation" className="cursor-pointer flex-1">
-                    <p className="text-foreground">
-                      Saya menyatakan bahwa semua informasi yang saya berikan adalah benar dan dapat dipertanggungjawabkan. 
-                      Data ini akan digunakan untuk keperluan pencatatan dan koordinasi program kontribusi pendidikan.
-                    </p>
-                  </label>
+                {/* Pernyataan */}
+                <div className="border border-border-light rounded-lg overflow-hidden">
+                  <div className="bg-surface-subdued px-5 py-4 border-b border-border-light">
+                    <h4 className="font-semibold text-foreground" style={{ fontSize: 'var(--text-base)' }}>Pernyataan</h4>
+                  </div>
+                  <div className="p-5">
+                    <div className="flex items-start gap-3">
+                      <Checkbox
+                        id="confirmation"
+                        checked={isConfirmed}
+                        onCheckedChange={setIsConfirmed}
+                        className="mt-0.5"
+                      />
+                      <label htmlFor="confirmation" className="cursor-pointer flex-1">
+                        <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>
+                          Saya menyatakan bahwa semua informasi yang saya berikan adalah benar dan dapat dipertanggungjawabkan.
+                          Data ini akan digunakan untuk keperluan pencatatan dan koordinasi program kontribusi pendidikan.
+                        </p>
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -74,7 +74,7 @@ export function FileUpload({
         <button
           type="button"
           onClick={handleClick}
-          className="w-full px-4 py-3 border border-border rounded bg-input-background text-foreground hover:bg-surface-subdued focus:outline-none focus:ring-2 focus:ring-ring transition-colors flex items-center justify-center gap-2"
+          className="w-full border border-dashed border-border-light rounded bg-input-background text-foreground hover:bg-surface-subdued focus:outline-none focus:ring-2 focus:ring-ring transition-colors flex items-center justify-center gap-2"
           style={{
             fontSize: 'var(--input-text-size)',
             borderRadius: 'var(--input-border-radius)',
@@ -82,13 +82,13 @@ export function FileUpload({
           }}
         >
           <Upload className="w-5 h-5 text-muted-foreground" />
-          <span className="text-muted-foreground">
+          <span className="text-muted-foreground" style={{ fontSize: 'var(--input-text-size)' }}>
             {placeholder}
           </span>
         </button>
       ) : (
         <div 
-          className="w-full px-4 py-3 border border-border rounded bg-input-background flex items-center justify-between gap-3"
+          className="w-full px-4 py-3 border border-border-light rounded bg-input-background flex items-center justify-between gap-3"
           style={{
             fontSize: 'var(--input-text-size)',
             borderRadius: 'var(--input-border-radius)',
@@ -120,7 +120,7 @@ export function FileUpload({
       {helperText && (
         <p 
           className="text-muted-foreground"
-          style={{ fontSize: '12px' }}
+          style={{ fontSize: 'var(--text-xs)' }}
         >
           {helperText}
         </p>

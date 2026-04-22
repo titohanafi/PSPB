@@ -13,23 +13,25 @@ export function PackageCheckbox({
   description = "",
   icon,
 }: PackageCheckboxProps) {
-  // Generate unique id from title
   const checkboxId = `package-${title.toLowerCase().replace(/\s+/g, '-')}`;
-  
+
   return (
-    <div className={`relative rounded-lg shrink-0 w-full transition-colors ${checked ? 'bg-[var(--primary-50)]' : 'bg-muted'}`}>
-      <div className={`content-stretch flex gap-3 items-start px-6 py-5 relative w-full transition-colors ${checked ? 'bg-[var(--primary-50)]' : 'bg-card-background'}`}>
+    <label
+      htmlFor={checkboxId}
+      className={`relative rounded-lg shrink-0 w-full transition-colors border cursor-pointer block ${checked ? 'border-primary bg-[var(--primary-50)]' : 'border-border-light bg-surface-default hover:bg-surface-subdued'}`}
+    >
+      <input
+        id={checkboxId}
+        name={checkboxId}
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="sr-only peer"
+      />
+      <div className="content-stretch flex gap-3 items-start px-6 py-5 relative w-full">
         <div className="content-stretch flex items-center pt-[2px] relative shrink-0">
-          <label htmlFor={checkboxId} className="relative shrink-0 size-5 cursor-pointer">
-            <input
-              id={checkboxId}
-              name={checkboxId}
-              type="checkbox"
-              checked={checked}
-              onChange={(e) => onChange(e.target.checked)}
-              className="sr-only peer"
-            />
-            <div 
+          <div className="relative shrink-0 size-5">
+            <div
               className="absolute bg-input-background border border-border border-solid rounded peer-checked:bg-primary peer-checked:border-primary transition-colors"
               style={{
                 left: '50%',
@@ -38,6 +40,8 @@ export function PackageCheckbox({
                 width: '18px',
                 height: '18px',
                 borderRadius: 'var(--radius)',
+                backgroundColor: checked ? 'var(--color-primary)' : undefined,
+                borderColor: checked ? 'var(--color-primary)' : undefined,
               }}
             >
               {checked && (
@@ -56,7 +60,7 @@ export function PackageCheckbox({
                 </svg>
               )}
             </div>
-          </label>
+          </div>
         </div>
         <div className="content-stretch flex flex-[1_0_0] flex-col gap-3 items-start min-h-px min-w-px relative">
           <div className="content-stretch flex gap-3 items-center relative shrink-0 w-full">
@@ -80,6 +84,6 @@ export function PackageCheckbox({
           )}
         </div>
       </div>
-    </div>
+    </label>
   );
 }

@@ -1,21 +1,13 @@
-import { useState } from "react";
-import { Info, ChevronDown } from "lucide-react";
-
-interface PackageDetail {
-  label: string;
-  value: string;
-}
-
 interface PackageCheckboxDetailedProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   title: string;
   estimatedBudget: string;
   buildingArea?: string;
-  details?: PackageDetail[];
+  details?: { label: string; value: string }[];
   description: string;
   icon: Record<string, string>;
-  uniqueId?: string; // Add unique identifier to prevent ID conflicts
+  uniqueId?: string;
 }
 
 export function PackageCheckboxDetailed({
@@ -23,30 +15,30 @@ export function PackageCheckboxDetailed({
   onChange,
   title,
   estimatedBudget,
-  buildingArea = "Data tidak tersedia",
-  details = [],
   description,
   icon,
   uniqueId,
 }: PackageCheckboxDetailedProps) {
-  // Use uniqueId if provided, otherwise fallback to title-based ID
   const checkboxId = uniqueId || `package-${title.toLowerCase().replace(/\s+/g, '-')}`;
-  
+
   return (
-    <div className={`relative rounded-lg shrink-0 w-full transition-colors ${checked ? 'bg-[var(--primary-50)]' : 'bg-muted'}`}>
-      <div className={`content-stretch flex gap-3 items-start px-6 py-5 relative w-full transition-colors ${checked ? 'bg-[var(--primary-50)]' : 'bg-card-background'}`}>
+    <label
+      htmlFor={checkboxId}
+      className={`relative rounded-lg shrink-0 w-full transition-colors border cursor-pointer block ${checked ? 'border-primary bg-[var(--primary-50)]' : 'border-border-light bg-surface-default hover:bg-surface-subdued'}`}
+    >
+      <input
+        id={checkboxId}
+        name={checkboxId}
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="sr-only peer"
+      />
+      <div className="content-stretch flex gap-3 items-start px-6 py-5 relative w-full">
         <div className="content-stretch flex items-center pt-[2px] relative shrink-0">
-          <label htmlFor={checkboxId} className="relative shrink-0 size-5 cursor-pointer">
-            <input
-              id={checkboxId}
-              name={checkboxId}
-              type="checkbox"
-              checked={checked}
-              onChange={(e) => onChange(e.target.checked)}
-              className="sr-only peer"
-            />
-            <div 
-              className="absolute bg-input-background border border-border border-solid rounded peer-checked:bg-primary peer-checked:border-primary transition-colors"
+          <div className="relative shrink-0 size-5">
+            <div
+              className="absolute border border-solid rounded transition-colors"
               style={{
                 left: '50%',
                 top: '50%',
@@ -54,6 +46,8 @@ export function PackageCheckboxDetailed({
                 width: '18px',
                 height: '18px',
                 borderRadius: 'var(--radius)',
+                backgroundColor: checked ? 'var(--color-primary)' : 'var(--input-background)',
+                borderColor: checked ? 'var(--color-primary)' : 'var(--border)',
               }}
             >
               {checked && (
@@ -72,14 +66,12 @@ export function PackageCheckboxDetailed({
                 </svg>
               )}
             </div>
-          </label>
+          </div>
         </div>
         <div className="content-stretch flex flex-[1_0_0] flex-col gap-3 items-start min-h-px min-w-px relative">
-          <div className="content-stretch flex gap-3 items-center relative shrink-0 w-full">
-            <h4 className="font-normal text-foreground" style={{ fontSize: 'var(--text-base)', fontWeight: 'var(--font-weight-normal)' }}>
-              {title}
-            </h4>
-          </div>
+          <h4 className="font-normal text-foreground" style={{ fontSize: 'var(--text-base)', fontWeight: 'var(--font-weight-normal)' }}>
+            {title}
+          </h4>
           <div className="content-stretch flex gap-3 items-start relative shrink-0 w-full">
             <div className="overflow-clip relative shrink-0 size-6">
               <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 20">
@@ -94,6 +86,6 @@ export function PackageCheckboxDetailed({
           </div>
         </div>
       </div>
-    </div>
+    </label>
   );
 }

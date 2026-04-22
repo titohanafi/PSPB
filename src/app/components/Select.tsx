@@ -26,7 +26,8 @@ export function Select({
   const labelStyle = {
     fontSize: 'var(--input-label-size)',
     fontWeight: 'var(--input-label-weight)',
-    marginBottom: 'var(--spacing-2)',
+    color: 'var(--input-label-color)',
+    marginBottom: '4px',
     display: 'block',
   };
 
@@ -53,7 +54,7 @@ export function Select({
       )}
       <div className="relative">
         <select
-          className="block w-full appearance-none border border-border bg-input-background text-foreground shadow-sm focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring transition"
+          className="block w-full appearance-none border border-border-light bg-input-background text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring transition"
           style={selectStyle}
           value={value}
           onChange={(e) => onChange(e.target.value)}

@@ -48,7 +48,7 @@ export function FormInput({
           padding: 'var(--input-padding-y) var(--input-padding-x)',
           borderRadius: 'var(--input-border-radius)',
           borderWidth: 'var(--input-border-width)',
-          borderColor: 'var(--input-border-color)',
+          borderColor: 'var(--border-light)',
         }}
         placeholder={placeholder}
       />
