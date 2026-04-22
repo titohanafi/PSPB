@@ -5,6 +5,12 @@ import image_04548ced8b9c607492512ca4d86e0edeca5bfd32 from 'figma:asset/04548ced
 import image_1f5643d16e54cc50c3fdfcf17be860e220488cff from 'figma:asset/1f5643d16e54cc50c3fdfcf17be860e220488cff.png'
 import image_0751c73fa2583d2e523a37de8198f2a3ea59b605 from 'figma:asset/0751c73fa2583d2e523a37de8198f2a3ea59b605.png'
 import image_d8498b6e9a2b91933b54107da2c09d52ca24eb06 from 'figma:asset/d8498b6e9a2b91933b54107da2c09d52ca24eb06.png'
+import imgInfrastrukturDigital from "../assets/infrastrukturdigital.jpg";
+import imgRevitalisasiSekolah from "../assets/revitalisasisekolah.jpg";
+import imgPengembanganPlatform from "../assets/platformdigital.jpg";
+import imgSumberBelajar from "../assets/sumberbelajarmurid.jpg";
+import imgPendampinganGTK from "../assets/pelatihangtk.jpg";
+import imgKebutuhanLainnya from "../assets/pendidikanlainnya.jpg";
 import svgPaths from "./svg-x97lb5z7ia";
 import loopSvgPaths from "./svg-qgcasdpjdv";
 import highlightSvgPaths from "./svg-pfbodqyl9b";
@@ -819,7 +825,7 @@ function Frame63({ onClick }: { onClick?: () => void }) {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col gap-3 items-start min-h-px min-w-px relative">
       <p className="min-w-full not-italic relative shrink-0 text-foreground w-[min-content] whitespace-pre-wrap text-xs font-semibold">Digitalisasi Pembelajaran</p>
-      <h3 className="min-w-full relative shrink-0 w-[min-content] whitespace-pre-wrap">Sumber Belajar Murid</h3>
+      <h3 className="min-w-full relative shrink-0 w-[min-content] whitespace-pre-wrap">Bahan Ajar Digital</h3>
       <p className="min-w-full not-italic relative shrink-0 text-foreground w-[min-content] whitespace-pre-wrap">Penyediaan sumber materi belajar digital untuk mendukung proses belajar murid.</p>
       <Button onClick={onClick} color="white" size="md">
         Pelajari Selengkapnya
@@ -1421,7 +1427,7 @@ function Block3() {
       category: "Digitalisasi Pembelajaran",
       title: "Infrastruktur Digital",
       description: "Terdapat ~16 ribu satuan pendidikan yang membutuhkan dukungan infrastruktur listrik dan internet untuk mendukung proses pembelajaran",
-      imageUrl: "https://images.unsplash.com/photo-1758521961483-30f5908b9c93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwaW5mcmFzdHJ1Y3R1cmUlMjBpbnRlcm5ldCUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzcyNjczMzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      imageUrl: imgInfrastrukturDigital,
       contributions: [
         {
           icon: "wifi",
@@ -1442,7 +1448,7 @@ function Block3() {
       category: "Digitalisasi Pembelajaran",
       title: "Pengembangan Platform Digital",
       description: "Terdapat delapan menu di Platform Rumah Pendidikan yang dapat didukung dengan tambahan dukungan dari mitra yang memiliki kapabilitas platform serupa.",
-      imageUrl: "https://images.unsplash.com/photo-1759752394755-1241472b589d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwcGxhdGZvcm0lMjBkZXZlbG9wbWVudCUyMGxhcHRvcHxlbnwxfHx8fDE3NzI2NzMzNzZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      imageUrl: imgPengembanganPlatform,
       contributions: [
         {
           icon: "wifi",
@@ -1463,7 +1469,7 @@ function Block3() {
       category: "Peningkatan Kompetensi",
       title: "Pendampingan Pelatihan GTK",
       description: "334 ribu dari 400 ribu sekolah membutuhkan pelatihan Pembelajaran Mendalam serta Koding & Kegiatan Artifisial untuk mendukung pembelajaran murid.",
-      imageUrl: "https://images.unsplash.com/photo-1742549586702-c23994895082?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFjaGVyJTIwdHJhaW5pbmclMjBpbmRvbmVzaWElMjBjbGFzc3Jvb218ZW58MXx8fHwxNzcyNjczMzc0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      imageUrl: imgPendampinganGTK,
       contributions: [
         {
           icon: "wifi",
@@ -1482,9 +1488,9 @@ function Block3() {
     },
     {
       category: "Digitalisasi Pembelajaran",
-      title: "Sumber Belajar Murid",
+      title: "Bahan Ajar Digital",
       description: "Terdapat 40 mata pelajaran prioritas yang membutuhkan dukungan murid pembelajaran digital berkualitas di Sumber Belajar Ruang Murid.",
-      imageUrl: "https://images.unsplash.com/photo-1563394867331-e687a36112fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGxlYXJuaW5nJTIwZGlnaXRhbCUyMGNvbnRlbnR8ZW58MXx8fHwxNzcyNjczMzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      imageUrl: imgSumberBelajar,
       contributions: [
         {
           icon: "wifi",
@@ -1505,7 +1511,7 @@ function Block3() {
       category: "Revitalisasi Sekolah",
       title: "Revitalisasi Sekolah",
       description: "60 ribu dari 400 ribu sekolah membutuhkan revitalisasi infrastruktur ruangan sekolah yang rusak ringan hingga rusak sedang.",
-      imageUrl: "https://images.unsplash.com/photo-1639380366818-6053eb8f174c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzY2hvb2wlMjBidWlsZGluZyUyMHJlbm92YXRpb24lMjBjb25zdHJ1Y3Rpb258ZW58MXx8fHwxNzcyNjczMzc2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      imageUrl: imgRevitalisasiSekolah,
       contributions: [
         {
           icon: "wifi",
@@ -1526,7 +1532,7 @@ function Block3() {
       category: "Paket Dukungan Lainnya",
       title: "Kebutuhan Pendidikan Lainnya",
       description: "Mulai dari kebutuhan penangaman > 5 Juta Anak Tidak Sekolah, pembayaan PJJ Diktendik dari 18,5 juta murid, kebutuhan pembiayaan murid bertalenta yang akan berkompetisi, hingga peningkatan kolaborasi Vokasi dengan Dunia Usaha dan Dunia Industri.",
-      imageUrl: "https://images.unsplash.com/photo-1758685733926-00cba008215b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBzdXBwb3J0JTIwc3R1ZGVudHMlMjBjbGFzc3Jvb218ZW58MXx8fHwxNzcyNjczMzc2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      imageUrl: imgKebutuhanLainnya,
       contributions: [
         {
           icon: "wifi",

@@ -17,12 +17,12 @@ export interface ProgramContentConfig {
 
 // 1. PENGEMBANGAN PLATFORM DIGITAL
 export const platformDigitalContent: ProgramContentConfig = {
-  fieldLabel: "Topik Konten Belajar",
-  placeholder: "Pilih Topik",
+  fieldLabel: "Pilihan Pengembangan",
+  placeholder: "Pilih Pengembangan",
   options: [
     {
       value: "sso-belajar-id",
-      label: "Integrasi SSO Belajar ID",
+      label: "Pemberian Akses SSO Akun Belajar.id",
       prasyaratSubstansi: [
         "Kemitraan berjalan dengan skema non komersial",
         "Tidak terdapat biaya dalam proses integrasi dan atau mendukung proses integrasi berlangsung",
@@ -37,8 +37,8 @@ export const platformDigitalContent: ProgramContentConfig = {
       ]
     },
     {
-      value: "integrasi-fitur-rumah-pendidikan",
-      label: "Integrasi Fitur/Service pada Rumah Pendidikan",
+      value: "integrasi-rumah-pendidikan",
+      label: "Integrasi Layanan ke dalam Rumah Pendidikan",
       prasyaratSubstansi: [
         "Kemitraan berjalan dengan skema non komersial",
         "Tidak terdapat biaya dalam proses pengembangan atau integrasi fitur",
@@ -57,102 +57,54 @@ export const platformDigitalContent: ProgramContentConfig = {
   ]
 };
 
-// 2. SUMBER BELAJAR MURID
-export const sumberBelajarContent: ProgramContentConfig = {
-  fieldLabel: "Materi Sumber Belajar",
-  placeholder: "Pilih materi sumber belajar",
-  options: [
-    {
-      value: "sd",
-      label: "SD",
-      prasyaratSubstansi: [
-        "Materi sumber belajar sesuai Capaian Pembelajaran (CP) dan Tujuan Pembelajaran (TP) terbaru sesuai jenjang & mapel.",
-        "Materi relevan, mudah dipahami, dan sesuai dengan jenjang murid.",
-        "Materi sumber belajar sesuai dengan topik mata pelajaran yang diberikan.",
-        "Pendekatan pembelajaran mengarah ke penguasaan konsep dan pengaplikasian dalam kehidupan sehari-hari, bukan hanya penyelesaian soal.",
-        "Materi sumber belajar tidak monoton tapi ada keragaman bentuk (video, infografis, bahan bacaan murid, dsb)."
-      ],
-      prasyaratTeknis: [
-        "Format kontribusi Sumber Belajar dalam bentuk video, dokumen/artikel, dan materi pembelajaran interaktif.",
-        "Video Sumber Belajar disediakan dalam link YouTube aktif dengan resolusi minimum 720p dan durasi maksimal 15 menit.",
-        "Dokumen/Artikel Sumber belajar disediakan dalam format PDF yang dapat diakses secara publik dan bukan dalam penyimpanan privat, dengan ukuran maksimal 10MB.",
-        "Materi Pembelajaran Interaktif disediakan dalam format .zip, berisi file HTML5 dengan ukuran maksimal 16MB.",
-        "Materi Pembelajaran Interaktif memiliki fitur interaksi (drag, drop, touch, dan swipe) dan dapat berjalan dengan baik di berbagai perangkat Interactive Flat Panel maupun Cross-Operating System dan Cross-Browser System."
-      ]
-    },
-    {
-      value: "smp",
-      label: "SMP",
-      prasyaratSubstansi: [
-        "Materi sumber belajar sesuai Capaian Pembelajaran (CP) dan Tujuan Pembelajaran (TP) terbaru sesuai jenjang & mapel.",
-        "Materi relevan, mudah dipahami, dan sesuai dengan jenjang murid.",
-        "Materi sumber belajar sesuai dengan topik mata pelajaran yang diberikan.",
-        "Pendekatan pembelajaran mengarah ke penguasaan konsep dan pengaplikasian dalam kehidupan sehari-hari, bukan hanya penyelesaian soal.",
-        "Materi sumber belajar tidak monoton tapi ada keragaman bentuk (video, infografis, bahan bacaan murid, dsb)."
-      ],
-      prasyaratTeknis: [
-        "Format kontribusi Sumber Belajar dalam bentuk video, dokumen/artikel, dan materi pembelajaran interaktif.",
-        "Video Sumber Belajar disediakan dalam link YouTube aktif dengan resolusi minimum 720p dan durasi maksimal 15 menit.",
-        "Dokumen/Artikel Sumber belajar disediakan dalam format PDF yang dapat diakses secara publik dan bukan dalam penyimpanan privat, dengan ukuran maksimal 10MB.",
-        "Materi Pembelajaran Interaktif disediakan dalam format .zip, berisi file HTML5 dengan ukuran maksimal 16MB.",
-        "Materi Pembelajaran Interaktif memiliki fitur interaksi (drag, drop, touch, dan swipe) dan dapat berjalan dengan baik di berbagai perangkat Interactive Flat Panel maupun Cross-Operating System dan Cross-Browser System."
-      ]
-    },
-    {
-      value: "sma-smk-umum",
-      label: "SMA & SMK (Materi Umum)",
-      prasyaratSubstansi: [
-        "Materi sumber belajar sesuai Capaian Pembelajaran (CP) dan Tujuan Pembelajaran (TP) terbaru sesuai jenjang & mapel.",
-        "Materi relevan, mudah dipahami, dan sesuai dengan jenjang murid.",
-        "Materi sumber belajar sesuai dengan topik mata pelajaran yang diberikan.",
-        "Pendekatan pembelajaran mengarah ke penguasaan konsep dan pengaplikasian dalam kehidupan sehari-hari, bukan hanya penyelesaian soal.",
-        "Materi sumber belajar tidak monoton tapi ada keragaman bentuk (video, infografis, bahan bacaan murid, dsb)."
-      ],
-      prasyaratTeknis: [
-        "Format kontribusi Sumber Belajar dalam bentuk video, dokumen/artikel, dan materi pembelajaran interaktif.",
-        "Video Sumber Belajar disediakan dalam link YouTube aktif dengan resolusi minimum 720p dan durasi maksimal 15 menit.",
-        "Dokumen/Artikel Sumber belajar disediakan dalam format PDF yang dapat diakses secara publik dan bukan dalam penyimpanan privat, dengan ukuran maksimal 10MB.",
-        "Materi Pembelajaran Interaktif disediakan dalam format .zip, berisi file HTML5 dengan ukuran maksimal 16MB.",
-        "Materi Pembelajaran Interaktif memiliki fitur interaksi (drag, drop, touch, dan swipe) dan dapat berjalan dengan baik di berbagai perangkat Interactive Flat Panel maupun Cross-Operating System dan Cross-Browser System."
-      ]
-    },
-    {
-      value: "smk-kejuruan",
-      label: "SMK (Materi Kejuruan)",
-      prasyaratSubstansi: [
-        "Materi sumber belajar sesuai Capaian Pembelajaran (CP) dan Tujuan Pembelajaran (TP) terbaru sesuai jenjang & mapel.",
-        "Materi relevan, mudah dipahami, dan sesuai dengan jenjang murid.",
-        "Materi sumber belajar sesuai dengan topik mata pelajaran yang diberikan.",
-        "Pendekatan pembelajaran mengarah ke penguasaan konsep dan pengaplikasian dalam kehidupan sehari-hari, bukan hanya penyelesaian soal.",
-        "Materi sumber belajar tidak monoton tapi ada keragaman bentuk (video, infografis, bahan bacaan murid, dsb)."
-      ],
-      prasyaratTeknis: [
-        "Format kontribusi Sumber Belajar dalam bentuk video, dokumen/artikel, dan materi pembelajaran interaktif.",
-        "Video Sumber Belajar disediakan dalam link YouTube aktif dengan resolusi minimum 720p dan durasi maksimal 15 menit.",
-        "Dokumen/Artikel Sumber belajar disediakan dalam format PDF yang dapat diakses secara publik dan bukan dalam penyimpanan privat, dengan ukuran maksimal 10MB.",
-        "Materi Pembelajaran Interaktif disediakan dalam format .zip, berisi file HTML5 dengan ukuran maksimal 16MB.",
-        "Materi Pembelajaran Interaktif memiliki fitur interaksi (drag, drop, touch, dan swipe) dan dapat berjalan dengan baik di berbagai perangkat Interactive Flat Panel maupun Cross-Operating System dan Cross-Browser System."
-      ]
-    },
-    {
-      value: "paud",
-      label: "PAUD",
-      prasyaratSubstansi: [
-        "Materi sumber belajar sesuai Capaian Pembelajaran (CP) dan Tujuan Pembelajaran (TP) terbaru sesuai jenjang & mapel.",
-        "Materi relevan, mudah dipahami, dan sesuai dengan jenjang murid.",
-        "Materi sumber belajar sesuai dengan topik mata pelajaran yang diberikan.",
-        "Pendekatan pembelajaran mengarah ke penguasaan konsep dan pengaplikasian dalam kehidupan sehari-hari, bukan hanya penyelesaian soal.",
-        "Materi sumber belajar tidak monoton tapi ada keragaman bentuk (video, infografis, bahan bacaan murid, dsb)."
-      ],
-      prasyaratTeknis: [
-        "Format kontribusi Sumber Belajar dalam bentuk video, dokumen/artikel, dan materi pembelajaran interaktif.",
-        "Video Sumber Belajar disediakan dalam link YouTube aktif dengan resolusi minimum 720p dan durasi maksimal 15 menit.",
-        "Dokumen/Artikel Sumber belajar disediakan dalam format PDF yang dapat diakses secara publik dan bukan dalam penyimpanan privat, dengan ukuran maksimal 10MB.",
-        "Materi Pembelajaran Interaktif disediakan dalam format .zip, berisi file HTML5 dengan ukuran maksimal 16MB.",
-        "Materi Pembelajaran Interaktif memiliki fitur interaksi (drag, drop, touch, dan swipe) dan dapat berjalan dengan baik di berbagai perangkat Interactive Flat Panel maupun Cross-Operating System dan Cross-Browser System."
-      ]
-    }
-  ]
+// 2. BAHAN AJAR DIGITAL
+export const bahanAjarDigitalContent = {
+  targetAudienceLabel: "Untuk Siapa",
+  targetAudienceOptions: [
+    { value: "guru", label: "Guru" },
+    { value: "murid", label: "Murid" }
+  ],
+  jenjangLabel: "Jenjang Pendidikan",
+  jenjangOptions: [
+    { value: "paud-tk", label: "PAUD/TK" },
+    { value: "sd", label: "SD" },
+    { value: "smp", label: "SMP" },
+    { value: "sma", label: "SMA" },
+    { value: "smk", label: "SMK" },
+    { value: "kesetaraan", label: "Kesetaraan" },
+    { value: "slb", label: "SLB" },
+    { value: "pendidikan-khusus", label: "Pendidikan Khusus" }
+  ],
+  prasyaratGuru: {
+    prasyaratSubstansi: [
+      "Telah memiliki pengalaman dalam menyelenggarakan pelatihan pengembangan kompetensi Guru dan Tenaga Kependidikan, sesuai dengan bidang prioritas khususnya yang relevan dengan topik-topik prioritas terkait.",
+      "Menyediakan materi pelatihan yang sesuai dengan kebutuhan pengembangan kompetensi Guru & Tenaga Kependidikan dan mendukung pencapaian tujuan pembelajaran sesuai dengan kebijakan Kemendikdasmen.",
+      "Memiliki bukti atau dokumentasi yang menunjukkan dampak positif dari pelatihan yang telah dilaksanakan, seperti peningkatan hasil belajar, dan atau evaluasi peserta.",
+      "Berkomitmen untuk tidak melakukan monetisasi terhadap peserta pada saat proses pelaksanaan pelatihan atau dalam pelaksanaan perjanjian kerjasama berlangsung."
+    ],
+    prasyaratTeknis: [
+      "Mitra memiliki dukungan sumber daya yang memadai, termasuk narasumber, fasilitator, dan tim teknis, yang mampu mendukung pelaksanaan pelatihan secara daring, luring, maupun hybrid.",
+      "Menyediakan media pembelajaran yang sesuai dengan kebutuhan pelatihan, seperti presentasi, video, bahan ajar interaktif, serta mendukung keterpaduan dengan platform digital yang digunakan.",
+      "Bersedia memfasilitasi kebutuhan pelatihan, termasuk akomodasi penyediaan ruang daring atau lokasi kegiatan luring, konsumsi, transportasi, ATK serta suvenir atau goodie bag.",
+      "Menyediakan silabus, modul, atau dokumen pendukung pelatihan lainnya yang terdokumentasi dengan baik dan dapat dikaji oleh pihak kementerian sebelum pelaksanaan.",
+      "Narasumber, pelatih, atau fasilitator yang ditugaskan oleh mitra memiliki latar belakang dan keahlian yang sesuai dengan topik pelatihan yang disampaikan."
+    ]
+  },
+  prasyaratMurid: {
+    prasyaratSubstansi: [
+      "Skema kemitraan bersifat nonkomersial",
+      "Tidak ada biaya yang dibebankan ke Kemendikdasmen dan ekosistemnya dalam proses pengembangan maupun pemenuhan kontribusi",
+      "Kontribusi selaras dengan kebutuhan di Ruang Murid dan sesuai dengan CP/ATP terbaru",
+      "Informasi dalam materi (teks, visual, audio) bersifat faktual, tidak mengandung unsur hoaks, dan berasal dari sumber yang dapat dipertanggungjawabkan"
+    ],
+    prasyaratTeknis: [
+      "Kontribusi Sumber Belajar tersedia dalam bentuk Materi Interaktif, Gim Edukasi, Lab Maya, Video, atau PDF",
+      "Kontribusi Latihan Soal tersedia dalam tipe Soal Olimpiade, UTBK, TKA, Ujian Sekolah (PTS, PAS, PAT), Asesmen Nasional, atau IELTS/TOEFL",
+      "Materi tipe video disediakan dalam link YouTube",
+      "Materi tipe artikel disediakan dalam format PDF",
+      "Materi tipe Interaktif disediakan dalam file HTML5"
+    ]
+  }
 };
 
 // 3. PENDAMPINGAN PELATIHAN GTK
@@ -280,20 +232,21 @@ export const kebutuhanLainnyaContent: ProgramContentConfig = {
     },
     {
       value: "lainnya",
-      label: "Lainnya"
+      label: "Lainnya",
+      deskripsi: ""
     }
   ]
 };
 
 // Mapping program title ke content config
-export const programContentMapping: Record<string, ProgramContentConfig> = {
+export const programContentMapping: Record<string, any> = {
   "Pengembangan Platform Digital": platformDigitalContent,
-  "Sumber Belajar Murid": sumberBelajarContent,
+  "Bahan Ajar Digital": bahanAjarDigitalContent,
   "Pendampingan Pelatihan GTK": pelatihanGTKContent,
   "Kebutuhan Pendidikan Lainnya": kebutuhanLainnyaContent,
 };
 
 // Helper function untuk mendapatkan content config berdasarkan program title
-export function getProgramContent(programTitle: string): ProgramContentConfig | null {
+export function getProgramContent(programTitle: string): any {
   return programContentMapping[programTitle] || null;
 }

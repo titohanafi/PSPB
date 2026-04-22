@@ -145,7 +145,7 @@ function Group10() {
   );
 }
 
-// Components for "Sumber Belajar Murid"
+// Components for "Bahan Ajar Digital"
 function Layer1() {
   return (
     <div className="absolute contents inset-0" data-name="Layer 11">
@@ -486,7 +486,7 @@ export function ProgramIllustration({ title }: ProgramIllustrationProps) {
     );
   }
   
-  if (title === "Sumber Belajar Murid") {
+  if (title === "Bahan Ajar Digital") {
     return (
       <div className="relative size-full" data-name="img-chalk-board">
         <Layer1 />

@@ -61,6 +61,17 @@ export function ProgramSelectionModal({
                   className={`overflow-hidden relative group cursor-pointer rounded-card border border-border-light flex flex-col gap-spacing-3 p-spacing-5 transition-colors hover:bg-[var(--surface-hovered)] active:bg-[var(--surface-pressed)] bg-surface-default`}
                   onClick={() => onSelectProgram(index)}
                 >
+                  {/* Gambar */}
+                  {card.imageUrl && (
+                    <div className="w-full h-40 overflow-hidden rounded-md">
+                      <img 
+                        src={card.imageUrl} 
+                        alt={card.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+
                   {/* Title dengan Icon */}
                   <div className="flex items-center gap-spacing-3">
                     <div className="relative flex items-center justify-center shrink-0 w-11 h-11 transition-all">

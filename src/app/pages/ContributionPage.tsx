@@ -4,12 +4,12 @@ import { ContributionFormWizard } from "../components/ContributionFormWizard";
 import { ProgramIllustration } from "../components/ProgramIllustration";
 import { SchoolMapModal } from "../components/SchoolMapModal";
 import { ProgramSelectionModal } from "../components/ProgramSelectionModal";
-import imgInfrastrukturDigital from "../../assets/imgInfrastrukturDigital.png";
-import imgSumberBelajar from "../../assets/imgSumberBelajar.png";
-import imgRevitalisasiSekolah from "../../assets/imgRevitalisasiSekolah.png";
-import imgPengembanganPlatform from "../../assets/imgPengembanganPlatform.png";
-import imgPendampinganGTK from "../../assets/imgPendampinganGTK.png";
-import imgKebutuhanLainnya from "../../assets/imgKebutuhanLainnya.png";
+import imgInfrastrukturDigital from "../../assets/infrastrukturdigital.jpg";
+import imgSumberBelajar from "../../assets/sumberbelajarmurid.jpg";
+import imgRevitalisasiSekolah from "../../assets/revitalisasisekolah.jpg";
+import imgPengembanganPlatform from "../../assets/platformdigital.jpg";
+import imgPendampinganGTK from "../../assets/pelatihangtk.jpg";
+import imgKebutuhanLainnya from "../../assets/pendidikanlainnya.jpg";
 
 const cardDetails = [
   {
@@ -21,7 +21,7 @@ const cardDetails = [
   {
     imageUrl: imgSumberBelajar,
     category: "KEBUTUHAN PEMBELAJARAN",
-    title: "Sumber Belajar Murid",
+    title: "Bahan Ajar Digital",
     description: "Dukungan dalam bentuk penyediaan materi pembelajaran yang berkualitas dan relevan untuk meningkatkan kualitas pembelajaran di sekolah."
   },
   {

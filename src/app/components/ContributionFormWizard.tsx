@@ -13,6 +13,7 @@ import { ContributionPrerequisites } from "./ContributionPrerequisites";
 import { Checkbox } from "./ui/checkbox";
 import svgPathsInternet from "../../imports/svg-rrklaa4o2z";
 import svgPathsElectricity from "../../imports/svg-if2lkdlrqq";
+import imgTerimaKasih from "../../assets/terimakasih.jpg";
 import svgPathsRevitalisasi from "../../imports/svg-t12jg4i11j";
 import { SimpleDropdownMenu, SimpleDropdownMenuItem } from "./SimpleDropdownMenu";
 
@@ -74,6 +75,9 @@ export function ContributionFormWizard({
 }: ContributionFormWizardProps) {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [expandedPrasyarat, setExpandedPrasyarat] = useState<{guru: boolean; murid: boolean; [key: string]: boolean}>({guru: true, murid: true, 'sso-belajar-id': true, 'integrasi-rumah-pendidikan': true});
+  const [expandedPrasyaratSection, setExpandedPrasyaratSection] = useState<Record<string, {substansi: boolean; teknis: boolean}>>({});
 
   // Debug: Log formData changes
   useEffect(() => {
@@ -123,9 +127,13 @@ export function ContributionFormWizard({
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
-    alert('Terima kasih atas kontribusi Anda!');
-    onClose();
+    setShowThankYou(true);
+  };
+
+  const handleBackToHome = () => {
+    setShowThankYou(false);
     setCurrentStep(1);
+    onClose();
   };
 
   const handlePackageChange = (idx: number, packageType: string, checked: boolean) => {
@@ -455,45 +463,129 @@ export function ContributionFormWizard({
                 </h4>
               </div>
               
-              <div className="flex flex-col gap-spacing-5 p-spacing-6 bg-surface-default">
-                <FormInput
-                  label="Nama Penanggung jawab"
-                  value={formData.fullName}
-                  onChange={(value) => setFormData({ ...formData, fullName: value })}
-                  placeholder="Ketik nama lengkap penanggung jawab kontribusi"
-                />
-                
-                <FormInput
-                  label="Nama Instansi"
-                  value={formData.organization}
-                  onChange={(value) => setFormData({ ...formData, organization: value })}
-                  placeholder="Ketik nama instansi/perusahaan yang terlibat"
-                />
-                
-                <FormInput
-                  label="Nomor Telepon"
-                  value={formData.phone}
-                  onChange={(value) => setFormData({ ...formData, phone: value })}
-                  placeholder="Ketik nomor telepon aktif milik instansi atau penanggung jawab"
-                  type="tel"
-                />
-                
-                <FormInput
-                  label="Alamat Email"
-                  value={formData.email}
-                  onChange={(value) => setFormData({ ...formData, email: value })}
-                  placeholder="Ketik email resmi instansi atau penanggung jawab"
-                  type="email"
-                />
+              <div className="flex flex-col gap-spacing-6 p-spacing-6 bg-surface-default">
+                {/* Segmen 1: Informasi Perusahaan */}
+                <div className="flex flex-col gap-4">
+                  <h5 className="font-semibold text-foreground" style={{ fontSize: '16px' }}>
+                    Informasi Perusahaan
+                  </h5>
+                  
+                  {/* Row 1: Nama Perusahaan | Bentuk Badan Hukum */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormInput
+                      label="Nama Perusahaan"
+                      value={formData.organization}
+                      onChange={(value) => setFormData({ ...formData, organization: value })}
+                      placeholder="Ketik nama perusahaan"
+                    />
+                    
+                    <Select
+                      label="Bentuk Badan Hukum"
+                      placeholder="Pilih bentuk badan hukum"
+                      value={formData.badanHukum || ''}
+                      onChange={(value) => setFormData({ ...formData, badanHukum: value })}
+                      options={[
+                        { label: 'PT', value: 'pt' },
+                        { label: 'PT Perorangan', value: 'pt-perorangan' },
+                        { label: 'Yayasan', value: 'yayasan' },
+                        { label: 'Koperasi', value: 'koperasi' },
+                        { label: 'Perkumpulan', value: 'perkumpulan' },
+                        { label: 'BUMN/BUMD', value: 'bumn-bumd' }
+                      ]}
+                    />
+                  </div>
+                  
+                  {/* Row 2: Status Mitra */}
+                  <div className="flex flex-col gap-2">
+                    <label className="text-foreground" style={{ fontSize: 'var(--input-label-size)', fontWeight: 'var(--input-label-weight)', color: 'var(--input-label-color)' }}>
+                      Status Mitra
+                    </label>
+                    <div className="flex gap-4">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="statusMitra"
+                          checked={formData.statusMitra === 'baru'}
+                          onChange={() => setFormData({ ...formData, statusMitra: 'baru' })}
+                          className="w-4 h-4 text-primary"
+                        />
+                        <span className="text-foreground text-sm">Baru</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="statusMitra"
+                          checked={formData.statusMitra === 'lama'}
+                          onChange={() => setFormData({ ...formData, statusMitra: 'lama' })}
+                          className="w-4 h-4 text-primary"
+                        />
+                        <span className="text-foreground text-sm">Lama</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
-                <FileUpload
-                  label="Profil Perusahaan"
-                  value={formData.companyProfile}
-                  onChange={(file) => setFormData({ ...formData, companyProfile: file })}
-                  placeholder="Pilih berkas profil perusahaan"
-                  accept=".pdf,.doc,.docx"
-                  helperText="Format berkas yang didukung: PDF, DOC, DOCX. Maksimum ukuran berkas 10 MB"
-                />
+                {/* Segmen 2: Data Narahubung */}
+                <div className="flex flex-col gap-4">
+                  <h5 className="font-semibold text-foreground" style={{ fontSize: '16px' }}>
+                    Data Narahubung
+                  </h5>
+                  
+                  {/* Row 1: Nama | Jabatan dan Posisi */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormInput
+                      label="Nama"
+                      value={formData.fullName}
+                      onChange={(value) => setFormData({ ...formData, fullName: value })}
+                      placeholder="Ketik nama lengkap"
+                    />
+                    
+                    <FormInput
+                      label="Jabatan dan Posisi"
+                      value={formData.position}
+                      onChange={(value) => setFormData({ ...formData, position: value })}
+                      placeholder="Ketik jabatan dan posisi"
+                    />
+                  </div>
+                  
+                  {/* Row 2: Email Kantor | Nomor Telepon */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormInput
+                      label="Email Kantor"
+                      value={formData.email}
+                      onChange={(value) => setFormData({ ...formData, email: value })}
+                      placeholder="Ketik email kantor"
+                      type="email"
+                    />
+                    
+                    <FormInput
+                      label="Nomor Telepon"
+                      value={formData.phone}
+                      onChange={(value) => {
+                        const numericValue = value.replace(/[^0-9]/g, '');
+                        setFormData({ ...formData, phone: numericValue });
+                      }}
+                      placeholder="Ketik nomor telepon"
+                      type="tel"
+                    />
+                  </div>
+                </div>
+
+                {/* Segmen 3: Dokumen Pendukung */}
+                <div className="flex flex-col gap-4">
+                  <h5 className="font-semibold text-foreground" style={{ fontSize: '16px' }}>
+                    Dokumen Pendukung
+                  </h5>
+                  
+                  <FileUpload
+                    label="Company Profile"
+                    value={formData.companyProfile}
+                    onChange={(file) => setFormData({ ...formData, companyProfile: file })}
+                    placeholder="Pilih berkas company profile"
+                    accept=".pdf,.doc,.docx"
+                    helperText="Format berkas yang didukung: PDF, DOC, DOCX. Maksimum ukuran berkas 10 MB"
+                  />
+                </div>
               </div>
             </div>
           )}
@@ -931,38 +1023,473 @@ export function ContributionFormWizard({
                                 );
                               }
 
-                              const selectedOption = programContent.options.find(
-                                opt => opt.value === contribution.selectedTopic
-                              );
+// Special handling for Bahan Ajar Digital
+                              if (program.title === "Bahan Ajar Digital") {
+                                return (
+                                  <div className="flex flex-col gap-3">
+                                    {/* Target Audience Label */}
+                                    <p 
+                                      className="text-foreground"
+                                      style={{
+                                        fontSize: '14px',
+                                        fontWeight: 500,
+                                        color: 'var(--input-label-color)',
+                                        lineHeight: '22px'
+                                      }}
+                                    >
+                                      {programContent.targetAudienceLabel}
+                                    </p>
+                                   
+                                    {/* Guru & Murid with nested jenjang & prasyarat */}
+                                    {programContent.targetAudienceOptions.map((targetOption: any) => {
+                                      const isTargetChecked = (contribution.targetAudience || []).includes(targetOption.value);
+                                      const isGuru = targetOption.value === 'guru';
+                                      
+                                      return (
+                                        <div key={targetOption.value} className="border border-border rounded-lg overflow-hidden">
+                                          {/* Target Audience Checkbox */}
+                                          <label
+                                            className={`flex items-center gap-3 p-4 cursor-pointer transition-colors ${
+                                              isTargetChecked 
+                                                ? 'bg-[var(--primary-50)]' 
+                                                : 'bg-background hover:bg-muted'
+                                            }`}
+                                          >
+                                            <div className="relative shrink-0">
+                                              <input
+                                                type="checkbox"
+                                                className="sr-only peer"
+                                                checked={isTargetChecked}
+                                                onChange={(e) => {
+                                                  const current = contribution.targetAudience || [];
+                                                  const newValues = e.target.checked
+                                                    ? [...current, targetOption.value]
+                                                    : current.filter((t: string) => t !== targetOption.value);
+                                                  setFormData({
+                                                    ...formData,
+                                                    contributions: {
+                                                      ...formData.contributions,
+                                                      [idx]: { 
+                                                        ...contribution, 
+                                                        targetAudience: newValues,
+                                                        jenjangGuru: newValues.includes('guru') ? contribution.jenjangGuru : [],
+                                                        jenjangMurid: newValues.includes('murid') ? contribution.jenjangMurid : []
+                                                      }
+                                                    }
+                                                  });
+                                                }}
+                                              />
+                                              <div 
+                                                className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
+                                                  isTargetChecked 
+                                                    ? 'bg-primary border-primary' 
+                                                    : 'bg-input-background border-border peer-hover:border-primary'
+                                                }`}
+                                              >
+                                                {isTargetChecked && (
+                                                  <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                  </svg>
+                                                )}
+                                              </div>
+                                            </div>
+                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{targetOption.label}</span>
+                                          </label>
+
+                                          {/* Nested: Jenjang + Prasyarat (only show when checked) */}
+                                          {isTargetChecked && (
+                                            <div className="p-4 bg-background border-t border-border flex flex-col gap-3">
+                                              {/* Jenjang - 4 columns grid */}
+                                              <div>
+                                                <p 
+                                                  className="text-foreground mb-2"
+                                                  style={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 500,
+                                                    color: 'var(--input-label-color)'
+                                                  }}
+                                                >
+                                                  Jenjang Pendidikan
+                                                </p>
+                                                
+                                                <div className="grid grid-cols-4 gap-2">
+                                                  {programContent.jenjangOptions.map((jenjangOption: any) => {
+                                                    const selectedJenjang = isGuru ? (contribution.jenjangGuru || []) : (contribution.jenjangMurid || []);
+                                                    const isChecked = selectedJenjang.includes(jenjangOption.value);
+                                                    
+                                                    return (
+                                                      <label
+                                                        key={`${targetOption.value}-${jenjangOption.value}`}
+                                                        className={`flex items-center gap-2 p-2 rounded cursor-pointer transition-colors text-center ${
+                                                          isChecked 
+                                                            ? 'bg-[var(--primary-50)]' 
+                                                            : 'bg-muted hover:bg-muted/80'
+                                                        }`}
+                                                      >
+                                                        <div className="relative shrink-0">
+                                                          <input
+                                                            type="checkbox"
+                                                            className="sr-only peer"
+                                                            checked={isChecked}
+                                                            onChange={(e) => {
+                                                              const current = isGuru ? (contribution.jenjangGuru || []) : (contribution.jenjangMurid || []);
+                                                              const newValues = e.target.checked
+                                                                ? [...current, jenjangOption.value]
+                                                                : current.filter((t: string) => t !== jenjangOption.value);
+                                                              setFormData({
+                                                                ...formData,
+                                                                contributions: {
+                                                                  ...formData.contributions,
+                                                                  [idx]: { 
+                                                                    ...contribution, 
+                                                                    [isGuru ? 'jenjangGuru' : 'jenjangMurid']: newValues 
+                                                                  }
+                                                                }
+                                                              });
+                                                            }}
+                                                          />
+                                                          <div 
+                                                            className={`w-4 h-4 border-2 rounded flex items-center justify-center transition-colors ${
+                                                              isChecked 
+                                                                ? 'bg-primary border-primary' 
+                                                                : 'bg-input-background border-border peer-hover:border-primary'
+                                                            }`}
+                                                          >
+                                                            {isChecked && (
+                                                              <svg className="w-2.5 h-2.5 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                              </svg>
+                                                            )}
+                                                          </div>
+                                                        </div>
+                                                        <span className="text-foreground text-sm">{jenjangOption.label}</span>
+                                                      </label>
+                                                    );
+                                                  })}
+                                                </div>
+                                              </div>
+
+                                              {/* Prasyarat - Show when jenjang is selected */}
+                                              {((isGuru && (contribution.jenjangGuru || []).length > 0) || (!isGuru && (contribution.jenjangMurid || []).length > 0)) && (
+                                                <div className="border border-border rounded-lg overflow-hidden">
+                                                  <button
+                                                    type="button"
+                                                    onClick={() => setExpandedPrasyarat(prev => ({...prev, [targetOption.value]: !prev[targetOption.value as 'guru' | 'murid']}))}
+                                                    className="w-full flex items-center justify-between p-3 bg-muted hover:bg-muted/80 transition-colors"
+                                                  >
+                                                    <span className="text-foreground font-medium text-sm">
+                                                      Prasyarat untuk {targetOption.label}
+                                                    </span>
+                                                    <svg 
+                                                      className={`w-4 h-4 text-foreground transition-transform ${expandedPrasyarat[targetOption.value as 'guru' | 'murid'] ? 'rotate-180' : ''}`}
+                                                      fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    >
+                                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                    </svg>
+                                                  </button>
+                                                  {expandedPrasyarat[targetOption.value as 'guru' | 'murid'] && (
+                                                    <div className="p-3 bg-background">
+                                                      <ContributionPrerequisites
+                                                        isOpenSubstansi={expandedPrasyaratSection[`${idx}-${targetOption.value}`]?.substansi ?? true}
+                                                        isOpenTeknis={expandedPrasyaratSection[`${idx}-${targetOption.value}`]?.teknis ?? false}
+                                                        onToggleSubstansi={() => setExpandedPrasyaratSection(prev => ({
+                                                          ...prev,
+                                                          [`${idx}-${targetOption.value}`]: {
+                                                            ...prev[`${idx}-${targetOption.value}`],
+                                                            substansi: !prev[`${idx}-${targetOption.value}`]?.substansi
+                                                          }
+                                                        }))}
+                                                        onToggleTeknis={() => setExpandedPrasyaratSection(prev => ({
+                                                          ...prev,
+                                                          [`${idx}-${targetOption.value}`]: {
+                                                            ...prev[`${idx}-${targetOption.value}`],
+                                                            teknis: !prev[`${idx}-${targetOption.value}`]?.teknis
+                                                          }
+                                                        }))}
+                                                        prasyaratSubstansi={isGuru ? programContent.prasyaratGuru.prasyaratSubstansi : programContent.prasyaratMurid.prasyaratSubstansi}
+                                                        prasyaratTeknis={isGuru ? programContent.prasyaratGuru.prasyaratTeknis : programContent.prasyaratMurid.prasyaratTeknis}
+                                                      />
+                                                    </div>
+                                                  )}
+                                                </div>
+                                              )}
+                                            </div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+</div>
+                                );
+                              }
+
+                              // Special handling for Pengembangan Platform Digital - no "Lainnya", show prasyarat per option
+                              if (program.title === "Pengembangan Platform Digital") {
+                                return (
+                                  <div className="flex flex-col gap-3">
+                                    <p 
+                                      className="text-foreground"
+                                      style={{
+                                        fontSize: '14px',
+                                        fontWeight: 500,
+                                        color: 'var(--input-label-color)'
+                                      }}
+                                    >
+                                      {programContent.fieldLabel}
+                                    </p>
+                                   
+                                    {programContent.options.map((option: any) => {
+                                      const isChecked = (contribution.selectedTopics || []).includes(option.value);
+                                      return (
+                                        <div key={option.value} className="border border-border rounded-lg overflow-hidden">
+                                          <label
+                                            className={`flex items-center gap-3 p-4 cursor-pointer transition-colors ${
+                                              isChecked 
+                                                ? 'bg-[var(--primary-50)]' 
+                                                : 'bg-background hover:bg-muted'
+                                            }`}
+                                          >
+                                            <div className="relative shrink-0">
+                                              <input
+                                                type="checkbox"
+                                                className="sr-only peer"
+                                                checked={isChecked}
+                                                onChange={(e) => {
+                                                  const currentTopics = contribution.selectedTopics || [];
+                                                  const newTopics = e.target.checked
+                                                    ? [...currentTopics, option.value]
+                                                    : currentTopics.filter((t: string) => t !== option.value);
+                                                  setFormData({
+                                                    ...formData,
+                                                    contributions: {
+                                                      ...formData.contributions,
+                                                      [idx]: { ...contribution, selectedTopics: newTopics }
+                                                    }
+                                                  });
+                                                }}
+                                              />
+                                              <div 
+                                                className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
+                                                  isChecked 
+                                                    ? 'bg-primary border-primary' 
+                                                    : 'bg-input-background border-border peer-hover:border-primary'
+                                                }`}
+                                              >
+                                                {isChecked && (
+                                                  <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                  </svg>
+                                                )}
+                                              </div>
+                                            </div>
+                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{option.label}</span>
+                                          </label>
+
+                                          {/* Show prasyarat when checked */}
+                                          {isChecked && (
+                                            <div className="p-4 bg-background border-t border-border">
+                                              <div className="border border-border rounded-lg overflow-hidden">
+                                                <button
+                                                  type="button"
+                                                  onClick={() => setExpandedPrasyarat(prev => ({...prev, [option.value]: !prev[option.value as 'guru' | 'murid']}))}
+                                                  className="w-full flex items-center justify-between p-3 bg-muted hover:bg-muted/80 transition-colors"
+                                                >
+                                                  <span className="text-foreground font-medium text-sm">
+                                                    Prasyarat
+                                                  </span>
+                                                  <svg 
+                                                    className={`w-4 h-4 text-foreground transition-transform ${expandedPrasyarat[option.value as 'guru' | 'murid'] ? 'rotate-180' : ''}`}
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                  >
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                  </svg>
+                                                </button>
+                                                {expandedPrasyarat[option.value as 'guru' | 'murid'] && (
+                                                  <div className="p-3 bg-background">
+                                                    <ContributionPrerequisites
+                                                      isOpenSubstansi={expandedPrasyaratSection[`${idx}-${option.value}`]?.substansi ?? true}
+                                                      isOpenTeknis={expandedPrasyaratSection[`${idx}-${option.value}`]?.teknis ?? false}
+                                                      onToggleSubstansi={() => setExpandedPrasyaratSection(prev => ({
+                                                        ...prev,
+                                                        [`${idx}-${option.value}`]: {
+                                                          ...prev[`${idx}-${option.value}`],
+                                                          substansi: !prev[`${idx}-${option.value}`]?.substansi
+                                                        }
+                                                      }))}
+                                                      onToggleTeknis={() => setExpandedPrasyaratSection(prev => ({
+                                                        ...prev,
+                                                        [`${idx}-${option.value}`]: {
+                                                          ...prev[`${idx}-${option.value}`],
+                                                          teknis: !prev[`${idx}-${option.value}`]?.teknis
+                                                        }
+                                                      }))}
+                                                      prasyaratSubstansi={option.prasyaratSubstansi}
+                                                      prasyaratTeknis={option.prasyaratTeknis}
+                                                    />
+                                                  </div>
+                                                )}
+                                              </div>
+                                            </div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                );
+                              }
 
                               return (
                                 <div className="flex flex-col gap-4">
-                                  {/* Dropdown Selection */}
-                                  <Select
-                                    label={programContent.fieldLabel}
-                                    placeholder={programContent.placeholder}
-                                    options={programContent.options.map(opt => ({
-                                      label: opt.label,
-                                      value: opt.value
-                                    }))}
-                                    value={contribution.selectedTopic || ''}
-                                    onChange={(value) => {
-                                      setFormData({
-                                        ...formData,
-                                        contributions: {
-                                          ...formData.contributions,
-                                          [idx]: { ...contribution, selectedTopic: value }
-                                        }
-                                      });
-                                    }}
-                                  />
+                                  {/* Checkbox Group Selection */}
+                                  <div className="flex flex-col gap-3">
+                                    <label 
+                                      className="text-foreground"
+                                      style={{
+                                        fontSize: 'var(--input-label-size)',
+                                        fontWeight: 'var(--input-label-weight)',
+                                        color: 'var(--input-label-color)',
+                                        lineHeight: '22px',
+                                        display: 'block'
+                                      }}
+                                    >
+                                      {programContent.fieldLabel}
+                                    </label>
+                                    
+{/* Program Options as Checkboxes - skip "lainnya" as it's handled separately */}
+                                    {programContent.options.filter((opt: any) => opt.value !== 'lainnya').map((option: any) => {
+                                      const isChecked = (contribution.selectedTopics || []).includes(option.value);
+                                      return (
+                                        <div key={option.value} className={`border border-border rounded-lg overflow-hidden ${isChecked ? 'bg-[var(--primary-50)]' : ''}`}>
+                                          <label
+                                            className={`flex items-center gap-3 p-3 cursor-pointer transition-colors ${isChecked ? '' : 'bg-background hover:bg-muted'}`}
+                                          >
+                                            <div className="relative shrink-0">
+                                              <input
+                                                type="checkbox"
+                                                className="sr-only peer"
+                                                checked={isChecked}
+                                                onChange={(e) => {
+                                                  const currentTopics = contribution.selectedTopics || [];
+                                                  const newTopics = e.target.checked
+                                                    ? [...currentTopics, option.value]
+                                                    : currentTopics.filter((t: string) => t !== option.value);
+                                                  setFormData({
+                                                    ...formData,
+                                                    contributions: {
+                                                      ...formData.contributions,
+                                                      [idx]: { ...contribution, selectedTopics: newTopics }
+                                                    }
+                                                  });
+                                                }}
+                                              />
+                                              <div 
+                                                className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
+                                                  isChecked 
+                                                    ? 'bg-primary border-primary' 
+                                                    : 'bg-input-background border-border peer-hover:border-primary'
+                                                }`}
+                                              >
+                                                {isChecked && (
+                                                  <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                  </svg>
+                                                )}
+                                              </div>
+                                            </div>
+                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{option.label}</span>
+                                          </label>
+                                          {isChecked && option.deskripsi && (
+                                            <div className="px-3 pb-3 bg-background border-t border-border">
+                                              <p className="text-sm text-muted-foreground mt-2">{option.deskripsi}</p>
+                                            </div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                                    
+                                    {/* Lainnya Option - with free text input */}
+                                    <label
+                                      className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
+                                        (contribution.selectedTopics || []).includes('lainnya') || contribution.otherTopic
+                                          ? 'bg-[var(--primary-50)]' 
+                                          : 'bg-background hover:bg-muted'
+                                      }`}
+                                    >
+                                      <div className="relative shrink-0">
+                                        <input
+                                          type="checkbox"
+                                          className="sr-only peer"
+                                          checked={(contribution.selectedTopics || []).includes('lainnya') || !!contribution.otherTopic}
+                                          onChange={(e) => {
+                                            const currentTopics = contribution.selectedTopics || [];
+                                            if (e.target.checked) {
+                                              setFormData({
+                                                ...formData,
+                                                contributions: {
+                                                  ...formData.contributions,
+                                                  [idx]: { 
+                                                    ...contribution, 
+                                                    selectedTopics: [...currentTopics, 'lainnya'],
+                                                    otherTopic: ' '
+                                                  }
+                                                }
+                                              });
+                                            } else {
+                                              setFormData({
+                                                ...formData,
+                                                contributions: {
+                                                  ...formData.contributions,
+                                                  [idx]: { 
+                                                    ...contribution, 
+                                                    selectedTopics: currentTopics.filter((t: string) => t !== 'lainnya'),
+                                                    otherTopic: ''
+                                                  }
+                                                }
+                                              });
+                                            }
+                                          }}
+                                        />
+                                        <div 
+                                          className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
+                                            (contribution.selectedTopics || []).includes('lainnya') || contribution.otherTopic
+                                              ? 'bg-primary border-primary' 
+                                              : 'bg-input-background border-border peer-hover:border-primary'
+                                          }`}
+                                        >
+                                          {((contribution.selectedTopics || []).includes('lainnya') || contribution.otherTopic) && (
+                                            <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                          )}
+                                        </div>
+                                      </div>
+                                      <div className="flex-1">
+                                        <span className="text-foreground" style={{ fontSize: '16px' }}>Lainnya</span>
+                                        {((contribution.selectedTopics || []).includes('lainnya') || contribution.otherTopic) && (
+                                          <input
+                                            type="text"
+                                            className="w-full mt-2 px-3 py-2 border border-border rounded bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring text-sm"
+                                            placeholder="Tulis dukungan lainnya..."
+                                            value={contribution.otherTopic === ' ' ? '' : contribution.otherTopic || ''}
+                                            onChange={(e) => {
+                                              setFormData({
+                                                ...formData,
+                                                contributions: {
+                                                  ...formData.contributions,
+                                                  [idx]: { ...contribution, otherTopic: e.target.value }
+                                                }
+                                              });
+                                            }}
+                                          />
+                                        )}
+                                      </div>
+                                    </label>
+                                  </div>
 
-                                  {/* Prerequisites / Description */}
-                                  {selectedOption && (
+                                  {/* Prerequisites - Show when at least one topic is selected (excluding Lainnya) */}
+                                  {(contribution.selectedTopics && contribution.selectedTopics.length > 0) && (
                                     <ContributionPrerequisites
-                                      prasyaratSubstansi={selectedOption.prasyaratSubstansi}
-                                      prasyaratTeknis={selectedOption.prasyaratTeknis}
-                                      deskripsi={selectedOption.deskripsi}
+                                      prasyaratSubstansi={programContent.options[0]?.prasyaratSubstansi}
+                                      prasyaratTeknis={programContent.options[0]?.prasyaratTeknis}
                                     />
                                   )}
                                 </div>
@@ -1062,27 +1589,56 @@ export function ContributionFormWizard({
                   </div>
                   <div className="p-5 bg-default rounded-lg">
                     <div className="grid grid-cols-1 gap-4">
+                      {/* Segmen 1: Informasi Perusahaan */}
                       <div>
-                        <p className="text-xs text-muted-foreground mb-1">Nama Penanggung Jawab</p>
-                        <p className="text-sm font-medium text-foreground">{formData.fullName || '-'}</p>
+                        <p className="text-xs text-muted-foreground mb-1">Bentuk Badan Hukum</p>
+                        <p className="text-sm font-medium text-foreground">
+                          {formData.badanHukum === 'pt' ? 'PT' : 
+                           formData.badanHukum === 'pt-perorangan' ? 'PT Perorangan' :
+                           formData.badanHukum === 'yayasan' ? 'Yayasan' :
+                           formData.badanHukum === 'koperasi' ? 'Koperasi' :
+                           formData.badanHukum === 'perkumpulan' ? 'Perkumpulan' :
+                           formData.badanHukum === 'bumn-bumd' ? 'BUMN/BUMD' : '-'}
+                        </p>
                       </div>
                       <div>
-                        <p className="text-xs text-muted-foreground mb-1">Nama Instansi</p>
+                        <p className="text-xs text-muted-foreground mb-1">Status Mitra</p>
+                        <p className="text-sm font-medium text-foreground">
+                          {formData.statusMitra === 'baru' ? 'Baru' : 
+                           formData.statusMitra === 'lama' ? 'Lama' : '-'}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-muted-foreground mb-1">Nama Perusahaan</p>
                         <p className="text-sm font-medium text-foreground">{formData.organization || '-'}</p>
                       </div>
+                      
+                      {/* Segmen 2: Data Narahubung */}
                       <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Nama</p>
+                          <p className="text-sm font-medium text-foreground">{formData.fullName || '-'}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Jabatan dan Posisi</p>
+                          <p className="text-sm font-medium text-foreground">{formData.position || '-'}</p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Email Kantor</p>
+                          <p className="text-sm font-medium text-foreground">{formData.email || '-'}</p>
+                        </div>
                         <div>
                           <p className="text-xs text-muted-foreground mb-1">Nomor Telepon</p>
                           <p className="text-sm font-medium text-foreground">{formData.phone || '-'}</p>
                         </div>
-                        <div>
-                          <p className="text-xs text-muted-foreground mb-1">Email</p>
-                          <p className="text-sm font-medium text-foreground">{formData.email || '-'}</p>
-                        </div>
                       </div>
+                      
+                      {/* Segmen 3: Dokumen Pendukung */}
                       {formData.companyProfile && (
                         <div>
-                          <p className="text-xs text-muted-foreground mb-1">Profil Perusahaan</p>
+                          <p className="text-xs text-muted-foreground mb-1">Company Profile</p>
                           <p className="text-sm font-medium text-foreground">{formData.companyProfile.name}</p>
                         </div>
                       )}
@@ -1185,19 +1741,84 @@ export function ContributionFormWizard({
                               </div>
                             ) : null}
                             
-                            {/* Selected Topic for non-multi-school programs */}
-                            {!isMultiSchoolProgram && contribution.selectedTopic && (() => {
+                            {/* Selected Topics for non-multi-school programs */}
+                            {!isMultiSchoolProgram && ((contribution.selectedTopics && contribution.selectedTopics.length > 0) || contribution.otherTopic) && (() => {
                               const programContent = getProgramContent(program.title);
-                              const selectedOption = programContent?.options.find(
-                                opt => opt.value === contribution.selectedTopic
-                              );
                               
-                              return selectedOption ? (
+                              // Get regular labels (excluding "lainnya")
+                              const selectedLabels = (contribution.selectedTopics || [])
+                                .filter((t: string) => t !== 'lainnya')
+                                .map((topicValue: string) => {
+                                  const option = programContent?.options.find((opt: any) => opt.value === topicValue);
+                                  return option?.label || topicValue;
+                                });
+                              
+                              // Handle "Lainnya" separately with the user input
+                              const hasLainnya = (contribution.selectedTopics || []).includes('lainnya') || contribution.otherTopic;
+                              const lainnyaInput = contribution.otherTopic && contribution.otherTopic !== ' ' ? contribution.otherTopic : '';
+                              
+                              // Combine all items
+                              const allItems: {label: string; isLainnya: boolean}[] = [
+                                ...selectedLabels.map(label => ({ label, isLainnya: false })),
+                                ...(hasLainnya ? [{ label: lainnyaInput || 'Lainnya', isLainnya: true }] : [])
+                              ];
+                              
+                              return allItems.length > 0 ? (
                                 <div>
                                   <p className="text-xs text-muted-foreground mb-1">{programContent?.fieldLabel}</p>
-                                  <p className="text-sm font-medium text-foreground">{selectedOption.label}</p>
+                                  <div className="flex flex-col gap-1">
+                                    {allItems.map((item: {label: string; isLainnya: boolean}, idx: number) => (
+                                      <p key={idx} className="text-sm font-medium text-foreground">
+                                        • {item.isLainnya && lainnyaInput ? `Lainnya: ${lainnyaInput}` : item.label}
+                                      </p>
+                                    ))}
+                                  </div>
                                 </div>
                               ) : null;
+                            })()}
+
+                            {/* Selected Audience & Jenjang for Bahan Ajar Digital */}
+                            {!isMultiSchoolProgram && contribution.targetAudience && contribution.targetAudience.length > 0 && (() => {
+                              const programContent = getProgramContent(program.title);
+                              const jenjangMap: Record<string, string> = {};
+                              programContent?.jenjangOptions.forEach((opt: any) => {
+                                jenjangMap[opt.value] = opt.label;
+                              });
+                              
+                              const guruLabels = (contribution.jenjangGuru || []).map((v: string) => jenjangMap[v] || v);
+                              const muridLabels = (contribution.jenjangMurid || []).map((v: string) => jenjangMap[v] || v);
+                              
+                              return (
+                                <div>
+                                  <p className="text-xs text-muted-foreground mb-1">{programContent?.targetAudienceLabel}</p>
+                                  <div className="flex flex-col gap-1">
+                                    {(contribution.targetAudience || []).includes('guru') && (
+                                      <>
+                                        <p className="text-sm font-medium text-foreground">• Guru</p>
+                                        {guruLabels.length > 0 && (
+                                          <div className="ml-4 flex flex-col gap-1">
+                                            {guruLabels.map((label: string, idx: number) => (
+                                              <p key={`guru-${idx}`} className="text-sm text-foreground">- {label}</p>
+                                            ))}
+                                          </div>
+                                        )}
+                                      </>
+                                    )}
+                                    {(contribution.targetAudience || []).includes('murid') && (
+                                      <>
+                                        <p className="text-sm font-medium text-foreground">• Murid</p>
+                                        {muridLabels.length > 0 && (
+                                          <div className="ml-4 flex flex-col gap-1">
+                                            {muridLabels.map((label: string, idx: number) => (
+                                              <p key={`murid-${idx}`} className="text-sm text-foreground">- {label}</p>
+                                            ))}
+                                          </div>
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </div>
+                              );
                             })()}
                             
                             {contribution.type && (
@@ -1306,6 +1927,30 @@ export function ContributionFormWizard({
           </div>
         </div>
       </div>
+
+      {showThankYou && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-background rounded-lg max-w-lg w-full p-8 text-center shadow-lg">
+            <img 
+              src={imgTerimaKasih} 
+              alt="Terima Kasih" 
+              className="w-64 h-auto mx-auto mb-6"
+            />
+            <h2 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">
+              Terima kasih sudah mengisi formulir kontribusi
+            </h2>
+            <p className="text-[var(--text-secondary)] mb-8 max-w-md mx-auto">
+              Dengan mengirim formulir ini, Anda setuju untuk dihubungi pihak terkait dan melanjutkan proses kontribusi.
+            </p>
+            <button
+              onClick={handleBackToHome}
+              className="bg-primary text-primary-foreground py-3 px-6 rounded-button font-semibold hover:opacity-90 transition-opacity"
+            >
+              Kembali ke Beranda
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

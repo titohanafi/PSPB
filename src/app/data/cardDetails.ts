@@ -1,9 +1,16 @@
+import imgInfrastrukturDigital from "../../assets/infrastrukturdigital.jpg";
+import imgRevitalisasiSekolah from "../../assets/revitalisasisekolah.jpg";
+import imgPengembanganPlatform from "../../assets/platformdigital.jpg";
+import imgSumberBelajar from "../../assets/sumberbelajarmurid.jpg";
+import imgPendampinganGTK from "../../assets/pelatihangtk.jpg";
+import imgKebutuhanLainnya from "../../assets/pendidikanlainnya.jpg";
+
 export const cardDetails = [
   {
     category: "Digitalisasi Pembelajaran",
     title: "Infrastruktur Digital",
     description: "Terdapat ~16 ribu satuan pendidikan yang membutuhkan dukungan infrastruktur listrik dan internet untuk mendukung proses pembelajaran",
-    imageUrl: "https://images.unsplash.com/photo-1758521961483-30f5908b9c93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwaW5mcmFzdHJ1Y3R1cmUlMjBpbnRlcm5ldCUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzcyNjczMzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: imgInfrastrukturDigital,
     contributions: [
       {
         icon: "wifi",
@@ -25,7 +32,7 @@ export const cardDetails = [
     category: "Peningkatan Kualitas Fasilitas",
     title: "Revitalisasi Sekolah",
     description: "Sekitar 123 ribu satuan pendidikan di Indonesia membutuhkan perbaikan dan pembaruan fasilitas belajar untuk menciptakan lingkungan pendidikan yang nyaman dan kondusif",
-    imageUrl: "https://images.unsplash.com/photo-1681223889704-e6c180d5ae58?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzY2hvb2wlMjBidWlsZGluZyUyMHJlbm92YXRpb258ZW58MXx8fHwxNzcyNjczNDE4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: imgRevitalisasiSekolah,
     contributions: [
       {
         icon: "building",
@@ -47,7 +54,7 @@ export const cardDetails = [
     category: "Digitalisasi Pembelajaran",
     title: "Pengembangan Platform Digital",
     description: "Dukungan pengembangan dan integrasi platform digital untuk meningkatkan akses dan kualitas pembelajaran",
-    imageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwcGxhdGZvcm0lMjBkZXZlbG9wbWVudHxlbnwxfHx8fDE3NzI2NzM0NDF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: imgPengembanganPlatform,
     budget: "Rp 300 M",
     budgetPerSchool: "Varies",
     progress: 30,
@@ -55,9 +62,9 @@ export const cardDetails = [
   },
   {
     category: "Peningkatan Kualitas Pembelajaran",
-    title: "Sumber Belajar Murid",
+    title: "Bahan Ajar Digital",
     description: "Penyediaan materi pembelajaran berkualitas untuk berbagai jenjang pendidikan guna mendukung kegiatan belajar mengajar",
-    imageUrl: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkZW50JTIwbGVhcm5pbmclMjBtYXRlcmlhbHN8ZW58MXx8fHwxNzcyNjczNDQxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: imgSumberBelajar,
     budget: "Rp 200 M",
     budgetPerSchool: "Varies",
     progress: 20,
@@ -67,7 +74,7 @@ export const cardDetails = [
     category: "Peningkatan Kapasitas Guru",
     title: "Pendampingan Pelatihan GTK",
     description: "Program pelatihan dan pengembangan profesional bagi Guru dan Tenaga Kependidikan untuk meningkatkan kualitas pengajaran",
-    imageUrl: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFjaGVyJTIwdHJhaW5pbmd8ZW58MXx8fHwxNzcyNjczNDQxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: imgPendampinganGTK,
     budget: "Rp 500 M",
     budgetPerSchool: "≈ Rp 2 juta/guru",
     progress: 15,
@@ -77,7 +84,7 @@ export const cardDetails = [
     category: "Dukungan Pendidikan",
     title: "Kebutuhan Pendidikan Lainnya",
     description: "Berbagai bentuk dukungan pendidikan termasuk beasiswa, program vokasi, dan kegiatan pendidikan lainnya",
-    imageUrl: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBzdXBwb3J0fGVufDF8fHx8MTc3MjY3MzQ0MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: imgKebutuhanLainnya,
     budget: "Rp 400 M",
     budgetPerSchool: "Varies",
     progress: 10,

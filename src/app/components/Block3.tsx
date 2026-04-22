@@ -32,12 +32,20 @@ export default function Block3({ Frame }: Block3Props) {
     organization: '',
     position: '',
     companyProfile: null as File | null,
+    // Additional Step 3 fields
+    badanHukum: '',
+    statusMitra: '',
     // Step 2: Detail Kontribusi
     contributions: {} as Record<number, { 
       type: string; 
       amount: string; 
       notes: string;
-      selectedTopic?: string;
+      selectedTopics?: string[];
+      otherTopic?: string;
+      // For Bahan Ajar Digital
+      targetAudience?: string[];
+      jenjangGuru?: string[];
+      jenjangMurid?: string[];
       // For Infrastruktur Digital & Revitalisasi Sekolah
       school?: {
         name: string;
@@ -117,7 +125,7 @@ export default function Block3({ Frame }: Block3Props) {
     },
     {
       category: "Digitalisasi Pembelajaran",
-      title: "Sumber Belajar Murid",
+      title: "Bahan Ajar Digital",
       description: "Terdapat 40 mata pelajaran prioritas yang membutuhkan dukungan murid pembelajaran digital berkualitas di Sumber Belajar Ruang Murid.",
       imageUrl: "https://images.unsplash.com/photo-1563394867331-e687a36112fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGxlYXJuaW5nJTIwZGlnaXRhbCUyMGNvbnRlbnR8ZW58MXx8fHwxNzcyNjczMzc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
       contributions: [
