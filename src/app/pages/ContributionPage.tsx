@@ -19,18 +19,6 @@ const cardDetails = [
     description: "Dukungan dalam bentuk penyediaan infrastruktur digital untuk meningkatkan akses terhadap teknologi informasi dan komunikasi di sekolah."
   },
   {
-    imageUrl: imgSumberBelajar,
-    category: "KEBUTUHAN PEMBELAJARAN",
-    title: "Bahan Ajar Digital",
-    description: "Dukungan dalam bentuk penyediaan materi pembelajaran yang berkualitas dan relevan untuk meningkatkan kualitas pembelajaran di sekolah."
-  },
-  {
-    imageUrl: imgRevitalisasiSekolah,
-    category: "KEBUTUHAN INFRASTRUKTUR",
-    title: "Revitalisasi Sekolah",
-    description: "Dukungan dalam bentuk renovasi dan pemeliharaan fasilitas sekolah untuk menciptakan lingkungan belajar yang nyaman dan kondusif."
-  },
-  {
     imageUrl: imgPengembanganPlatform,
     category: "KEBUTUHAN TEKNOLOGI",
     title: "Pengembangan Platform Digital",
@@ -41,6 +29,18 @@ const cardDetails = [
     category: "KEBUTUHAN PENGEMBANGAN SDM",
     title: "Pendampingan Pelatihan GTK",
     description: "Dukungan dalam bentuk pelatihan dan pendampingan untuk meningkatkan kompetensi guru dan tenaga kependidikan."
+  },
+  {
+    imageUrl: imgSumberBelajar,
+    category: "KEBUTUHAN PEMBELAJARAN",
+    title: "Bahan Ajar Digital",
+    description: "Dukungan dalam bentuk penyediaan materi pembelajaran yang berkualitas dan relevan untuk meningkatkan kualitas pembelajaran di sekolah."
+  },
+  {
+    imageUrl: imgRevitalisasiSekolah,
+    category: "KEBUTUHAN INFRASTRUKTUR",
+    title: "Revitalisasi Sekolah",
+    description: "Dukungan dalam bentuk renovasi dan pemeliharaan fasilitas sekolah untuk menciptakan lingkungan belajar yang nyaman dan kondusif."
   },
   {
     imageUrl: imgKebutuhanLainnya,
