@@ -640,7 +640,7 @@ export function ContributionFormWizard({
                         >
                           <p
                             className="text-subdued mb-0.5"
-                            style={{ fontSize: 'var(--text-sm)' }}
+                            style={{ fontSize: '14px' }}
                           >
                             Program {idx + 1}
                           </p>
@@ -1090,7 +1090,7 @@ export function ContributionFormWizard({
                                                 )}
                                               </div>
                                             </div>
-                                            <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>{targetOption.label}</span>
+                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{targetOption.label}</span>
                                           </label>
 
                                           {/* Nested: Jenjang + Prasyarat (only show when checked) */}
@@ -1098,29 +1098,50 @@ export function ContributionFormWizard({
                                             <div className="p-4 border-t border-border-light flex flex-col gap-3">
                                               {/* Jenjang - 4 columns grid */}
                                               <div>
-                                                <p
-                                                  className="text-foreground mb-2"
-                                                  style={{
-                                                    fontSize: 'var(--input-label-size)',
-                                                    fontWeight: 'var(--input-label-weight)',
-                                                    color: 'var(--input-label-color)'
-                                                  }}
-                                                >
-                                                  Jenjang Pendidikan
-                                                </p>
+                                                <div className="flex items-center justify-between mb-2">
+                                                  <p
+                                                    className="text-foreground"
+                                                    style={{
+                                                      fontSize: 'var(--input-label-size)',
+                                                      fontWeight: 'var(--input-label-weight)',
+                                                      color: 'var(--input-label-color)'
+                                                    }}
+                                                  >
+                                                    Jenjang Pendidikan
+                                                  </p>
+                                                  <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                      const allJenjangValues = programContent.jenjangOptions.map((j: any) => j.value);
+                                                      setFormData({
+                                                        ...formData,
+                                                        contributions: {
+                                                          ...formData.contributions,
+                                                          [idx]: {
+                                                            ...contribution,
+                                                            [isGuru ? 'jenjangGuru' : 'jenjangMurid']: allJenjangValues
+                                                          }
+                                                        }
+                                                      });
+                                                    }}
+                                                    className="text-sm text-primary hover:opacity-80 transition-opacity font-medium"
+                                                  >
+                                                    Pilih Semua
+                                                  </button>
+                                                </div>
 
-                                                <div className="grid grid-cols-4 gap-2">
+                                                <div className="grid grid-cols-2 gap-2">
                                                   {programContent.jenjangOptions.map((jenjangOption: any) => {
                                                     const selectedJenjang = isGuru ? (contribution.jenjangGuru || []) : (contribution.jenjangMurid || []);
                                                     const isChecked = selectedJenjang.includes(jenjangOption.value);
 
                                                     return (
                                                       <label
-                                                        key={`${targetOption.value}-${jenjangOption.value}`}
-                                                        className={`flex items-center gap-2 p-2 rounded cursor-pointer transition-colors ${
+                                                        key={jenjangOption.value}
+                                                        className={`flex items-center gap-3 p-3 cursor-pointer transition-colors rounded border ${
                                                           isChecked
-                                                            ? 'bg-primary/10 text-primary'
-                                                            : 'text-foreground hover:bg-surface-subdued'
+                                                            ? 'border-primary bg-[var(--primary-50)]'
+                                                            : 'border-border-light bg-background hover:bg-surface-subdued'
                                                         }`}
                                                       >
                                                         <div className="relative shrink-0">
@@ -1146,20 +1167,20 @@ export function ContributionFormWizard({
                                                             }}
                                                           />
                                                           <div
-                                                            className={`w-4 h-4 border-2 rounded flex items-center justify-center transition-colors ${
+                                                            className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
                                                               isChecked
                                                                 ? 'bg-primary border-primary'
                                                                 : 'bg-input-background border-border peer-hover:border-primary'
                                                             }`}
                                                           >
                                                             {isChecked && (
-                                                              <svg className="w-2.5 h-2.5 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                              <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                                               </svg>
                                                             )}
                                                           </div>
                                                         </div>
-                                                        <span className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{jenjangOption.label}</span>
+                                                        <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{jenjangOption.label}</span>
                                                       </label>
                                                     );
                                                   })}
@@ -1259,11 +1280,11 @@ export function ContributionFormWizard({
                                                   <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                                   </svg>
-                                                )}
+)}
+                                                </div>
                                               </div>
-                                            </div>
-                                            <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>{option.label}</span>
-                                          </label>
+                                              <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{option.label}</span>
+                                            </label>
 
                                           {/* Show prasyarat when checked - collapsible */}
                                           {isChecked && (option.prasyaratSubstansi || option.prasyaratTeknis) && (
@@ -1356,15 +1377,15 @@ return (
                                                    </svg>
                                                  )}
                                                </div>
-                                             </div>
-                                             <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>{option.label}</span>
-                                           </label>
-                                           {isChecked && option.deskripsi && (
-                                             <div className="px-3 pb-3 bg-background border-t border-border-light">
-                                               <p className="text-muted-foreground mt-2" style={{ fontSize: 'var(--text-sm)' }}>{option.deskripsi}</p>
-                                             </div>
-                                           )}
-{/* Show prasyarat only for Pengembangan Platform Digital (per-option) */}
+</div>
+                                              <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{option.label}</span>
+                                            </label>
+                                            {isChecked && option.deskripsi && (
+                                              <div className="px-3 pb-3 bg-background border-t border-border-light">
+                                                <p className="text-muted-foreground mt-2" style={{ fontSize: '14px' }}>{option.deskripsi}</p>
+                                              </div>
+                                            )}
+                                          {/* Show prasyarat only for Pengembangan Platform Digital (per-option) */}
                                           {isChecked && (program.title === "Pengembangan Platform Digital") && (option.prasyaratSubstansi || option.prasyaratTeknis) && (
                                             <div className="px-4 pb-4 pt-3 border-t border-border-light-light">
                                               <button
@@ -1451,14 +1472,14 @@ return (
                                                 )}
                                               </div>
                                             </div>
-                                            <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-sm)' }}>Lainnya</span>
+                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>Lainnya</span>
                                           </label>
                                           {isLainnyaChecked && (
                                             <div className="px-3 pb-3 bg-background border-t border-border-light">
                                               <input
                                                 type="text"
                                                 className="w-full mt-2 px-3 py-2 border border-border-light rounded bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                                                style={{ fontSize: 'var(--text-sm)' }}
+                                                style={{ fontSize: '14px' }}
                                                 placeholder="Tulis dukungan lainnya..."
                                                 value={contribution.otherTopic === ' ' ? '' : contribution.otherTopic || ''}
                                                 onChange={(e) => {
@@ -1650,7 +1671,7 @@ return (
                       return (
                         <div key={idx} className="border border-border-light rounded-lg overflow-hidden">
                           <div className="px-4 py-3 border-b border-border-light">
-                            <h5 className="font-semibold text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{idx + 1}. {program.title}</h5>
+                            <h5 className="font-semibold text-foreground" style={{ fontSize: '14px' }}>{idx + 1}. {program.title}</h5>
                           </div>
 
                           <div className="px-4 py-4 grid grid-cols-2 gap-3">
@@ -1667,7 +1688,7 @@ return (
 
                                         {/* Buildings for Revitalisasi Sekolah - Simplified */}
                                         {isRevitalisasiSekolah && schoolItem.selectedBuildings && schoolItem.selectedBuildings.length > 0 && (
-                                          <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>
+                                          <p className="text-foreground" style={{ fontSize: '14px' }}>
                                             {revitalizationBuildings
                                               .filter((building) => schoolItem.selectedBuildings.includes(building.id))
                                               .map((building) => building.buildingName)
@@ -1677,7 +1698,7 @@ return (
 
                                       {/* Packages for Infrastruktur Digital - Simplified */}
                                       {isInfrastrukturDigital && schoolItem.packages && schoolItem.packages.length > 0 && (
-                                        <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>
+                                        <p className="text-foreground" style={{ fontSize: '14px' }}>
                                           {schoolItem.packages.map((pkg: string) => 
                                             pkg === 'internet' ? 'Jaringan Internet' : 
                                             pkg === 'electricity' ? 'Instalasi Listrik' : pkg
@@ -1689,7 +1710,7 @@ return (
                                       {schoolItem.notes && (
                                         <div className="mt-3">
                                           <p className="text-subdued mb-0" style={{ fontSize: 'var(--text-xs)' }}>Catatan:</p>
-                                          <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{schoolItem.notes}</p>
+                                          <p className="text-foreground" style={{ fontSize: '14px' }}>{schoolItem.notes}</p>
                                         </div>
                                       )}
                                       </div>
@@ -1725,7 +1746,7 @@ return (
                                 <div className="col-span-2">
                                   <div className="flex flex-col gap-1">
                                     {allItems.map((item: {label: string; isLainnya: boolean}, idx: number) => (
-                                      <p key={idx} className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>
+                                      <p key={idx} className="text-foreground" style={{ fontSize: '14px' }}>
                                         • {item.isLainnya && lainnyaInput ? `Lainnya: ${lainnyaInput}` : item.label}
                                       </p>
                                     ))}
@@ -1778,14 +1799,14 @@ return (
                             {contribution.type && (
                               <div>
                                 <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Jenis Kontribusi</p>
-                                <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{contribution.type}</p>
+                                <p className="text-foreground" style={{ fontSize: '14px' }}>{contribution.type}</p>
                               </div>
                             )}
 
                             {contribution.amount && (
                               <div>
                                 <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Jumlah/Nominal</p>
-                                <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>{contribution.amount}</p>
+                                <p className="text-foreground" style={{ fontSize: '14px' }}>{contribution.amount}</p>
                               </div>
                             )}
 
@@ -1793,7 +1814,7 @@ return (
                             {contribution.notes && !isMultiSchoolProgram && (
                               <div className="col-span-2 mt-1">
                                 <p className="text-subdued mb-0" style={{ fontSize: 'var(--text-xs)' }}>Informasi Tambahan</p>
-                                <p className="text-foreground whitespace-pre-wrap" style={{ fontSize: 'var(--text-sm)' }}>{contribution.notes}</p>
+                                <p className="text-foreground whitespace-pre-wrap" style={{ fontSize: '14px' }}>{contribution.notes}</p>
                               </div>
                             )}
                           </div>
@@ -1817,7 +1838,7 @@ return (
                         className="mt-0.5"
                       />
                       <label htmlFor="confirmation" className="cursor-pointer flex-1">
-                        <p className="text-foreground" style={{ fontSize: 'var(--text-sm)' }}>
+                        <p className="text-foreground" style={{ fontSize: '14px' }}>
                           Saya menyatakan bahwa semua informasi yang saya berikan adalah benar dan dapat dipertanggungjawabkan.
                           Data ini akan digunakan untuk keperluan pencatatan dan koordinasi program kontribusi pendidikan.
                         </p>
