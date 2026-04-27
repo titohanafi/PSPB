@@ -3096,7 +3096,7 @@ function Frame24() {
         paddingBottom: 'calc(var(--spacing-8) * 3)'
       }}
     >
-      <div className="max-w-[1140px] mx-auto w-full flex flex-col gap-8 md:gap-10 items-center">
+      <div className="max-w-[1140px] mx-auto w-full flex flex-col gap-12 items-center">
         <h2 className="not-italic relative shrink-0 text-foreground text-center w-full max-w-[1000px] whitespace-pre-wrap">{`Terima kasih atas partisipasi  dalam mewujudkan pendidikan bermutu untuk semua`}</h2>
         <Frame70 />
       </div>
