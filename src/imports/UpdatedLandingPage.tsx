@@ -3539,7 +3539,7 @@ function WhyContributeAndImpact() {
         }}
       >
         <div className="max-w-[1140px] w-full mx-auto">
-          <div className="flex flex-col gap-[72px] items-center">
+          <div className="flex flex-col gap-8 items-center">
             <div className="flex flex-col gap-4 items-center">
               <h2 className="not-italic relative shrink-0 text-center text-gray-900 w-full whitespace-pre-wrap" style={{ fontFamily: 'Inter' }}>Dampak nyata kolaborasi melalui PSPB:</h2>
             </div>
