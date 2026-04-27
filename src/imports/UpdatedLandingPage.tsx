@@ -3430,7 +3430,7 @@ function Footer() {
                 </li>
                 <li className="flex items-start gap-2">
                   <svg className="w-4 h-4 text-blue-300 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                  <span className="text-blue-200" style={{ fontFamily: 'Inter', fontSize: '14px' }}>Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi — Jakarta</span>
+                  <span className="text-blue-200" style={{ fontFamily: 'Inter', fontSize: '14px' }}> Gedung C, Kompleks Kemdikbud, Jakarta</span>
                 </li>
               </ul>
             </div>
@@ -3444,6 +3444,9 @@ function Footer() {
           <p className="text-blue-300 text-center sm:text-left" style={{ fontFamily: 'Inter', fontSize: '13px' }}>
             © {new Date().getFullYear()} Partisipasi Semesta Pendidikan Bermutu. Hak cipta dilindungi.
           </p>
+          <div className="flex gap-4">
+            <a href="#" className="text-blue-300 hover:text-white transition-colors" style={{ fontFamily: 'Inter', fontSize: '13px' }}>Kebijakan Privasi</a>
+          </div>
         </div>
       </div>
     </footer>
