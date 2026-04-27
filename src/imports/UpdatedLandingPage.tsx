@@ -3464,11 +3464,11 @@ function ProgramReachSection() {
         }}
       >
         <div className="max-w-[1140px] w-full mx-auto">
-          <div className="flex flex-col gap-10 items-center">
-            <div className="flex flex-col gap-3 items-center" style={{ marginBottom: '24px' }}>
-              <h2 className="not-italic relative shrink-0 text-center text-gray-900 w-full whitespace-pre-wrap" style={{ fontFamily: 'Inter' }}>Dampak Program PSPB</h2>
-              <p className="not-italic relative shrink-0 text-center text-gray-600 max-w-[800px] whitespace-pre-wrap text-responsive-body-lg" style={{ fontFamily: 'Inter' }}>Menghimpun kolaborasi untuk meningkatkan mutu pendidikan Indonesia</p>
-            </div>
+          <div className="flex flex-col gap-12 items-center w-full">
+              <div className="flex flex-col gap-4 items-center text-center">
+                <h2 className="not-italic relative shrink-0 text-center text-gray-900 w-full whitespace-pre-wrap" style={{ fontFamily: 'Inter' }}>Dampak Program PSPB</h2>
+                <p className="not-italic relative shrink-0 text-center text-gray-600 max-w-[800px] whitespace-pre-wrap text-responsive-body-lg" style={{ fontFamily: 'Inter' }}>Menghimpun kolaborasi untuk meningkatkan mutu pendidikan Indonesia</p>
+              </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
 <div className="group relative bg-white border border-gray-200 rounded-2xl p-6 cursor-pointer shadow-sm">
