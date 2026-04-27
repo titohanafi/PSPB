@@ -1677,7 +1677,7 @@ function Frame2() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0">
       <div className="not-italic relative shrink-0 text-foreground text-center w-full max-w-[1056px] whitespace-pre-wrap">
-        <h2 className="block" style={{ fontSize: '28px' }}>Bagaimana kolaborasi melalui PSPB dapat menghasilkan dampak nyata?</h2>
+        <h2 className="block" style={{ fontSize: '28px' }}>Bagaimana kolaborasi melalui PSPB<br />dapat menghasilkan dampak nyata?</h2>
       </div>
     </div>
   );
@@ -3411,19 +3411,19 @@ function Footer() {
       {/* Main footer content */}
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 py-12 md:py-16">
         <div className="max-w-[1140px] mx-auto w-full">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-16 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12">
             {/* Col 1: Logo + tagline */}
             <div className="md:col-span-2 flex flex-col gap-5">
               <div style={{ '--fill-0': '#ffffff' } as React.CSSProperties}>
                 <Component20250425LogoKemitraanPendidikan />
               </div>
-              <p className="text-blue-200 leading-relaxed max-w-sm" style={{ fontFamily: 'Inter', fontSize: '14px' }}>
+              <p className="text-blue-200 leading-relaxed" style={{ fontFamily: 'Inter', fontSize: '14px' }}>
                 Platform kolaborasi nasional untuk menghimpun partisipasi semesta dalam mewujudkan pendidikan bermutu di seluruh Indonesia.
               </p>
             </div>
 
             {/* Col 2: Kontak */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 md:col-start-3">
               <h4 className="text-white font-semibold" style={{ fontFamily: 'Inter', fontSize: '14px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Kontak</h4>
               <ul className="flex flex-col gap-3">
                 <li className="flex items-start gap-2">
@@ -3539,7 +3539,7 @@ function WhyContributeAndImpact() {
         }}
       >
         <div className="max-w-[1140px] w-full mx-auto">
-          <div className="flex flex-col gap-8 items-center">
+          <div className="flex flex-col gap-12 items-center">
             <div className="flex flex-col gap-4 items-center">
               <h2 className="not-italic relative shrink-0 text-center text-gray-900 w-full whitespace-pre-wrap" style={{ fontFamily: 'Inter' }}>Dampak nyata kolaborasi melalui PSPB:</h2>
             </div>
@@ -3637,7 +3637,7 @@ function WhyContributeAndImpact() {
       <div
         className="content-stretch flex flex-col gap-10 h-auto items-center relative w-full px-4 sm:px-6 md:px-8 lg:px-12"
         style={{
-          paddingTop: 'calc(var(--spacing-8) * 4)',
+          paddingTop: 'calc(var(--spacing-8) * 2)',
           paddingBottom: 'calc(var(--spacing-8) * 1)',
           background: 'linear-gradient(to bottom, #f1f2f4 10%, #ffffff 100%)'
         }}
