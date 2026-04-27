@@ -2607,7 +2607,7 @@ function Frame21() {
     <div className="bg-foreground relative shrink-0 w-full">
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div 
-          className="content-stretch flex flex-col items-center justify-center relative w-full px-4 sm:px-6 md:px-8 lg:px-12"
+          className="content-stretch flex flex-col items-center justify-center relative w-full px-4 sm:px-6 md:px-8 lg:px-12 mb-12"
           style={{
             paddingTop: 'calc(var(--spacing-8) * 3)',
 paddingBottom: 'calc(var(--spacing-8) * 1)',
