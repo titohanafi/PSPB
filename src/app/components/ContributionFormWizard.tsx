@@ -599,10 +599,11 @@ export function ContributionFormWizard({
               <div className="flex flex-col gap-spacing-6 p-spacing-6 bg-surface-default">
                 {selectedProgram.map((programIndex, idx) => {
                   const program = cardDetails[programIndex];
-                  const contribution = formData.contributions[idx] || { 
-                    type: '', 
-                    amount: '', 
+                  const contribution = formData.contributions[idx] || {
+                    type: '',
+                    amount: '',
                     notes: '',
+                    topikMateri: '',
                     school: '',
                     schools: [],
                     packages: []
@@ -1022,55 +1023,82 @@ export function ContributionFormWizard({
 
 // Special handling for Bahan Ajar Digital
                               if (program.title === "Bahan Ajar Digital") {
+                                const combinedJenjang = [...new Set([...(contribution.jenjangGuru || []), ...(contribution.jenjangMurid || [])])];
+
                                 return (
-                                  <div className="flex flex-col gap-3">
-                                    {/* Target Audience Label */}
-                                    <p
-                                      className="text-foreground"
-                                      style={{
-                                        fontSize: 'var(--input-label-size)',
-                                        fontWeight: 'var(--input-label-weight)',
-                                        color: 'var(--input-label-color)',
-                                        lineHeight: '22px'
-                                      }}
-                                    >
-                                      {programContent.targetAudienceLabel}
+                                  <div className="flex flex-col gap-1">
+                                    {/* Jenjang Label with Select All */}
+                                    <div className="flex items-center justify-between">
+                                      <p
+                                        className="text-foreground"
+                                        style={{
+                                          fontSize: 'var(--input-label-size)',
+                                          fontWeight: 'var(--input-label-weight)',
+                                          color: 'var(--input-label-color)',
+                                          lineHeight: '22px'
+                                        }}
+                                      >
+                                        {programContent.jenjangLabel}
+                                      </p>
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          const allJenjangValues = programContent.jenjangOptions.map((j: any) => j.value);
+                                          setFormData({
+                                            ...formData,
+                                            contributions: {
+                                              ...formData.contributions,
+                                              [idx]: {
+                                                ...contribution,
+                                                jenjangGuru: allJenjangValues,
+                                                jenjangMurid: allJenjangValues
+                                              }
+                                            }
+                                          });
+                                        }}
+                                        className="text-sm text-primary hover:opacity-80 transition-opacity font-medium"
+                                      >
+                                        Pilih Semua
+                                      </button>
+                                    </div>
+
+                                    {/* Helper Text */}
+                                    <p className="text-muted-foreground" style={{ fontSize: 'var(--text-xs)' }}>
+                                      Pilih minimal satu jenjang pendidikan
                                     </p>
-                                   
-                                    {/* Guru & Murid with nested jenjang & prasyarat */}
-                                    {programContent.targetAudienceOptions.map((targetOption: any) => {
-                                      const isTargetChecked = (contribution.targetAudience || []).includes(targetOption.value);
-                                      const isGuru = targetOption.value === 'guru';
-                                      
-                                      return (
-                                        <div key={targetOption.value} className={`rounded-lg overflow-hidden border transition-colors ${isTargetChecked ? 'border-primary' : 'border-border-light'}`}>
-                                          {/* Target Audience Checkbox */}
+
+                                    {/* Jenjang Grid */}
+                                    <div className="grid grid-cols-2 gap-3 mt-2">
+                                      {programContent.jenjangOptions.map((jenjangOption: any) => {
+                                        const isChecked = combinedJenjang.includes(jenjangOption.value);
+
+                                        return (
                                           <label
-                                            className={`flex items-center gap-3 p-4 cursor-pointer transition-colors ${
-                                              isTargetChecked
-                                                ? 'bg-[var(--primary-50)]'
-                                                : 'bg-background hover:bg-surface-subdued'
+                                            key={jenjangOption.value}
+                                            className={`flex items-center gap-3 p-3 cursor-pointer transition-colors rounded border ${
+                                              isChecked
+                                                ? 'border-primary bg-[var(--primary-50)]'
+                                                : 'border-border-light bg-background hover:bg-surface-subdued'
                                             }`}
                                           >
                                             <div className="relative shrink-0">
                                               <input
                                                 type="checkbox"
                                                 className="sr-only peer"
-                                                checked={isTargetChecked}
+                                                checked={isChecked}
                                                 onChange={(e) => {
-                                                  const current = contribution.targetAudience || [];
                                                   const newValues = e.target.checked
-                                                    ? [...current, targetOption.value]
-                                                    : current.filter((t: string) => t !== targetOption.value);
+                                                    ? [...combinedJenjang, jenjangOption.value]
+                                                    : combinedJenjang.filter((t: string) => t !== jenjangOption.value);
+                                                  const uniqueValues = [...new Set(newValues)];
                                                   setFormData({
                                                     ...formData,
                                                     contributions: {
                                                       ...formData.contributions,
                                                       [idx]: {
                                                         ...contribution,
-                                                        targetAudience: newValues,
-                                                        jenjangGuru: newValues.includes('guru') ? contribution.jenjangGuru : [],
-                                                        jenjangMurid: newValues.includes('murid') ? contribution.jenjangMurid : []
+                                                        jenjangGuru: uniqueValues,
+                                                        jenjangMurid: uniqueValues
                                                       }
                                                     }
                                                   });
@@ -1078,149 +1106,82 @@ export function ContributionFormWizard({
                                               />
                                               <div
                                                 className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
-                                                  isTargetChecked
+                                                  isChecked
                                                     ? 'bg-primary border-primary'
                                                     : 'bg-input-background border-border peer-hover:border-primary'
                                                 }`}
                                               >
-                                                {isTargetChecked && (
+                                                {isChecked && (
                                                   <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                                   </svg>
                                                 )}
                                               </div>
                                             </div>
-                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{targetOption.label}</span>
+                                            <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{jenjangOption.label}</span>
                                           </label>
+                                        );
+                                      })}
+                                    </div>
 
-                                          {/* Nested: Jenjang + Prasyarat (only show when checked) */}
-                                          {isTargetChecked && (
-                                            <div className="p-4 border-t border-border-light flex flex-col gap-3">
-                                              {/* Jenjang - 4 columns grid */}
-                                              <div>
-                                                <div className="flex items-center justify-between mb-2">
-                                                  <p
-                                                    className="text-foreground"
-                                                    style={{
-                                                      fontSize: 'var(--input-label-size)',
-                                                      fontWeight: 'var(--input-label-weight)',
-                                                      color: 'var(--input-label-color)'
-                                                    }}
-                                                  >
-                                                    Jenjang Pendidikan
-                                                  </p>
-                                                  <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                      const allJenjangValues = programContent.jenjangOptions.map((j: any) => j.value);
-                                                      setFormData({
-                                                        ...formData,
-                                                        contributions: {
-                                                          ...formData.contributions,
-                                                          [idx]: {
-                                                            ...contribution,
-                                                            [isGuru ? 'jenjangGuru' : 'jenjangMurid']: allJenjangValues
-                                                          }
-                                                        }
-                                                      });
-                                                    }}
-                                                    className="text-sm text-primary hover:opacity-80 transition-opacity font-medium"
-                                                  >
-                                                    Pilih Semua
-                                                  </button>
-                                                </div>
+                                    {/* Prasyarat - Show when any jenjang is selected */}
+                                    {combinedJenjang.length > 0 && (
+                                      <div className="pb-4 pt-3 border-b border-border-light mt-4">
+                                        <button
+                                          type="button"
+                                          onClick={() => setExpandedPrasyarat(prev => ({...prev, [idx]: !prev[idx]}))}
+                                          className="flex items-center justify-between w-full"
+                                        >
+                                          <p className="font-medium text-foreground" style={{ fontSize: 'var(--text-base)' }}>
+                                            Prasyarat
+                                          </p>
+                                          <ChevronDown
+                                            className={`w-4 h-4 text-foreground transition-transform ${expandedPrasyarat[idx] ? 'rotate-180' : ''}`}
+                                          />
+                                        </button>
 
-                                                <div className="grid grid-cols-2 gap-2">
-                                                  {programContent.jenjangOptions.map((jenjangOption: any) => {
-                                                    const selectedJenjang = isGuru ? (contribution.jenjangGuru || []) : (contribution.jenjangMurid || []);
-                                                    const isChecked = selectedJenjang.includes(jenjangOption.value);
+                                        {expandedPrasyarat[idx] && (
+                                          <div className="border-t border-border-light mt-2 pt-2">
+                                            <ContributionPrerequisites
+                                              prasyaratSubstansi={programContent.prasyaratGuru.prasyaratSubstansi.concat(programContent.prasyaratMurid.prasyaratSubstansi)}
+                                              prasyaratTeknis={programContent.prasyaratGuru.prasyaratTeknis.concat(programContent.prasyaratMurid.prasyaratTeknis)}
+                                            />
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
 
-                                                    return (
-                                                      <label
-                                                        key={jenjangOption.value}
-                                                        className={`flex items-center gap-3 p-3 cursor-pointer transition-colors rounded border ${
-                                                          isChecked
-                                                            ? 'border-primary bg-[var(--primary-50)]'
-                                                            : 'border-border-light bg-background hover:bg-surface-subdued'
-                                                        }`}
-                                                      >
-                                                        <div className="relative shrink-0">
-                                                          <input
-                                                            type="checkbox"
-                                                            className="sr-only peer"
-                                                            checked={isChecked}
-                                                            onChange={(e) => {
-                                                              const current = isGuru ? (contribution.jenjangGuru || []) : (contribution.jenjangMurid || []);
-                                                              const newValues = e.target.checked
-                                                                ? [...current, jenjangOption.value]
-                                                                : current.filter((t: string) => t !== jenjangOption.value);
-                                                              setFormData({
-                                                                ...formData,
-                                                                contributions: {
-                                                                  ...formData.contributions,
-                                                                  [idx]: {
-                                                                    ...contribution,
-                                                                    [isGuru ? 'jenjangGuru' : 'jenjangMurid']: newValues
-                                                                  }
-                                                                }
-                                                              });
-                                                            }}
-                                                          />
-                                                          <div
-                                                            className={`w-5 h-5 border-2 rounded flex items-center justify-center transition-colors ${
-                                                              isChecked
-                                                                ? 'bg-primary border-primary'
-                                                                : 'bg-input-background border-border peer-hover:border-primary'
-                                                            }`}
-                                                          >
-                                                            {isChecked && (
-                                                              <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                                              </svg>
-                                                            )}
-                                                          </div>
-                                                        </div>
-                                                        <span className="text-foreground font-medium" style={{ fontSize: '14px' }}>{jenjangOption.label}</span>
-                                                      </label>
-                                                    );
-                                                  })}
-                                                </div>
-                                              </div>
+                                    <div className="flex flex-col gap-2 mt-4">
+                                      <label
+                                        className="text-foreground"
+                                        style={{
+                                          fontSize: 'var(--input-label-size)',
+                                          fontWeight: 'var(--input-label-weight)',
+                                          color: 'var(--input-label-color)',
+                                          lineHeight: '22px',
+                                          display: 'block'
+                                        }}
+                                      >
+                                        Tuliskan Topik atau Materi
+                                      </label>
+                                      <textarea
+                                        value={contribution.topikMateri || ''}
+                                        onChange={(e) => {
+                                          setFormData({
+                                            ...formData,
+                                            contributions: {
+                                              ...formData.contributions,
+                                              [idx]: { ...contribution, topikMateri: e.target.value }
+                                            }
+                                          });
+                                        }}
+                                        placeholder="Contoh: Matematika SD kelas 4, Bahasa Inggris SMP, dll"
+                                        className="w-full px-4 py-3 border border-border-light rounded bg-input-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                                        rows={3}
+                                      />
+                                    </div>
 
-                                              {/* Prasyarat - Show when jenjang is selected */}
-                                              {((isGuru && (contribution.jenjangGuru || []).length > 0) || (!isGuru && (contribution.jenjangMurid || []).length > 0)) && (
-                                                <div className="mt-4">
-                                                  <button
-                                                    type="button"
-                                                    onClick={() => setExpandedPrasyarat(prev => ({...prev, [targetOption.value]: !prev[targetOption.value]}))}
-                                                    className="w-full flex items-center justify-between py-1 hover:opacity-80 transition-opacity"
-                                                  >
-                                                    <span className="text-foreground font-medium" style={{ fontSize: 'var(--text-base)' }}>
-                                                      Prasyarat untuk {targetOption.label}
-                                                    </span>
-                                                    <svg
-                                                      className={`w-4 h-4 text-foreground transition-transform ${expandedPrasyarat[targetOption.value] ? 'rotate-180' : ''}`}
-                                                      fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                    >
-                                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                                    </svg>
-                                                  </button>
-                                                  {expandedPrasyarat[targetOption.value] && (
-                                                    <div className="mt-2 border-t border-border-light pt-3">
-                                                      <ContributionPrerequisites
-                                                        prasyaratSubstansi={isGuru ? programContent.prasyaratGuru.prasyaratSubstansi : programContent.prasyaratMurid.prasyaratSubstansi}
-                                                        prasyaratTeknis={isGuru ? programContent.prasyaratGuru.prasyaratTeknis : programContent.prasyaratMurid.prasyaratTeknis}
-                                                      />
-                                                    </div>
-                                                  )}
-                                                </div>
-                                              )}
-                                            </div>
-                                          )}
-                                        </div>
-                                      );
-                                    })}
-</div>
+                                  </div>
                                 );
                               }
 
@@ -1755,46 +1716,37 @@ return (
                               ) : null;
                             })()}
 
-                            {/* Selected Audience & Jenjang for Bahan Ajar Digital */}
-                            {!isMultiSchoolProgram && contribution.targetAudience && contribution.targetAudience.length > 0 && (() => {
+                            {/* Selected Jenjang for Bahan Ajar Digital */}
+                            {!isMultiSchoolProgram && contribution.jenjangGuru && contribution.jenjangGuru.length > 0 && (() => {
                               const programContent = getProgramContent(program.title);
                               const jenjangMap: Record<string, string> = {};
                               programContent?.jenjangOptions.forEach((opt: any) => {
                                 jenjangMap[opt.value] = opt.label;
                               });
-                              
-                              const guruLabels = (contribution.jenjangGuru || []).map((v: string) => jenjangMap[v] || v);
-                              const muridLabels = (contribution.jenjangMurid || []).map((v: string) => jenjangMap[v] || v);
-                              
+
+                              const jenjangLabels = (contribution.jenjangGuru || []).map((v: string) => jenjangMap[v] || v);
+
                               return (
-                                <div className="col-span-2 flex flex-col gap-2">
-                                  {(contribution.targetAudience || []).includes('guru') && guruLabels.length > 0 && (
-                                    <div>
-                                      <p className="text-foreground mb-1" style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Guru</p>
-                                      <div className="flex flex-wrap gap-1">
-                                        {guruLabels.map((label: string, idx: number) => (
-                                          <span key={`guru-${idx}`} className="px-2 py-1 bg-white border border-border-light rounded-full" style={{ fontSize: 'var(--text-xs)' }}>
-                                            {label}
-                                          </span>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
-                                  {(contribution.targetAudience || []).includes('murid') && muridLabels.length > 0 && (
-                                    <div>
-                                      <p className="text-foreground mb-1" style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Murid</p>
-                                      <div className="flex flex-wrap gap-1">
-                                        {muridLabels.map((label: string, idx: number) => (
-                                          <span key={`murid-${idx}`} className="px-2 py-1 bg-white border border-border-light rounded-full" style={{ fontSize: 'var(--text-xs)' }}>
-                                            {label}
-                                          </span>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
+                                <div className="col-span-2 flex flex-col gap-1">
+                                  <p className="text-subdued mb-1" style={{ fontSize: 'var(--text-xs)' }}>Jenjang Pendidikan</p>
+                                  <div className="flex flex-wrap gap-1">
+                                    {jenjangLabels.map((label: string, i: number) => (
+                                      <span key={i} className="px-2 py-1 bg-white border border-border-light rounded-full" style={{ fontSize: 'var(--text-xs)' }}>
+                                        {label}
+                                      </span>
+                                    ))}
+                                  </div>
                                 </div>
                               );
                             })()}
+
+                            {/* Topik atau Materi for Bahan Ajar Digital */}
+                            {!isMultiSchoolProgram && contribution.topikMateri && (
+                              <div className="col-span-2">
+                                <p className="text-subdued mb-0" style={{ fontSize: 'var(--text-xs)' }}>Topik atau Materi</p>
+                                <p className="text-foreground whitespace-pre-wrap" style={{ fontSize: '14px' }}>{contribution.topikMateri}</p>
+                              </div>
+                            )}
                             
                             {contribution.type && (
                               <div>
@@ -1918,11 +1870,11 @@ return (
               alt="Terima Kasih" 
               className="w-64 h-auto mx-auto mb-6"
             />
-            <h2 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">
+            <h3 className="text-xl font-bold mb-4 text-[var(--text-primary)]">
               Terima kasih sudah mengisi formulir kontribusi
-            </h2>
+            </h3>
             <p className="text-[var(--text-secondary)] mb-8 max-w-md mx-auto">
-              Dengan mengirim formulir ini, Anda setuju untuk dihubungi pihak terkait dan melanjutkan proses kontribusi.
+              Setelah ini, Anda akan mendapat email dari <span style={{ fontWeight: 600, textDecoration: 'underline', fontSize: 'inherit' }}>ruangmitra@dikdasmen.belajar.id</span> untuk melanjutkan proses kolaborasi.
             </p>
             <button
               onClick={handleBackToHome}

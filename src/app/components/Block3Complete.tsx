@@ -20,6 +20,7 @@ interface ContributionData {
   type: string;
   amount: string;
   notes: string;
+  topikMateri: string;
   school?: School;
   packages?: string[];
 }

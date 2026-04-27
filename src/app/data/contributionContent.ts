@@ -59,12 +59,7 @@ export const platformDigitalContent: ProgramContentConfig = {
 
 // 2. BAHAN AJAR DIGITAL
 export const bahanAjarDigitalContent = {
-  targetAudienceLabel: "Untuk Siapa",
-  targetAudienceOptions: [
-    { value: "guru", label: "Guru" },
-    { value: "murid", label: "Murid" }
-  ],
-  jenjangLabel: "Jenjang Pendidikan",
+  jenjangLabel: "Pilih jenjang pendidikan untuk Guru dan Murid",
   jenjangOptions: [
     { value: "paud-tk", label: "PAUD/TK" },
     { value: "sd", label: "SD" },
