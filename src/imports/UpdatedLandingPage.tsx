@@ -2399,7 +2399,7 @@ function Block() {
       className="bg-white content-stretch flex flex-col gap-10 h-auto items-center relative shrink-0 w-full px-4 sm:px-6 md:px-8 lg:px-12" 
       data-name="Block"
       style={{
-        paddingTop: 'calc(var(--spacing-8) * 3)',
+        paddingTop: 'calc(var(--spacing-8) * 1)',
         paddingBottom: 'calc(var(--spacing-8) * 3)'
       }}
     >
@@ -3533,8 +3533,8 @@ function WhyContributeAndImpact() {
       <div
         className="content-stretch flex flex-col items-center relative w-full px-4 sm:px-6 md:px-8 lg:px-12"
         style={{
-          paddingTop: 'calc(var(--spacing-8) * 3)',
-          paddingBottom: 'calc(var(--spacing-8) * 1)',
+          paddingTop: 'calc(var(--spacing-8) * 1)',
+          paddingBottom: 'calc(var(--spacing-8) * 3)',
           backgroundColor: '#f1f2f4'
         }}
       >
