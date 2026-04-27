@@ -3102,7 +3102,6 @@ function Frame24() {
           <Frame70 />
         </div>
       </div>
-      </div>
     </div>
   );
 }
