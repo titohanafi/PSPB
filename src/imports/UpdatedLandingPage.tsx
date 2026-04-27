@@ -236,7 +236,7 @@ function Frame53() {
           <p className="text-[20px] leading-relaxed text-white/90">Gotong royong dari sektor swasta, lembaga internasional, dan publik diperlukan untuk pemerataan kemajuan pendidikan</p>
           <div className="mt-1 p-3 rounded-lg flex" style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)' }}>
             <div className="w-1 mr-4 rounded-full" style={{ backgroundColor: '#FCD222' }} />
-            <p className="text-[20px] leading-relaxed text-white/90 font-[Inter]"><strong>Partisipasi Semesta Pendidikan Berkelanjutan</strong> hadir untuk menjembatani kolaborasi agar lebih tepat sasaran, mudah, dan transparan.</p>
+            <p className="text-[20px] leading-relaxed text-white/90 font-[Inter]"><strong>Partisipasi Semesta Pendidikan Bermutu (PSPB)</strong> hadir untuk menjembatani kolaborasi agar lebih tepat sasaran, mudah, dan transparan.</p>
           </div>
         </div>
         <button 
@@ -282,8 +282,8 @@ function BannerCarousel() {
 function VariantLightBackground() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center pb-6 pt-2 relative shrink-0 w-full gap-6" data-name="Variant=Light Background">
-      <h2 className="relative shrink-0 text-center w-full whitespace-pre-wrap">Menghimpun kolaborasi dukungan melalui program prioritas</h2>
-      <p className="relative shrink-0 text-center w-full max-w-[800px] text-foreground text-responsive-body-lg whitespace-pre-wrap">Program prioritas telah ditentukan sesuai dengan kebutuhan sekolah agar dukungan menjadi lebih tepat sasaran dan berdampak</p>
+      <h2 className="relative shrink-0 text-center w-full whitespace-pre-wrap">Saatnya ikut gotong royong dengan berkolaborasi mendukung program prioritas</h2>
+      <p className="relative shrink-0 text-center w-full max-w-[800px] text-foreground text-responsive-body-lg whitespace-pre-wrap">Program prioritas di bawah telah disesuaikan berdasarkan data kebutuhan sehingga lebih tepat sasaran dan berdampak bagi sekolah</p>
     </div>
   );
 }
@@ -1282,7 +1282,7 @@ function ContributionCTACard({ onClick }: { onClick?: () => void }) {
         {/* Content */}
         <div className="flex flex-col items-center justify-center text-center relative z-10 w-full">
           <div className="max-w-3xl w-full flex flex-col items-center" style={{ gap: 'var(--spacing-8)' }}>
-            <h3 className="text-primary-foreground" style={{ fontSize: '28px' }}>Pintu kontribusi untuk berkolaborasi dalam mendukung kemajuan pendidikan Indonesia terbuka lebar untuk Anda</h3>
+            <h3 className="text-primary-foreground" style={{ fontSize: '28px' }}>Pilih program, tentukan bentuk dukungan, dan bergabunglah bersama mitra yang sudah berkontribusi</h3>
             
             <Button
               onClick={onClick}
@@ -1303,7 +1303,7 @@ function ContributionCTACard({ onClick }: { onClick?: () => void }) {
           <div className="absolute w-6 h-6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary rounded-full animate-ping opacity-30" />
         </div>
         <p className="text-foreground text-left text-sm">
-          Siapkan profil dasar organisasi atau perusahaan Anda. Isi formulir komitmen kolaborasi dan tim kami akan menghubungi Anda untuk langkah selanjutnya.
+          Siapkan profil dasar organisasi atau perusahaan Anda. Isi formulir komitmen kolaborasi dan tim kami akan menghubungi Anda untuk langkah selanjutnya. Silakan unduh <strong className="text-blue-600 underline"><a href="/panduan-proses-kolaborasi-pspb.pdf" target="_blank">Panduan Proses Kolaborasi PSPB</a></strong> untuk informasi selengkapnya.
         </p>
       </div>
     </div>
@@ -2635,9 +2635,6 @@ paddingBottom: 'calc(var(--spacing-8) * 1)',
           </div>
           <h2 className="min-w-full not-italic relative shrink-0 text-center text-white w-full whitespace-pre-wrap">Alur pemetaan kebutuhan hingga penyaluran bantuan</h2>
           <Frame23 />
-          <Button color="blue" size="lg" icon={Download} iconPosition="left">
-            Unduh panduan proses kolaborasi
-          </Button>
           </div>
         </div>
       </div>
