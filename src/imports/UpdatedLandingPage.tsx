@@ -1241,7 +1241,7 @@ function Frame({ onCardClick }: { onCardClick: (index: number) => void }) {
 function ContributionCTACard({ onClick }: { onClick?: () => void }) {
   return (
     <div 
-      className="w-full overflow-hidden"
+      className="w-full overflow-hidden bg-[#103178]"
       style={{
         marginTop: 'var(--spacing-8)',
         borderRadius: 'var(--radius-card)',
@@ -1249,10 +1249,8 @@ function ContributionCTACard({ onClick }: { onClick?: () => void }) {
       }}
     >
       <div 
-        className="relative"
+        className="flex flex-col relative shrink-0 w-full"
         style={{
-          background: 'var(--color-accent)',
-          padding: 'var(--spacing-8) var(--spacing-6)',
           paddingTop: 'calc(var(--spacing-8) * 1.5)',
           paddingBottom: 'calc(var(--spacing-8) * 1.5)'
         }}
@@ -1294,7 +1292,7 @@ function ContributionCTACard({ onClick }: { onClick?: () => void }) {
       </div>
       
       {/* Information Banner - Full Width */}
-      <div className="w-full bg-primary-foreground/60 border-t border-primary-foreground/20 p-[var(--spacing-6)] flex gap-[var(--spacing-3)] items-start backdrop-blur-sm">
+      <div className="w-full bg-[#e8eef5] border-t border-primary-foreground/20 p-[var(--spacing-6)] flex gap-[var(--spacing-3)] items-start backdrop-blur-sm">
         <div className="relative w-3 h-3 flex-shrink-0 mt-1">
           {/* Center dot */}
           <div className="absolute w-3 h-3 bg-primary rounded-full" />
@@ -1302,7 +1300,7 @@ function ContributionCTACard({ onClick }: { onClick?: () => void }) {
           {/* Pulse animation ring */}
           <div className="absolute w-6 h-6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary rounded-full animate-ping opacity-30" />
         </div>
-        <p className="text-foreground text-left text-sm">
+        <p className="text-gray-700 text-left text-sm">
           Siapkan profil dasar organisasi atau perusahaan Anda. Isi formulir komitmen kolaborasi dan tim kami akan menghubungi Anda untuk langkah selanjutnya. Silakan unduh <strong className="text-blue-600 underline"><a href="/panduan-proses-kolaborasi-pspb.pdf" target="_blank">Panduan Proses Kolaborasi PSPB</a></strong> untuk informasi selengkapnya.
         </p>
       </div>
@@ -2431,11 +2429,11 @@ function Frame15() {
       <div className="content-stretch grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-6 items-start relative w-full min-w-0">
         <ol className="list-decimal relative shrink-0 text-foreground break-words font-bold text-responsive-base" start="1">
           <li className="ms-5 md:ms-6 break-words">
-            Pengumpulan data kebutuhan
+            Akses kebutuhan prioritas tervalidasi
           </li>
         </ol>
         <div className="w-full">
-          <Frame22 />
+          <p className="text-muted-foreground break-words text-responsive-base">Mitra mengakses kebutuhan, wilayah, dan program prioritas berdasarkan data tervalidasi.</p>
         </div>
       </div>
     </div>
@@ -2448,11 +2446,11 @@ function Frame16() {
       <div className="content-stretch grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-6 items-start relative w-full min-w-0">
         <ol className="list-decimal relative shrink-0 text-foreground break-words font-bold text-responsive-base" start="2">
           <li className="ms-5 md:ms-6 break-words">
-            Verifikasi data oleh Pemerintah Daerah
+            Penentuan fokus kontribusi
           </li>
         </ol>
         <div className="w-full">
-          <p className="text-muted-foreground break-words text-responsive-base">Data diverifikasi untuk memastikan keabsahan dan prioritas.</p>
+          <p className="text-muted-foreground break-words text-responsive-base">Mitra menentukan lokasi, program, bentuk dukungan, dan penerima manfaat.</p>
         </div>
       </div>
     </div>
@@ -2465,11 +2463,11 @@ function Frame17() {
       <div className="content-stretch grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-6 items-start relative w-full min-w-0">
         <ol className="list-decimal relative shrink-0 text-foreground break-words font-bold text-responsive-base" start="3">
           <li className="ms-5 md:ms-6 break-words">
-            {`Integrasi  ke  platform`}
+            Pengajuan komitmen kolaborasi
           </li>
         </ol>
         <div className="w-full">
-          <p className="text-muted-foreground break-words text-responsive-base">Data terverifikasi ditampilkan dalam platform berbasis peta.</p>
+          <p className="text-muted-foreground break-words text-responsive-base">Mitra mengajukan minat dan rencana kontribusi melalui PSPB.</p>
         </div>
       </div>
     </div>
@@ -2482,11 +2480,11 @@ function Frame18() {
       <div className="content-stretch grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-6 items-start relative w-full min-w-0">
         <ol className="list-decimal relative shrink-0 text-foreground break-words font-bold text-responsive-base" start="4">
           <li className="ms-5 md:ms-6 break-words">
-            {`Pemilihan program  oleh mitra`}
+            Validasi dan penyelarasan
           </li>
         </ol>
         <div className="w-full">
-          <p className="text-muted-foreground break-words text-responsive-base">Mitra memilih lokasi dan jenis dukungan sesuai kebutuhan yang tersedia.</p>
+          <p className="text-muted-foreground break-words text-responsive-base">Mitra berkoordinasi untuk memastikan kesesuaian program dan kebutuhan.</p>
         </div>
       </div>
     </div>
@@ -2499,11 +2497,11 @@ function Frame19() {
       <div className="content-stretch grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-6 items-start relative w-full min-w-0">
         <ol className="list-decimal relative shrink-0 text-foreground break-words font-bold text-responsive-base" start="5">
           <li className="ms-5 md:ms-6 break-words">
-            Mitra mengisi formulir komitmen kolaborasi
+            Implementasi kontribusi
           </li>
         </ol>
         <div className="w-full">
-          <p className="text-muted-foreground break-words text-responsive-base">Mitra mengisi komitmen untuk mulai berkontribusi lalu berdiskusi dengan Kemendikdasmen terkait potensi kolaborasi.</p>
+          <p className="text-muted-foreground break-words text-responsive-base">Mitra menyalurkan kontribusi sesuai kesepakatan.</p>
         </div>
       </div>
     </div>
@@ -2516,11 +2514,11 @@ function Frame20() {
       <div className="content-stretch grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-6 items-start relative w-full min-w-0">
         <ol className="list-decimal relative shrink-0 text-foreground break-words font-bold text-responsive-base" start="6">
           <li className="ms-5 md:ms-6 break-words">
-            Pendampingan implementasi
+            Monitoring dan pelaporan
           </li>
         </ol>
         <div className="w-full">
-          <p className="text-muted-foreground break-words text-responsive-base">Kemendikdasmen mendampingi proses penyaluran dan pelaporan bantuan.</p>
+          <p className="text-muted-foreground break-words text-responsive-base">Mitra mendukung monitoring dan pelaporan.</p>
         </div>
       </div>
     </div>
@@ -2633,7 +2631,7 @@ paddingBottom: 'calc(var(--spacing-8) * 1)',
               </div>
             </div>
           </div>
-          <h2 className="min-w-full not-italic relative shrink-0 text-center text-white w-full whitespace-pre-wrap">Alur pemetaan kebutuhan hingga penyaluran bantuan</h2>
+          <h2 className="min-w-full not-italic relative shrink-0 text-center text-white w-full whitespace-pre-wrap">Alur Kontribusi Mitra</h2>
           <Frame23 />
           </div>
         </div>
@@ -3424,17 +3422,19 @@ function Footer() {
 
             {/* Col 2: Kontak */}
             <div className="flex flex-col gap-4 md:col-start-3">
-              <h4 className="text-white font-semibold" style={{ fontFamily: 'Inter', fontSize: '14px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Kontak</h4>
-              <ul className="flex flex-col gap-3">
-                <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-blue-300 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                  <span className="text-blue-200" style={{ fontFamily: 'Inter', fontSize: '14px' }}>pspb@kemdikbud.go.id</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-blue-300 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                  <span className="text-blue-200" style={{ fontFamily: 'Inter', fontSize: '14px' }}> Gedung C, Kompleks Kemdikbud, Jakarta</span>
-                </li>
-              </ul>
+              <h4 className="text-white font-semibold" style={{ fontFamily: 'Inter', fontSize: '14px', letterSpacing: '0.05em' }}>Memiliki pertanyaan/kendala seputar PSPB?</h4>
+              <p className="text-blue-200" style={{ fontFamily: 'Inter', fontSize: '14px' }}>
+                  Kirimkan pertanyaanmu melalui {' '}
+                  <a 
+                    href="https://pusatinformasi.ult.kemdikdasmen.go.id/hc/id/requests/new" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-200 hover:text-white transition-colors underline font-medium"
+                    style={{ fontFamily: 'Inter', fontSize: '14px' }}
+                  >
+                    Form Pusat Informasi
+                  </a>
+                </p>
             </div>
           </div>
         </div>
@@ -3533,7 +3533,7 @@ function WhyContributeAndImpact() {
       <div
         className="content-stretch flex flex-col items-center relative w-full px-4 sm:px-6 md:px-8 lg:px-12"
         style={{
-          paddingTop: 'calc(var(--spacing-8) * 1)',
+paddingTop: 'calc(var(--spacing-8) * 3)',
           paddingBottom: 'calc(var(--spacing-8) * 3)',
           backgroundColor: '#f1f2f4'
         }}
